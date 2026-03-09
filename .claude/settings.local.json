@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git lfs:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(gh auth:*)",
+      "Bash(git push:*)",
+      "Bash(git:*)",
+      "Bash(curl:*)",
+      "Bash(GIT_TRACE=1 GIT_CURL_VERBOSE=1 git push:*)"
     ]
   }
 }
