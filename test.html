@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniAI - 交互式3D场景编辑器</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #0f1419 100%);
+            color: #e8eaed;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        #container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        /* 左侧：3D场景 */
+        #scene-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #scene-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        /* 右侧：控制面板 */
+        #control-panel {
+            width: 400px;
+            background: rgba(15, 15, 30, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #control-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #control-panel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #control-panel::-webkit-scrollbar-thumb {
+            background: rgba(138, 43, 226, 0.5);
+            border-radius: 4px;
+        }
+
+        #control-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(138, 43, 226, 0.7);
+        }
+        
+        .panel-section {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.2s ease;
+        }
+
+        .panel-section:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #a78bfa;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .section-title i {
+            font-size: 20px;
+        }
+        
+        /* 生成面板 */
+        #generate-panel {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #c4b5fd;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(167, 139, 250, 0.2);
+            border-radius: 10px;
+            color: #e8eaed;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+        }
+
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        /* 对象选择面板 */
+        .object-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .object-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid transparent;
+        }
+
+        .object-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: translateX(2px);
+        }
+
+        .object-item.selected {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.12);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+        
+        .object-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #a78bfa;
+        }
+        
+        .object-info {
+            flex: 1;
+        }
+        
+        .object-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #e8eaed;
+            font-size: 14px;
+        }
+
+        .object-type {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+        }
+        
+        /* 修改面板 */
+        .modification-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .style-option {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .style-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .style-option.selected {
+            border-color: #8a2be2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        
+        .style-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .style-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* 状态指示器 */
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(15, 15, 30, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 12px 24px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid rgba(167, 139, 250, 0.2);
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 提示信息 */
+        #hint-overlay {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            font-size: 14px;
+            color: #c4b5fd;
+        }
+        
+        /* 工具提示 */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            z-index: 1000;
+            pointer-events: none;
+            white-space: nowrap;
+            border: 1px solid #8a2be2;
+        }
+        
+        /* 选择高亮效果 */
+        .selection-highlight {
+            position: absolute;
+            border: 2px solid #8b5cf6;
+            border-radius: 6px;
+            pointer-events: none;
+            z-index: 50;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+    <!-- Three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- OrbitControls 用于相机控制 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="container">
+        <!-- 3D场景容器 -->
+        <div id="scene-container">
+            <canvas id="scene-canvas"></canvas>
+            
+            <!-- 状态指示器 -->
+            <div id="status-indicator" class="status-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <span id="status-text">处理中...</span>
+            </div>
+            
+            <!-- 选择高亮框 -->
+            <div id="selection-highlight" class="selection-highlight" style="display: none;"></div>
+            
+            <!-- 提示信息 -->
+            <div id="hint-overlay">
+                <i class="fas fa-mouse-pointer"></i>
+                <span id="hint-text">点击场景中的物体进行选择，然后在右侧面板修改</span>
+            </div>
+        </div>
+        
+        <!-- 控制面板 -->
+        <div id="control-panel">
+            <!-- 生成面板 -->
+            <div id="generate-panel">
+                <div class="section-title">
+                    <i class="fas fa-robot"></i>
+                    <span>AI场景生成</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">场景描述</label>
+                    <textarea id="scene-prompt" class="form-textarea" placeholder="例如：一个宁静的村庄，有三栋不同风格的房屋，一个小花园，远处有山..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">场景风格</label>
+                    <select id="scene-style" class="form-input">
+                        <option value="realistic">写实风格</option>
+                        <option value="cartoon">卡通风格</option>
+                        <option value="fantasy">奇幻风格</option>
+                        <option value="cyberpunk">赛博朋克</option>
+                        <option value="watercolor">水彩风格</option>
+                    </select>
+                </div>
+                
+                <button id="generate-scene-btn" class="btn btn-primary">
+                    <i class="fas fa-magic"></i> 生成3D场景
+                </button>
+            </div>
+            
+            <!-- 对象列表面板 -->
+            <div class="panel-section">
+                <div class="section-title">
+                    <i class="fas fa-cube"></i>
+                    <span>场景对象 (3)</span>
+                </div>
+                
+                <div class="object-list" id="object-list">
+                    <!-- 动态生成的对象列表 -->
+                    <div class="object-item selected" data-object-id="house1">
+                        <div class="object-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="object-info">
+                            <div class="object-name">房屋 A</div>
+                            <div class="object-type">现代风格 · 可编辑</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="object-item" data-object-id="house2">
+                        <div class="object-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="object-info">
+                            <div class="object-name">房屋 B</div>
+                            <div class="object-type">传统风格 · 可编辑</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="object-item" data-object-id="house3">
+                        <div class="object-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="object-info">
+                            <div class="object-name">房屋 C</div>
+                            <div class="object-type">别墅风格 · 可编辑</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="object-item" data-object-id="tree1">
+                        <div class="object-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="object-info">
+                            <div class="object-name">大树</div>
+                            <div class="object-type">景观 · 可编辑</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 对象编辑面板 -->
+            <div class="panel-section">
+                <div class="section-title">
+                    <i class="fas fa-edit"></i>
+                    <span>编辑对象: <span id="editing-object-name">房屋 A</span></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">修改描述</label>
+                    <input type="text" id="modify-prompt" class="form-input" placeholder="例如：将屋顶改成红色瓦片，增加一个烟囱">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">预定义样式</label>
+                    <div class="modification-grid" id="style-options">
+                        <div class="style-option" data-style="modern">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                            <div class="style-name">现代简约</div>
+                        </div>
+                        <div class="style-option" data-style="traditional">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                            <div class="style-name">传统中式</div>
+                        </div>
+                        <div class="style-option" data-style="villa">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"></div>
+                            <div class="style-name">豪华别墅</div>
+                        </div>
+                        <div class="style-option" data-style="cottage">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #43e97b, #38f9d7);"></div>
+                            <div class="style-name">乡村小屋</div>
+                        </div>
+                        <div class="style-option selected" data-style="original">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #fa709a, #fee140);"></div>
+                            <div class="style-name">保持原样</div>
+                        </div>
+                        <div class="style-option" data-style="custom">
+                            <div class="style-preview" style="background: linear-gradient(135deg, #8a2be2, #4169e1);">
+                                <i class="fas fa-wand-magic-sparkles" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div class="style-name">AI自定义</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="apply-modification-btn" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> 应用修改
+                </button>
+            </div>
+            
+            <!-- 场景控制面板 -->
+            <div class="panel-section">
+                <div class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>场景控制</span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <button id="reset-camera-btn" class="btn" style="background: rgba(255,255,255,0.1); color: white;">
+                        <i class="fas fa-video"></i> 重置视角
+                    </button>
+                    <button id="export-scene-btn" class="btn" style="background: rgba(255,255,255,0.1); color: white;">
+                        <i class="fas fa-download"></i> 导出场景
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 主应用程序
+        class InteractiveSceneEditor {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.controls = null;
+                
+                // 场景状态
+                this.sceneObjects = [];
+                this.selectedObject = null;
+                this.generatedImage = null;
+                
+                // 3D对象映射
+                this.objectMap = new Map(); // objectId -> THREE.Object3D
+                
+                this.init();
+            }
+            
+            init() {
+                this.initThreeJS();
+                this.setupEventListeners();
+                this.createDefaultScene();
+                this.animate();
+            }
+            
+            initThreeJS() {
+                // 创建场景
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x0f0f1e);
+                this.scene.fog = new THREE.Fog(0x0f0f1e, 50, 150);
+
+                // 创建相机
+                this.camera = new THREE.PerspectiveCamera(
+                    60,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    1000
+                );
+                this.camera.position.set(15, 12, 15);
+
+                // 创建渲染器
+                const canvas = document.getElementById('scene-canvas');
+                this.renderer = new THREE.WebGLRenderer({
+                    canvas,
+                    antialias: true,
+                    alpha: false,
+                    powerPreference: "high-performance"
+                });
+                this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                // 启用物理正确的光照
+                this.renderer.physicallyCorrectLights = true;
+
+                // 优化阴影设置
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+                // 色调映射 - 更真实的颜色
+                this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                this.renderer.toneMappingExposure = 1.0;
+
+                // 输出编码
+                this.renderer.outputEncoding = THREE.sRGBEncoding;
+
+                // 添加轨道控制器
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.08;
+                this.controls.minDistance = 5;
+                this.controls.maxDistance = 100;
+                this.controls.maxPolarAngle = Math.PI / 2.1;
+                this.controls.target.set(0, 2, 0);
+
+                // 添加光源
+                this.setupLights();
+
+                // 窗口大小调整
+                window.addEventListener('resize', () => {
+                    this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                });
+
+                // 点击事件 - 选择物体
+                canvas.addEventListener('click', (event) => {
+                    this.handleCanvasClick(event);
+                });
+
+                // 鼠标移动 - 显示工具提示
+                canvas.addEventListener('mousemove', (event) => {
+                    this.handleMouseMove(event);
+                });
+            }
+            
+            setupLights() {
+                // 环境光 - 模拟天空散射光
+                const ambientLight = new THREE.AmbientLight(0x404060, 0.4);
+                this.scene.add(ambientLight);
+
+                // 主方向光（太阳）- 更真实的太阳光照
+                const sunLight = new THREE.DirectionalLight(0xfff5e6, 1.2);
+                sunLight.position.set(50, 80, 30);
+                sunLight.castShadow = true;
+
+                // 优化阴影质量
+                sunLight.shadow.mapSize.width = 2048;
+                sunLight.shadow.mapSize.height = 2048;
+                sunLight.shadow.camera.left = -30;
+                sunLight.shadow.camera.right = 30;
+                sunLight.shadow.camera.top = 30;
+                sunLight.shadow.camera.bottom = -30;
+                sunLight.shadow.camera.near = 0.5;
+                sunLight.shadow.camera.far = 200;
+                sunLight.shadow.bias = -0.0001;
+                sunLight.shadow.normalBias = 0.02;
+
+                this.scene.add(sunLight);
+
+                // 半球光 - 模拟天空和地面的反射光
+                const hemisphereLight = new THREE.HemisphereLight(
+                    0x87CEEB,  // 天空颜色（蓝色）
+                    0x4a3728,  // 地面颜色（棕色）
+                    0.5
+                );
+                this.scene.add(hemisphereLight);
+
+                // 补光 - 模拟环境反射
+                const fillLight = new THREE.DirectionalLight(0x9db4ff, 0.3);
+                fillLight.position.set(-30, 20, -20);
+                this.scene.add(fillLight);
+
+                // 背光 - 增加深度感
+                const rimLight = new THREE.DirectionalLight(0xffffff, 0.2);
+                rimLight.position.set(-20, 10, 30);
+                this.scene.add(rimLight);
+
+                // 保存光源引用以便后续调整
+                this.lights = {
+                    ambient: ambientLight,
+                    sun: sunLight,
+                    hemisphere: hemisphereLight,
+                    fill: fillLight,
+                    rim: rimLight
+                };
+            }
+            
+            setupEventListeners() {
+                // 生成场景按钮
+                document.getElementById('generate-scene-btn').addEventListener('click', () => {
+                    this.generateScene();
+                });
+                
+                // 对象选择
+                document.getElementById('object-list').addEventListener('click', (e) => {
+                    const objectItem = e.target.closest('.object-item');
+                    if (objectItem) {
+                        this.selectObjectFromList(objectItem.dataset.objectId);
+                    }
+                });
+                
+                // 样式选择
+                document.getElementById('style-options').addEventListener('click', (e) => {
+                    const styleOption = e.target.closest('.style-option');
+                    if (styleOption) {
+                        this.selectStyle(styleOption.dataset.style);
+                    }
+                });
+                
+                // 应用修改按钮
+                document.getElementById('apply-modification-btn').addEventListener('click', () => {
+                    this.applyModification();
+                });
+                
+                // 重置相机
+                document.getElementById('reset-camera-btn').addEventListener('click', () => {
+                    this.resetCamera();
+                });
+            }
+            
+            createDefaultScene() {
+                // 创建地面 - 使用更真实的材质
+                const groundGeometry = new THREE.PlaneGeometry(100, 100, 50, 50);
+                const groundMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x2a3a4a,
+                    roughness: 0.9,
+                    metalness: 0.0,
+                    envMapIntensity: 0.5
+                });
+                const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+                ground.rotation.x = -Math.PI / 2;
+                ground.receiveShadow = true;
+
+                // 添加地面细节（法线扰动）
+                groundGeometry.computeVertexNormals();
+
+                this.scene.add(ground);
+
+                // 添加网格辅助线（可选，增强空间感）
+                const gridHelper = new THREE.GridHelper(100, 50, 0x444466, 0x222233);
+                gridHelper.material.opacity = 0.2;
+                gridHelper.material.transparent = true;
+                this.scene.add(gridHelper);
+
+                // 创建一些默认的房屋作为示例
+                this.createExampleHouses();
+
+                // 添加天空盒
+                this.createSkybox();
+            }
+            
+            createExampleHouses() {
+                // 房屋1 - 现代风格
+                const house1 = this.createHouse(0x4facfe, -10, 0, -5, 'modern');
+                house1.userData = { id: 'house1', name: '房屋 A', type: 'house' };
+                this.scene.add(house1);
+                this.objectMap.set('house1', house1);
+                
+                // 房屋2 - 传统风格
+                const house2 = this.createHouse(0xf093fb, 0, 0, -5, 'traditional');
+                house2.userData = { id: 'house2', name: '房屋 B', type: 'house' };
+                this.scene.add(house2);
+                this.objectMap.set('house2', house2);
+                
+                // 房屋3 - 别墅风格
+                const house3 = this.createHouse(0x43e97b, 10, 0, -5, 'villa');
+                house3.userData = { id: 'house3', name: '房屋 C', type: 'house' };
+                this.scene.add(house3);
+                this.objectMap.set('house3', house3);
+                
+                // 树木
+                const tree = this.createTree(0, 0, 5);
+                tree.userData = { id: 'tree1', name: '大树', type: 'tree' };
+                this.scene.add(tree);
+                this.objectMap.set('tree1', tree);
+                
+                // 默认选择第一个房屋
+                this.selectObject('house1');
+            }
+            
+            createHouse(color, x, y, z, style) {
+                const group = new THREE.Group();
+                group.position.set(x, y, z);
+
+                // 根据样式调整房屋设计
+                let width = 4, height = 3, depth = 4;
+                let roofHeight = 2;
+
+                switch(style) {
+                    case 'modern':
+                        width = 5;
+                        height = 4;
+                        depth = 6;
+                        roofHeight = 1;
+                        break;
+                    case 'traditional':
+                        width = 4;
+                        height = 3.5;
+                        depth = 5;
+                        roofHeight = 2.5;
+                        break;
+                    case 'villa':
+                        width = 6;
+                        height = 5;
+                        depth = 8;
+                        roofHeight = 3;
+                        break;
+                }
+
+                // 房屋主体 - 使用物理材质
+                const bodyGeometry = new THREE.BoxGeometry(width, height, depth);
+                const bodyMaterial = new THREE.MeshStandardMaterial({
+                    color: color,
+                    roughness: 0.7,
+                    metalness: 0.0,
+                    envMapIntensity: 0.3
+                });
+                const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+                body.castShadow = true;
+                body.receiveShadow = true;
+                body.position.y = height / 2;
+                group.add(body);
+
+                // 屋顶 - 更真实的材质
+                const roofGeometry = new THREE.ConeGeometry(width * 0.8, roofHeight, 4);
+                const roofMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x8B4513,
+                    roughness: 0.95,
+                    metalness: 0.0
+                });
+                const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+                roof.castShadow = true;
+                roof.receiveShadow = true;
+                roof.position.y = height + roofHeight / 2;
+                roof.rotation.y = Math.PI / 4;
+                group.add(roof);
+
+                // 窗户
+                this.addWindows(group, width, height, depth);
+
+                // 门 - 木质材质
+                const doorGeometry = new THREE.BoxGeometry(1, 2, 0.2);
+                const doorMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x654321,
+                    roughness: 0.8,
+                    metalness: 0.0
+                });
+                const door = new THREE.Mesh(doorGeometry, doorMaterial);
+                door.castShadow = true;
+                door.position.set(0, 1, depth / 2 + 0.1);
+                group.add(door);
+
+                // 门把手 - 金属材质
+                const handleGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+                const handleMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xccaa66,
+                    roughness: 0.2,
+                    metalness: 0.9
+                });
+                const handle = new THREE.Mesh(handleGeometry, handleMaterial);
+                handle.position.set(0.4, 1, depth / 2 + 0.2);
+                group.add(handle);
+
+                return group;
+            }
+            
+            addWindows(group, width, height, depth) {
+                // 窗户几何体和材质
+                const windowGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.1);
+                const windowMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x87CEEB,
+                    transparent: true,
+                    opacity: 0.6,
+                    roughness: 0.1,
+                    metalness: 0.1,
+                    envMapIntensity: 1.0
+                });
+
+                // 窗框材质
+                const frameMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.5,
+                    metalness: 0.0
+                });
+
+                // 左侧窗户
+                const window1 = new THREE.Mesh(windowGeometry, windowMaterial);
+                window1.position.set(-width/3, height/2, depth/2 + 0.1);
+                window1.castShadow = true;
+                group.add(window1);
+
+                // 右侧窗户
+                const window2 = new THREE.Mesh(windowGeometry, windowMaterial);
+                window2.position.set(width/3, height/2, depth/2 + 0.1);
+                window2.castShadow = true;
+                group.add(window2);
+
+                // 背面窗户
+                const window3 = window1.clone();
+                window3.position.z = -depth/2 - 0.1;
+                group.add(window3);
+
+                const window4 = window2.clone();
+                window4.position.z = -depth/2 - 0.1;
+                group.add(window4);
+            }
+            
+            createTree(x, y, z) {
+                const group = new THREE.Group();
+                group.position.set(x, y, z);
+
+                // 树干 - 木质纹理
+                const trunkGeometry = new THREE.CylinderGeometry(0.3, 0.4, 2, 8);
+                const trunkMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x6b4423,
+                    roughness: 0.95,
+                    metalness: 0.0
+                });
+                const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+                trunk.castShadow = true;
+                trunk.receiveShadow = true;
+                trunk.position.y = 1;
+                group.add(trunk);
+
+                // 树冠 - 叶子材质
+                const crownGeometry = new THREE.SphereGeometry(1.5, 16, 12);
+                const crownMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x2d5016,
+                    roughness: 0.9,
+                    metalness: 0.0
+                });
+                const crown = new THREE.Mesh(crownGeometry, crownMaterial);
+                crown.castShadow = true;
+                crown.receiveShadow = true;
+                crown.position.y = 3;
+                group.add(crown);
+
+                // 添加第二层树冠增加真实感
+                const crown2 = new THREE.Mesh(
+                    new THREE.SphereGeometry(1.2, 16, 12),
+                    crownMaterial
+                );
+                crown2.castShadow = true;
+                crown2.position.y = 3.8;
+                group.add(crown2);
+
+                return group;
+            }
+            
+            createSkybox() {
+                // 创建更真实的天空渐变
+                const skyGeometry = new THREE.SphereGeometry(200, 32, 32);
+                const skyMaterial = new THREE.ShaderMaterial({
+                    vertexShader: `
+                        varying vec3 vWorldPosition;
+                        void main() {
+                            vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+                            vWorldPosition = worldPosition.xyz;
+                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        varying vec3 vWorldPosition;
+                        uniform float time;
+
+                        void main() {
+                            // 计算天空渐变
+                            float height = normalize(vWorldPosition).y;
+
+                            // 地平线颜色（暖色调）
+                            vec3 horizonColor = vec3(0.4, 0.3, 0.5);
+
+                            // 天顶颜色（深蓝色）
+                            vec3 zenithColor = vec3(0.05, 0.08, 0.15);
+
+                            // 中间过渡色
+                            vec3 midColor = vec3(0.15, 0.18, 0.35);
+
+                            // 平滑插值
+                            vec3 color;
+                            if (height > 0.0) {
+                                // 地平线到天顶
+                                float t = pow(height, 0.7);
+                                color = mix(horizonColor, midColor, t * 0.5);
+                                color = mix(color, zenithColor, t * 0.5 + 0.5);
+                            } else {
+                                // 地平线以下
+                                color = mix(horizonColor, vec3(0.1, 0.1, 0.2), -height);
+                            }
+
+                            // 添加微妙的星星效果
+                            float stars = 0.0;
+                            if (height > 0.3) {
+                                vec3 pos = vWorldPosition * 0.05;
+                                stars = fract(sin(dot(pos.xy, vec2(12.9898, 78.233))) * 43758.5453);
+                                stars = pow(stars, 50.0) * (height - 0.3) * 0.5;
+                            }
+
+                            color += vec3(stars);
+
+                            gl_FragColor = vec4(color, 1.0);
+                        }
+                    `,
+                    uniforms: {
+                        time: { value: 0.0 }
+                    },
+                    side: THREE.BackSide
+                });
+
+                const skybox = new THREE.Mesh(skyGeometry, skyMaterial);
+                this.scene.add(skybox);
+
+                // 保存引用以便动画
+                this.skybox = skybox;
+                this.skyMaterial = skyMaterial;
+            }
+            
+            async generateScene() {
+                const prompt = document.getElementById('scene-prompt').value;
+                const style = document.getElementById('scene-style').value;
+                
+                if (!prompt.trim()) {
+                    alert('请输入场景描述');
+                    return;
+                }
+                
+                // 显示加载状态
+                this.showStatus('生成AI图片中...');
+                
+                try {
+                    // 调用AI图片生成API
+                    const imageUrl = await this.callAIImageAPI(prompt, style);
+                    
+                    // 分析图片并创建3D场景
+                    this.showStatus('分析图片内容...');
+                    const sceneData = await this.analyzeImage(imageUrl);
+                    
+                    // 根据分析结果重建3D场景
+                    this.showStatus('构建3D场景...');
+                    await this.reconstruct3DScene(sceneData, imageUrl);
+                    
+                    this.showStatus('场景生成完成！', 2000);
+                } catch (error) {
+                    console.error('场景生成失败:', error);
+                    this.showStatus('生成失败: ' + error.message, 3000);
+                }
+            }
+            
+            async callAIImageAPI(prompt, style) {
+                // 模拟API调用 - 实际项目中替换为真实的AI图片生成API
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // 使用随机示例图片
+                        const exampleImages = [
+                            'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
+                            'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=800&h=600&fit=crop',
+                            'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop',
+                            'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop'
+                        ];
+                        resolve(exampleImages[Math.floor(Math.random() * exampleImages.length)]);
+                    }, 2000);
+                });
+            }
+            
+            async analyzeImage(imageUrl) {
+                // 模拟图片分析 - 实际项目中应使用图像分割和物体检测API
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // 模拟分析结果
+                        resolve({
+                            objects: [
+                                { id: 'house1', type: 'house', name: '现代房屋', position: { x: -10, y: 0, z: -5 } },
+                                { id: 'house2', type: 'house', name: '传统房屋', position: { x: 0, y: 0, z: -5 } },
+                                { id: 'house3', type: 'house', name: '豪华别墅', position: { x: 10, y: 0, z: -5 } },
+                                { id: 'tree1', type: 'tree', name: '大树', position: { x: 0, y: 0, z: 5 } },
+                                { id: 'tree2', type: 'tree', name: '小树', position: { x: 5, y: 0, z: 3 } }
+                            ],
+                            environment: {
+                                groundColor: 0x3a3a5a,
+                                skyColor: 0x87CEEB
+                            }
+                        });
+                    }, 1500);
+                });
+            }
+            
+            async reconstruct3DScene(sceneData, backgroundImage) {
+                // 清除现有对象
+                this.clearScene();
+                
+                // 创建地面
+                const groundGeometry = new THREE.PlaneGeometry(50, 50);
+                const groundMaterial = new THREE.MeshStandardMaterial({ 
+                    color: sceneData.environment.groundColor,
+                    roughness: 0.8
+                });
+                const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+                ground.rotation.x = -Math.PI / 2;
+                ground.receiveShadow = true;
+                this.scene.add(ground);
+                
+                // 根据分析结果创建对象
+                for (const objData of sceneData.objects) {
+                    let object3D;
+                    
+                    switch(objData.type) {
+                        case 'house':
+                            object3D = this.createHouse(
+                                this.getRandomColor(),
+                                objData.position.x,
+                                objData.position.y,
+                                objData.position.z,
+                                'modern'
+                            );
+                            break;
+                        case 'tree':
+                            object3D = this.createTree(
+                                objData.position.x,
+                                objData.position.y,
+                                objData.position.z
+                            );
+                            break;
+                        default:
+                            continue;
+                    }
+                    
+                    object3D.userData = {
+                        id: objData.id,
+                        name: objData.name,
+                        type: objData.type
+                    };
+                    
+                    this.scene.add(object3D);
+                    this.objectMap.set(objData.id, object3D);
+                }
+                
+                // 添加背景图片作为天空盒纹理（简化版）
+                // 在实际项目中，可以使用Three.js的CubeTextureLoader加载天空盒
+                
+                // 更新对象列表UI
+                this.updateObjectListUI(sceneData.objects);
+                
+                // 默认选择第一个对象
+                if (sceneData.objects.length > 0) {
+                    this.selectObject(sceneData.objects[0].id);
+                }
+            }
+            
+            clearScene() {
+                // 清除所有可交互对象
+                for (const [id, object3D] of this.objectMap) {
+                    this.scene.remove(object3D);
+                }
+                this.objectMap.clear();
+                
+                // 保留光源和相机
+            }
+            
+            updateObjectListUI(objects) {
+                const objectList = document.getElementById('object-list');
+                objectList.innerHTML = '';
+                
+                for (const obj of objects) {
+                    const icon = this.getObjectIcon(obj.type);
+                    const objectItem = document.createElement('div');
+                    objectItem.className = 'object-item';
+                    objectItem.dataset.objectId = obj.id;
+                    
+                    objectItem.innerHTML = `
+                        <div class="object-icon">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="object-info">
+                            <div class="object-name">${obj.name}</div>
+                            <div class="object-type">${obj.type} · 可编辑</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    `;
+                    
+                    objectList.appendChild(objectItem);
+                }
+                
+                // 更新标题中的对象数量
+                document.querySelector('.panel-section:nth-child(2) .section-title span').textContent = 
+                    `场景对象 (${objects.length})`;
+            }
+            
+            getObjectIcon(type) {
+                const iconMap = {
+                    'house': 'fa-home',
+                    'tree': 'fa-tree',
+                    'car': 'fa-car',
+                    'person': 'fa-user',
+                    'animal': 'fa-paw',
+                    'building': 'fa-building'
+                };
+                return iconMap[type] || 'fa-cube';
+            }
+            
+            getRandomColor() {
+                const colors = [0x4facfe, 0xf093fb, 0x43e97b, 0xfa709a, 0x8a2be2];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            selectObject(objectId) {
+                // 清除之前的选择
+                if (this.selectedObject) {
+                    const prevObject = this.objectMap.get(this.selectedObject);
+                    if (prevObject) {
+                        prevObject.traverse((child) => {
+                            if (child.isMesh && child.material.emissive) {
+                                child.material.emissive.setHex(0x000000);
+                                child.material.emissiveIntensity = 0;
+                            }
+                        });
+                    }
+                }
+
+                // 设置新的选择
+                this.selectedObject = objectId;
+                const selectedObject3D = this.objectMap.get(objectId);
+
+                if (selectedObject3D) {
+                    // 添加发光效果
+                    selectedObject3D.traverse((child) => {
+                        if (child.isMesh && child.material.emissive) {
+                            child.material.emissive.setHex(0x8b5cf6);
+                            child.material.emissiveIntensity = 0.3;
+                        }
+                    });
+
+                    // 更新UI
+                    this.updateSelectionUI(objectId);
+
+                    // 相机聚焦到选中的对象
+                    this.focusCameraOnObject(selectedObject3D);
+                }
+            }
+            
+            selectObjectFromList(objectId) {
+                this.selectObject(objectId);
+                
+                // 更新列表UI
+                document.querySelectorAll('.object-item').forEach(item => {
+                    item.classList.remove('selected');
+                    if (item.dataset.objectId === objectId) {
+                        item.classList.add('selected');
+                    }
+                });
+            }
+            
+            updateSelectionUI(objectId) {
+                const object3D = this.objectMap.get(objectId);
+                if (object3D && object3D.userData) {
+                    document.getElementById('editing-object-name').textContent = object3D.userData.name;
+                }
+            }
+            
+            selectStyle(style) {
+                // 更新样式选择UI
+                document.querySelectorAll('.style-option').forEach(option => {
+                    option.classList.remove('selected');
+                    if (option.dataset.style === style) {
+                        option.classList.add('selected');
+                    }
+                });
+            }
+            
+            async applyModification() {
+                if (!this.selectedObject) {
+                    alert('请先选择一个对象');
+                    return;
+                }
+                
+                const style = document.querySelector('.style-option.selected').dataset.style;
+                const prompt = document.getElementById('modify-prompt').value;
+                
+                if (style === 'custom' && !prompt.trim()) {
+                    alert('请输入修改描述');
+                    return;
+                }
+                
+                this.showStatus('应用修改中...');
+                
+                try {
+                    const object3D = this.objectMap.get(this.selectedObject);
+                    
+                    if (style === 'custom') {
+                        // 使用AI修改对象
+                        await this.modifyObjectWithAI(object3D, prompt);
+                    } else {
+                        // 应用预定义样式
+                        this.applyPredefinedStyle(object3D, style);
+                    }
+                    
+                    this.showStatus('修改已应用！', 2000);
+                } catch (error) {
+                    console.error('修改失败:', error);
+                    this.showStatus('修改失败: ' + error.message, 3000);
+                }
+            }
+            
+            applyPredefinedStyle(object3D, style) {
+                const colorMap = {
+                    'modern': 0x4facfe,    // 蓝色
+                    'traditional': 0xf093fb, // 粉色
+                    'villa': 0x43e97b,     // 绿色
+                    'cottage': 0xfa709a,   // 红色
+                    'original': object3D.children[0].material.color.getHex() // 保持原色
+                };
+                
+                const color = colorMap[style] || 0x8a2be2;
+                
+                // 修改房屋颜色
+                object3D.traverse((child) => {
+                    if (child.isMesh && child !== object3D.children[1]) { // 不修改屋顶
+                        child.material.color.setHex(color);
+                    }
+                });
+                
+                // 更新对象名称
+                const styleNames = {
+                    'modern': '现代风格',
+                    'traditional': '传统风格',
+                    'villa': '别墅风格',
+                    'cottage': '小屋风格'
+                };
+                
+                if (style !== 'original' && object3D.userData) {
+                    const oldName = object3D.userData.name;
+                    const baseName = oldName.replace(/（.*）/, '').trim();
+                    object3D.userData.name = `${baseName}（${styleNames[style] || style}）`;
+                    this.updateObjectInList(this.selectedObject, object3D.userData.name);
+                }
+            }
+            
+            async modifyObjectWithAI(object3D, prompt) {
+                // 模拟AI修改 - 实际项目中应调用AI图片编辑API
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // 生成随机颜色
+                        const randomColor = Math.floor(Math.random() * 0xFFFFFF);
+                        
+                        // 应用新颜色
+                        object3D.traverse((child) => {
+                            if (child.isMesh && child !== object3D.children[1]) {
+                                child.material.color.setHex(randomColor);
+                            }
+                        });
+                        
+                        // 更新对象名称
+                        if (object3D.userData) {
+                            const oldName = object3D.userData.name;
+                            const baseName = oldName.replace(/（.*）/, '').trim();
+                            object3D.userData.name = `${baseName}（AI修改）`;
+                            this.updateObjectInList(this.selectedObject, object3D.userData.name);
+                        }
+                        
+                        resolve();
+                    }, 2000);
+                });
+            }
+            
+            updateObjectInList(objectId, newName) {
+                const objectItem = document.querySelector(`.object-item[data-object-id="${objectId}"]`);
+                if (objectItem) {
+                    objectItem.querySelector('.object-name').textContent = newName;
+                    
+                    // 如果当前正在编辑这个对象，更新编辑面板
+                    if (this.selectedObject === objectId) {
+                        document.getElementById('editing-object-name').textContent = newName;
+                    }
+                }
+            }
+            
+            handleCanvasClick(event) {
+                // 计算点击位置
+                const rect = this.renderer.domElement.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+                
+                // 创建射线
+                const raycaster = new THREE.Raycaster();
+                raycaster.setFromCamera(new THREE.Vector2(x, y), this.camera);
+                
+                // 检测与对象的交点
+                const intersects = raycaster.intersectObjects(
+                    Array.from(this.objectMap.values()),
+                    true
+                );
+                
+                if (intersects.length > 0) {
+                    // 找到被点击的对象
+                    let clickedObject = intersects[0].object;
+                    
+                    // 向上查找父对象直到找到有userData的对象
+                    while (clickedObject && !clickedObject.userData.id) {
+                        clickedObject = clickedObject.parent;
+                    }
+                    
+                    if (clickedObject && clickedObject.userData.id) {
+                        this.selectObject(clickedObject.userData.id);
+                        
+                        // 更新对象列表UI
+                        this.selectObjectFromList(clickedObject.userData.id);
+                    }
+                }
+            }
+            
+            handleMouseMove(event) {
+                // 实现鼠标悬停效果
+                // 这里可以添加工具提示等功能
+            }
+            
+            focusCameraOnObject(object3D) {
+                // 计算对象的边界框
+                const bbox = new THREE.Box3().setFromObject(object3D);
+                const center = bbox.getCenter(new THREE.Vector3());
+                const size = bbox.getSize(new THREE.Vector3());
+                
+                // 计算合适的相机距离
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const cameraDistance = maxDim * 2;
+                
+                // 移动相机
+                this.controls.target.copy(center);
+                this.camera.position.copy(center.clone().add(new THREE.Vector3(
+                    cameraDistance,
+                    cameraDistance * 0.5,
+                    cameraDistance
+                )));
+                
+                this.controls.update();
+            }
+            
+            resetCamera() {
+                this.camera.position.set(15, 12, 15);
+                this.controls.target.set(0, 0, 0);
+                this.controls.update();
+            }
+            
+            showStatus(message, duration = null) {
+                const statusIndicator = document.getElementById('status-indicator');
+                const statusText = document.getElementById('status-text');
+                
+                statusText.textContent = message;
+                statusIndicator.style.display = 'flex';
+                
+                if (duration) {
+                    setTimeout(() => {
+                        statusIndicator.style.display = 'none';
+                    }, duration);
+                }
+            }
+            
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                // 更新天空盒时间（用于动画效果）
+                if (this.skyMaterial) {
+                    this.skyMaterial.uniforms.time.value += 0.001;
+                }
+
+                // 更新控制器
+                this.controls.update();
+
+                // 渲染场景
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+        
+        // 页面加载后初始化编辑器
+        window.addEventListener('load', () => {
+            const editor = new InteractiveSceneEditor();
+            
+            console.log('交互式3D场景编辑器已启动！');
+            console.log('功能：');
+            console.log('1. 使用AI生成场景描述');
+            console.log('2. 点击场景中的对象进行选择');
+            console.log('3. 在右侧面板修改对象样式');
+            console.log('4. 使用AI自定义修改');
+        });
+    </script>
+</body>
+</html>
