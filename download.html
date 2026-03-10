@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件下载 - OmniAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d5a87;
+            --accent: #38bdf8;
+            --accent-dark: #0ea5e9;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+        }
+
+        .download-card {
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(30, 58, 95, 0.15);
+        }
+
+        .version-item {
+            transition: all 0.3s ease;
+        }
+
+        .version-item:hover {
+            background: #f8fafc;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2d5a87 0%, #3d7ab7 100%);
+            box-shadow: 0 10px 30px -8px rgba(30, 58, 95, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #1e3a5f;
+            color: #1e3a5f;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: #1e3a5f;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-white to-sky-50 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="fixed w-full glass-effect z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                    <span class="text-2xl font-black text-slate-800">OmniAI</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="index.html" class="text-slate-600 hover:text-sky-600 font-medium transition-all">首页</a>
+                    <a href="index.html#services" class="text-slate-600 hover:text-sky-600 font-medium transition-all">服务</a>
+                    <a href="index.html#about" class="text-slate-600 hover:text-sky-600 font-medium transition-all">关于</a>
+                    <a href="index.html#contact" class="text-slate-600 hover:text-sky-600 font-medium transition-all">联系我们</a>
+                </div>
+                <button class="md:hidden text-slate-600" onclick="toggleMobileMenu()" aria-label="切换移动菜单">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-effect border-t border-slate-200">
+            <div class="container mx-auto px-6 py-6 space-y-4">
+                <a href="index.html" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">首页</a>
+                <a href="index.html#services" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">服务</a>
+                <a href="index.html#about" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">关于</a>
+                <a href="index.html#contact" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 flex-grow">
+        <div class="container mx-auto px-6">
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center px-4 py-2 bg-sky-50 rounded-full mb-4 border border-sky-100">
+                    <i class="fas fa-download text-sky-600 mr-2"></i>
+                    <span class="text-sky-700 font-medium text-sm">软件下载中心</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-4">
+                    下载 <span class="gradient-text">OmniAI</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+                    选择适合您系统的版本，开始您的AI动画创作之旅
+                </p>
+            </div>
+
+            <!-- Download Section -->
+            <div class="max-w-4xl mx-auto">
+                <!-- Windows Version Card -->
+                <div class="download-card bg-white rounded-2xl border border-slate-200 shadow-sm mb-8 overflow-hidden">
+                    <!-- Card Header -->
+                    <div class="hero-gradient p-6 text-white">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                    <i class="fab fa-windows text-3xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold">Windows 版本</h2>
+                                    <p class="text-sky-200 text-sm">适用于 Windows 10/11</p>
+                                </div>
+                            </div>
+                            <div class="hidden md:block text-right">
+                                <p class="text-sky-200 text-sm">最新版本</p>
+                                <p class="text-2xl font-bold">V6.0.0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-6">
+                        <!-- Version Info -->
+                        <div class="grid md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-slate-50 rounded-xl p-4 text-center">
+                                <p class="text-slate-500 text-sm mb-1">版本号</p>
+                                <p class="text-slate-800 font-semibold">V6.0.0</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 text-center">
+                                <p class="text-slate-500 text-sm mb-1">文件大小</p>
+                                <p class="text-slate-800 font-semibold">约 130 MB</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 text-center">
+                                <p class="text-slate-500 text-sm mb-1">更新日期</p>
+                                <p class="text-slate-800 font-semibold">2026-03-10</p>
+                            </div>
+                        </div>
+
+                        <!-- Update Log -->
+                        <div class="mb-6 p-4 bg-green-50 rounded-xl border border-green-100">
+                            <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
+                                <i class="fas fa-file-alt text-green-500 mr-2"></i>
+                                更新日志
+                            </h4>
+                            <ul class="text-slate-600 text-sm space-y-2 font-light">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span>更新优化了UI界面显示</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Download Button -->
+                        <button onclick="showDownloadModal('v6')"
+                           class="btn-primary w-full text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-3">
+                            <i class="fas fa-download"></i>
+                            <span>立即下载</span>
+                        </button>
+
+                        <!-- System Requirements -->
+                        <div class="mt-6 p-4 bg-slate-50 rounded-xl">
+                            <h4 class="font-semibold text-slate-700 mb-2 flex items-center">
+                                <i class="fas fa-info-circle text-sky-500 mr-2"></i>
+                                系统要求
+                            </h4>
+                            <ul class="text-slate-600 text-sm space-y-1 font-light">
+                                <li>• 操作系统：Windows 10 或更高版本</li>
+                                <li>• 处理器：Intel Core i5 或同等性能</li>
+                                <li>• 内存：8 GB RAM 或以上</li>
+                                <li>• 存储空间：500 MB 可用空间</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version History -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-800 flex items-center">
+                                <i class="fas fa-history text-sky-500 mr-3"></i>
+                                历史版本
+                            </h3>
+                            <button onclick="toggleVersionHistory()" class="text-sky-600 hover:text-sky-700 font-medium flex items-center">
+                                <span id="toggleText">展开全部</span>
+                                <i id="toggleIcon" class="fas fa-chevron-down ml-2 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="versionHistory" class="hidden">
+                        <!-- Version 5.0.0 -->
+                        <div class="version-item p-4 border-b border-slate-100">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                <div class="flex items-center space-x-4 mb-3 md:mb-0">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
+                                        <span class="text-slate-600 font-bold text-sm">5.0</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-800">V5.0.0</p>
+                                        <p class="text-slate-500 text-sm">2026-03-10</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <button onclick="showDownloadModal('v5')"
+                                       class="text-sky-600 hover:text-sky-700 font-medium text-sm flex items-center">
+                                        <i class="fas fa-download mr-1"></i>
+                                        下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Version 4.0.0 -->
+                        <div class="version-item p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                <div class="flex items-center space-x-4 mb-3 md:mb-0">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
+                                        <span class="text-slate-600 font-bold text-sm">4.0</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-800">V4.0.0</p>
+                                        <p class="text-slate-500 text-sm">2026-03-07</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <button onclick="showDownloadModal('v4')"
+                                       class="text-sky-600 hover:text-sky-700 font-medium text-sm flex items-center">
+                                        <i class="fas fa-download mr-1"></i>
+                                        下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="mt-8 p-6 bg-sky-50 rounded-2xl border border-sky-100">
+                    <h4 class="font-semibold text-slate-800 mb-3 flex items-center">
+                        <i class="fas fa-question-circle text-sky-500 mr-2"></i>
+                        安装帮助
+                    </h4>
+                    <p class="text-slate-600 text-sm font-light leading-relaxed">
+                        下载完成后，双击安装程序按照提示完成安装。如遇到问题，请访问我们的
+                        <a href="index.html#contact" class="text-sky-600 hover:text-sky-700 underline">帮助中心</a>
+                        或发送邮件至
+                        <a href="mailto:bysmj1213897@163.com" class="text-sky-600 hover:text-sky-700 underline">bysmj1213897@163.com</a>
+                        获取技术支持。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                    <span class="text-2xl font-black">OmniAI</span>
+                </div>
+                <p class="text-slate-400 font-light text-sm">
+                    © 2026 OmniAI 南京万物可爱文化传媒有限公司
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
+            <div class="hero-gradient p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-lock mr-3"></i>
+                        下载验证
+                    </h3>
+                    <button onclick="closeDownloadModal()" class="text-white/80 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <p class="text-slate-600 mb-4 font-light">请输入下载密码以继续下载</p>
+                <div class="mb-4">
+                    <input type="password" id="downloadPassword"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+                           placeholder="请输入密码"
+                           onkeypress="if(event.key === 'Enter') verifyPassword()">
+                </div>
+                <p id="passwordError" class="text-red-500 text-sm mb-4 hidden">
+                    <i class="fas fa-exclamation-circle mr-1"></i>
+                    密码错误，请重新输入
+                </p>
+                <div class="flex gap-3">
+                    <button onclick="closeDownloadModal()"
+                            class="flex-1 px-4 py-3 border border-slate-300 text-slate-700 rounded-xl font-semibold hover:bg-slate-50 transition-all">
+                        取消
+                    </button>
+                    <button onclick="verifyPassword()"
+                            class="flex-1 btn-primary text-white px-4 py-3 rounded-xl font-semibold">
+                        确认下载
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== Security Configuration ==========
+        // URL storage (Base64 encoded)
+        const _u = {
+            v6: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNi4wLjAuZXhl',
+            v5: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNS4wLjAuZXhl',
+            v4: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNC4wLjAuZXhl'
+        };
+
+        // Obfuscated password storage
+        // Uses character code array for "omniai2026"
+        const _pw = [111, 109, 110, 105, 97, 105, 50, 48, 50, 54];
+
+        let _lt = 0;
+        let _cv = '';
+
+        // Decode URL
+        function _du(e) {
+            try {
+                return atob(e);
+            } catch {
+                return '';
+            }
+        }
+
+        // Decode password from char codes
+        function _dp() {
+            return String.fromCharCode.apply(null, _pw);
+        }
+
+        // Verify password
+        function _vp(p) {
+            return p && p === _dp();
+        }
+
+        // Rate limit
+        function _cl() {
+            const n = Date.now();
+            if (n - _lt < 2000) return false;
+            _lt = n;
+            return true;
+        }
+
+        // ========== UI Functions ==========
+        function showDownloadModal(version) {
+            if (!_cl()) {
+                alert('操作过于频繁，请稍后再试');
+                return;
+            }
+            _cv = version;
+            document.getElementById('passwordModal').classList.remove('hidden');
+            document.getElementById('downloadPassword').value = '';
+            document.getElementById('passwordError').classList.add('hidden');
+            setTimeout(() => document.getElementById('downloadPassword').focus(), 100);
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('passwordModal').classList.add('hidden');
+            _cv = '';
+        }
+
+        function verifyPassword() {
+            const input = document.getElementById('downloadPassword').value;
+            if (_vp(input)) {
+                const url = _du(_u[_cv]);
+                closeDownloadModal();
+                if (url) window.location.href = url;
+            } else {
+                document.getElementById('passwordError').classList.remove('hidden');
+                document.getElementById('downloadPassword').value = '';
+                document.getElementById('downloadPassword').focus();
+            }
+        }
+
+        // Close modal on outside click
+        document.getElementById('passwordModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDownloadModal();
+        });
+
+        // Anti-scraping: Disable dev tools
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()))) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.btn-primary') || e.target.closest('.text-sky-600')) {
+                e.preventDefault();
+            }
+        });
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function toggleVersionHistory() {
+            const history = document.getElementById('versionHistory');
+            const toggleText = document.getElementById('toggleText');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (history.classList.contains('hidden')) {
+                history.classList.remove('hidden');
+                toggleText.textContent = '收起';
+                toggleIcon.style.transform = 'rotate(180deg)';
+            } else {
+                history.classList.add('hidden');
+                toggleText.textContent = '展开全部';
+                toggleIcon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Enhanced scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.style.background = '';
+            }
+        });
+    </script>
+</body>
+</html>
