@@ -3,493 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>软件下载 - OmniAI</title>
+    <title>OmniAI | 下载中心</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --primary: #1e3a5f;
-            --primary-light: #2d5a87;
-            --accent: #38bdf8;
-            --accent-dark: #0ea5e9;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(30, 58, 95, 0.1);
-        }
-
-        .download-card {
-            transition: all 0.3s ease;
-        }
-
-        .download-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -12px rgba(30, 58, 95, 0.15);
-        }
-
-        .version-item {
-            transition: all 0.3s ease;
-        }
-
-        .version-item:hover {
-            background: #f8fafc;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #2d5a87 0%, #3d7ab7 100%);
-            box-shadow: 0 10px 30px -8px rgba(30, 58, 95, 0.4);
-        }
-
-        .btn-outline {
-            border: 2px solid #1e3a5f;
-            color: #1e3a5f;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            background: #1e3a5f;
-            color: white;
-        }
+        :root{--bg:#eef5f7;--card:rgba(255,255,255,.82);--line:rgba(15,23,42,.08);--ink:#0f172a;--muted:#556476;--brand:#0f766e;--brand2:#06b6d4;--ok:#22c55e;--warn:#ef4444;--shadow:0 24px 60px rgba(15,23,42,.12);--soft:0 16px 32px rgba(15,23,42,.08)}
+        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 10% 8%,rgba(20,184,166,.16),transparent 28%),radial-gradient(circle at 92% 12%,rgba(6,182,212,.16),transparent 22%),linear-gradient(180deg,#f8fbfc 0%,var(--bg) 55%,#f9fbfc 100%);overflow-x:hidden}body.modal-open{overflow:hidden}a{text-decoration:none;color:inherit}button,input{font:inherit}
+        .wrap{width:min(1180px,calc(100% - 40px));margin:0 auto}.nav,.hero,.layout,.stack,.heroMeta,.tiles,.support,.foot{display:grid;gap:18px}.nav{position:fixed;inset:0 0 auto;z-index:40;transition:.3s}.nav.scrolled{background:rgba(248,251,252,.82);backdrop-filter:blur(16px);box-shadow:0 10px 30px rgba(15,23,42,.08);border-bottom:1px solid rgba(15,23,42,.06)}.navrow,.footrow,.cardhead{display:flex;justify-content:space-between;gap:14px;align-items:center}.navrow,.mobilebox{width:min(1180px,calc(100% - 40px));margin:0 auto}.navrow{padding:18px 0}.brand{display:inline-flex;align-items:center;gap:14px;font:700 1.15rem "Sora","Noto Sans SC",sans-serif}.logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6);box-shadow:0 18px 28px rgba(15,118,110,.22)}
+        .links{display:flex;gap:28px;color:var(--muted)}.links a,.mobile a{position:relative;transition:.25s}.links a:after,.mobile a:after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand2));transform:scaleX(0);transform-origin:left;transition:.25s}.links a:hover,.mobile a:hover{color:var(--brand)}.links a:hover:after,.mobile a:hover:after{transform:scaleX(1)}
+        .navbtn,.btn,.ghost,.support a{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:18px;font-weight:700;transition:.28s}.navbtn,.btn{color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6);box-shadow:0 20px 36px rgba(15,118,110,.24)}.ghost,.support a{background:rgba(255,255,255,.8);border:1px solid var(--line);box-shadow:var(--soft)}.navbtn:hover,.btn:hover,.ghost:hover,.support a:hover{transform:translateY(-3px)}.menu{display:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.78)}.mobilebox{display:none;padding-bottom:18px}.mobilebox.open{display:block}.mobile{display:grid;gap:14px;padding:18px;border-radius:24px;background:rgba(255,255,255,.92);border:1px solid var(--line);box-shadow:var(--soft)}
+        .hero{padding:138px 0 34px}.heroCard,.dl,.side,.history,.contact,.glass,.modalCard{background:var(--card);border:1px solid var(--line);box-shadow:var(--soft)}.heroCard{position:relative;overflow:hidden;padding:34px;border-radius:34px;background:radial-gradient(circle at 14% 18%,rgba(20,184,166,.18),transparent 28%),linear-gradient(140deg,rgba(255,255,255,.96),rgba(245,251,252,.9))}.heroCard:after,.glass:after{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(6,182,212,.65),transparent);animation:line 5s linear infinite}.heroGrid,.layout,.heroMeta,.tiles,.modalActions{display:grid}.heroGrid{grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr);gap:26px}.pill{display:inline-flex;align-items:center;gap:10px;width:max-content;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(15,118,110,.14);box-shadow:var(--soft);color:var(--brand)}.dot{width:9px;height:9px;border-radius:999px;background:linear-gradient(180deg,#14b8a6,#06b6d4);box-shadow:0 0 0 8px rgba(6,182,212,.1);animation:pulse 2.4s ease-in-out infinite}
+        h1,h2,h3{margin:0}h1{margin:22px 0 16px;font:800 clamp(2.7rem,5vw,4.5rem)/.96 "Sora","Noto Sans SC",sans-serif;letter-spacing:-.05em}h2{font:800 1.28rem/1.2 "Sora","Noto Sans SC",sans-serif}.grad{background:linear-gradient(135deg,#0b4f4a 0%,#14b8a6 55%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.copy{color:var(--muted);line-height:1.9}.heroMeta,.tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.meta,.tile{padding:18px;border-radius:22px;background:rgba(255,255,255,.78);border:1px solid var(--line);box-shadow:var(--soft)}.meta span,.tile span{display:block;color:var(--muted);font-size:.9rem}.meta strong,.tile strong{display:block;margin-top:8px;font:800 1.2rem "Sora","Noto Sans SC",sans-serif;letter-spacing:-.04em}
+        .glass{position:relative;overflow:hidden;padding:24px;border-radius:28px;background:linear-gradient(160deg,rgba(11,79,74,.95),rgba(7,26,43,.94));box-shadow:0 28px 80px rgba(7,26,43,.25);color:rgba(255,255,255,.92)}.glass:before{content:"";position:absolute;width:220px;height:220px;top:-50px;left:-20px;border-radius:999px;background:rgba(45,212,191,.12);filter:blur(10px);animation:drift 13s ease-in-out infinite}.state{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}.signal{width:10px;height:10px;border-radius:999px;background:#5eead4;box-shadow:0 0 0 8px rgba(94,234,212,.16);animation:pulse 2.2s ease-in-out infinite}.glass p{margin:14px 0 18px;color:rgba(255,255,255,.68)}.glist{display:grid;gap:12px}.gitem{display:flex;align-items:center;gap:12px;padding:14px 15px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07)}
+        .layout{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:22px}.stack{gap:22px}.dl,.side,.history,.contact{position:relative;overflow:hidden;padding:24px;border-radius:28px}.dl:before,.side:before,.history:before,.contact:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--brand),var(--brand2))}.cardpill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(15,118,110,.08);color:var(--brand);font-size:.9rem;font-weight:700}
+        .check,.sys,.install{margin:0;padding:0;list-style:none;display:grid;gap:12px;color:var(--muted)}.check li,.sys li,.install li{display:flex;gap:12px;line-height:1.8}.check i{color:var(--ok);margin-top:5px}.sys i,.install i{color:var(--brand);margin-top:5px}
+        .actions{display:grid;gap:12px;margin-top:20px}.note{margin-top:16px;padding:16px 18px;border-radius:18px;background:rgba(15,118,110,.06);border:1px solid rgba(15,118,110,.08);color:var(--muted);line-height:1.8}
+        .accordion{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}.accordion.open{grid-template-rows:1fr}.inner{overflow:hidden;padding-top:4px}.historyList{display:grid;gap:14px}.item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:18px;border-radius:22px;background:#f5fbfc;border:1px solid rgba(15,23,42,.05);transition:.28s}.item:hover{transform:translateY(-4px);box-shadow:var(--soft)}.badge{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font:800 .98rem "Sora","Noto Sans SC",sans-serif;color:var(--brand);background:rgba(15,118,110,.08)}.item strong{display:block}.item span{display:block;margin-top:6px;color:var(--muted);font-size:.92rem}.act,.toggle{border:none;background:none;color:var(--brand);font-weight:700;cursor:pointer}.toggle{display:inline-flex;align-items:center;gap:8px}
+        .support{gap:12px}.foot{padding:26px 0 36px}.footrow{padding-top:22px;border-top:1px solid var(--line);color:#6b7280}
+        .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(7,26,43,.5);backdrop-filter:blur(8px)}.modal.open{display:grid}.modalCard{width:min(100%,460px);overflow:hidden;border-radius:28px;background:#fff;box-shadow:0 40px 100px rgba(7,26,43,.24);transform:translateY(16px) scale(.98);opacity:0;transition:.24s}.modal.open .modalCard{transform:none;opacity:1}.modalCard.shake{animation:shake .35s linear}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:22px 24px;color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6)}.modalTitle{display:inline-flex;align-items:center;gap:12px;font-weight:700}.close{width:40px;height:40px;border:none;border-radius:14px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.modalBody{padding:24px}.field{width:100%;padding:15px 16px;border-radius:18px;border:1px solid rgba(15,23,42,.1);background:#fbfefe;outline:none;transition:.2s}.field:focus{border-color:rgba(15,118,110,.4);box-shadow:0 0 0 4px rgba(20,184,166,.12)}.error{display:none;margin:12px 0 0;color:var(--warn);font-size:.92rem}.error.show{display:block}.modalActions{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
+        [data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .85s ease,transform .85s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}[data-reveal].show{opacity:1;transform:none}
+        @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-20px,0) scale(1.08)}}@keyframes line{0%{transform:translateX(-28%)}100%{transform:translateX(28%)}}@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:1}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}
+        @media (max-width:1024px){.heroGrid,.layout{grid-template-columns:1fr}}
+        @media (max-width:920px){.links,.navbtn{display:none}.menu{display:inline-grid;place-items:center}.hero{padding-top:120px}}
+        @media (max-width:720px){.wrap{width:min(100% - 28px,1180px)}.heroCard,.dl,.side,.history,.contact,.modalBody{padding:22px}.heroMeta,.tiles,.modalActions{grid-template-columns:1fr}.item{grid-template-columns:1fr;justify-items:start}.footrow{flex-direction:column;align-items:flex-start}}
+        @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:0s!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}}
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-white to-sky-50 min-h-screen flex flex-col">
-    <!-- Navigation -->
-    <nav class="fixed w-full glass-effect z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                    <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
-                        <i class="fas fa-robot text-white text-lg"></i>
-                    </div>
-                    <span class="text-2xl font-black text-slate-800">OmniAI</span>
-                </a>
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="index.html" class="text-slate-600 hover:text-sky-600 font-medium transition-all">首页</a>
-                    <a href="index.html#services" class="text-slate-600 hover:text-sky-600 font-medium transition-all">服务</a>
-                    <a href="index.html#about" class="text-slate-600 hover:text-sky-600 font-medium transition-all">关于</a>
-                    <a href="index.html#contact" class="text-slate-600 hover:text-sky-600 font-medium transition-all">联系我们</a>
+<body>
+    <div class="wrap">
+        <nav class="nav" id="nav">
+            <div class="navrow">
+                <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-wave-square"></i></span><span>OmniAI</span></a>
+                <div class="links">
+                    <a href="index.html">首页</a>
+                    <a href="#latest">最新版本</a>
+                    <a href="#history">历史版本</a>
+                    <a href="#support">帮助</a>
                 </div>
-                <button class="md:hidden text-slate-600" onclick="toggleMobileMenu()" aria-label="切换移动菜单">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden glass-effect border-t border-slate-200">
-            <div class="container mx-auto px-6 py-6 space-y-4">
-                <a href="index.html" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">首页</a>
-                <a href="index.html#services" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">服务</a>
-                <a href="index.html#about" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">关于</a>
-                <a href="index.html#contact" class="block text-slate-600 hover:text-sky-600 font-medium transition-all py-2">联系我们</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="pt-24 pb-16 flex-grow">
-        <div class="container mx-auto px-6">
-            <!-- Page Header -->
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center px-4 py-2 bg-sky-50 rounded-full mb-4 border border-sky-100">
-                    <i class="fas fa-download text-sky-600 mr-2"></i>
-                    <span class="text-sky-700 font-medium text-sm">软件下载中心</span>
+                <div style="display:flex;align-items:center;gap:16px">
+                    <a class="navbtn" href="index.html#contact"><i class="fa-regular fa-envelope"></i><span>联系支持</span></a>
+                    <button class="menu" id="menuBtn" aria-label="打开菜单" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-4">
-                    下载 <span class="gradient-text">OmniAI</span>
-                </h1>
-                <p class="text-lg text-slate-600 max-w-2xl mx-auto font-light">
-                    选择适合您系统的版本，开始您的AI动画创作之旅
-                </p>
             </div>
+            <div class="mobilebox" id="mobileBox">
+                <div class="mobile">
+                    <a href="index.html">首页</a>
+                    <a href="#latest">最新版本</a>
+                    <a href="#history">历史版本</a>
+                    <a href="#support">帮助</a>
+                </div>
+            </div>
+        </nav>
 
-            <!-- Download Section -->
-            <div class="max-w-4xl mx-auto">
-                <!-- Windows Version Card -->
-                <div class="download-card bg-white rounded-2xl border border-slate-200 shadow-sm mb-8 overflow-hidden">
-                    <!-- Card Header -->
-                    <div class="hero-gradient p-6 text-white">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
-                                    <i class="fab fa-windows text-3xl"></i>
-                                </div>
-                                <div>
-                                    <h2 class="text-2xl font-bold">Windows 版本</h2>
-                                    <p class="text-sky-200 text-sm">适用于 Windows 10/11</p>
-                                </div>
-                            </div>
-                            <div class="hidden md:block text-right">
-                                <p class="text-sky-200 text-sm">最新版本</p>
-                                <p class="text-2xl font-bold">V7.0.0</p>
+        <main>
+            <section class="hero">
+                <div class="heroCard" data-reveal>
+                    <div class="heroGrid">
+                        <div>
+                            <div class="pill"><span class="dot"></span><span>OmniAI 下载中心</span></div>
+                            <h1>下载更直接， <span class="grad">信息也更清楚</span></h1>
+                            <p class="copy">这一页改成了更正式的下载入口布局。版本、体积、更新日期、安装提示和历史版本都集中展示，动效更丰富，但不会干扰阅读。</p>
+                            <div class="heroMeta">
+                                <div class="meta"><span>当前版本</span><strong>V7.0.0</strong></div>
+                                <div class="meta"><span>更新时间</span><strong>2026-03-11</strong></div>
+                                <div class="meta"><span>适用系统</span><strong>Windows 10/11</strong></div>
                             </div>
                         </div>
+                        <aside class="glass">
+                            <div class="cardhead">
+                                <h2>这次版本包含</h2>
+                                <div class="state"><span class="signal"></span><span>稳定发布</span></div>
+                            </div>
+                            <p>保留原有下载验证逻辑，同时把下载页视觉层次、按钮反馈和信息组织方式都重新整理了一遍。</p>
+                            <div class="glist">
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>页面结构重新梳理</span></div>
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>下载入口层级更清晰</span></div>
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>动画反馈更完整但不过度</span></div>
+                            </div>
+                        </aside>
                     </div>
+                </div>
+            </section>
 
-                    <!-- Card Body -->
-                    <div class="p-6">
-                        <!-- Version Info -->
-                        <div class="grid md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-slate-50 rounded-xl p-4 text-center">
-                                <p class="text-slate-500 text-sm mb-1">版本号</p>
-                                <p class="text-slate-800 font-semibold">V7.0.0</p>
+            <section id="latest">
+                <div class="layout">
+                    <div class="stack">
+                        <article class="dl" data-reveal>
+                            <div class="cardhead">
+                                <h2>最新版本下载</h2>
+                                <span class="cardpill"><i class="fa-brands fa-windows"></i> Windows</span>
                             </div>
-                            <div class="bg-slate-50 rounded-xl p-4 text-center">
-                                <p class="text-slate-500 text-sm mb-1">文件大小</p>
-                                <p class="text-slate-800 font-semibold">约 130 MB</p>
+                            <div class="tiles">
+                                <div class="tile"><span>版本号</span><strong>V7.0.0</strong></div>
+                                <div class="tile"><span>文件大小</span><strong>约 130 MB</strong></div>
+                                <div class="tile"><span>更新时间</span><strong>2026-03-11</strong></div>
                             </div>
-                            <div class="bg-slate-50 rounded-xl p-4 text-center">
-                                <p class="text-slate-500 text-sm mb-1">更新日期</p>
-                                <p class="text-slate-800 font-semibold">2026-03-11</p>
-                            </div>
-                        </div>
-
-                        <!-- Update Log -->
-                        <div class="mb-6 p-4 bg-green-50 rounded-xl border border-green-100">
-                            <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
-                                <i class="fas fa-file-alt text-green-500 mr-2"></i>
-                                更新日志
-                            </h4>
-                            <ul class="text-slate-600 text-sm space-y-2 font-light">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
-                                    <span>构架更换</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
-                                    <span>UI更新</span>
-                                </li>
+                            <ul class="check">
+                                <li><i class="fa-solid fa-circle-check"></i><span>界面结构优化，首屏层次和主要操作更容易识别。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>下载页视觉更新，按钮、卡片和弹窗动效更完整。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>保留历史版本入口，便于按需回退。</span></li>
                             </ul>
-                        </div>
+                            <div class="actions">
+                                <button class="btn" type="button" onclick="showDownloadModal('v7')"><i class="fa-solid fa-download"></i><span>立即下载 V7.0.0</span></button>
+                                <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
+                            </div>
+                            <div class="note">下载需要输入授权密码。验证成功后会直接跳转到对应的安装包地址。</div>
+                        </article>
 
-                        <!-- Download Button -->
-                        <button onclick="showDownloadModal('v7')"
-                           class="btn-primary w-full text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-3">
-                            <i class="fas fa-download"></i>
-                            <span>立即下载</span>
-                        </button>
+                        <article class="history" id="history" data-reveal style="--d:.08s">
+                            <div class="cardhead">
+                                <h2>历史版本</h2>
+                                <button class="toggle" id="toggleBtn" aria-expanded="false"><span id="toggleText">展开全部</span><i class="fa-solid fa-chevron-down" id="toggleIcon"></i></button>
+                            </div>
+                            <div class="accordion" id="accordion">
+                                <div class="inner">
+                                    <div class="historyList">
+                                        <div class="item"><div class="badge">6.0</div><div><strong>V6.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v6')">下载</button></div>
+                                        <div class="item"><div class="badge">5.0</div><div><strong>V5.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v5')">下载</button></div>
+                                        <div class="item"><div class="badge">4.0</div><div><strong>V4.0.0</strong><span>2026-03-07</span></div><button class="act" type="button" onclick="showDownloadModal('v4')">下载</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
 
-                        <!-- System Requirements -->
-                        <div class="mt-6 p-4 bg-slate-50 rounded-xl">
-                            <h4 class="font-semibold text-slate-700 mb-2 flex items-center">
-                                <i class="fas fa-info-circle text-sky-500 mr-2"></i>
-                                系统要求
-                            </h4>
-                            <ul class="text-slate-600 text-sm space-y-1 font-light">
-                                <li>• 操作系统：Windows 10 或更高版本</li>
-                                <li>• 处理器：Intel Core i5 或同等性能</li>
-                                <li>• 内存：8 GB RAM 或以上</li>
-                                <li>• 存储空间：500 MB 可用空间</li>
+                    <div class="stack">
+                        <article class="side" data-reveal style="--d:.08s">
+                            <div class="cardhead"><h2>系统要求</h2></div>
+                            <ul class="sys">
+                                <li><i class="fa-solid fa-desktop"></i><span>Windows 10 或更高版本</span></li>
+                                <li><i class="fa-solid fa-microchip"></i><span>Intel Core i5 或同等级处理器</span></li>
+                                <li><i class="fa-solid fa-memory"></i><span>8 GB RAM 及以上</span></li>
+                                <li><i class="fa-solid fa-hard-drive"></i><span>至少 500 MB 可用存储空间</span></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
+                        </article>
 
-                <!-- Version History -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="p-6 border-b border-slate-200">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-xl font-bold text-slate-800 flex items-center">
-                                <i class="fas fa-history text-sky-500 mr-3"></i>
-                                历史版本
-                            </h3>
-                            <button onclick="toggleVersionHistory()" class="text-sky-600 hover:text-sky-700 font-medium flex items-center">
-                                <span id="toggleText">展开全部</span>
-                                <i id="toggleIcon" class="fas fa-chevron-down ml-2 transition-transform"></i>
-                            </button>
-                        </div>
-                    </div>
+                        <article class="side" data-reveal style="--d:.14s">
+                            <div class="cardhead"><h2>安装说明</h2></div>
+                            <ul class="install">
+                                <li><i class="fa-solid fa-1"></i><span>下载安装包后双击运行。</span></li>
+                                <li><i class="fa-solid fa-2"></i><span>按提示完成安装路径和桌面快捷方式设置。</span></li>
+                                <li><i class="fa-solid fa-3"></i><span>首次启动建议先完成项目目录配置。</span></li>
+                            </ul>
+                        </article>
 
-                    <div id="versionHistory" class="hidden">
-                        <!-- Version 6.0.0 -->
-                        <div class="version-item p-4 border-b border-slate-100">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between">
-                                <div class="flex items-center space-x-4 mb-3 md:mb-0">
-                                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span class="text-slate-600 font-bold text-sm">6.0</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-slate-800">V6.0.0</p>
-                                        <p class="text-slate-500 text-sm">2026-03-10</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4">
-                                    <button onclick="showDownloadModal('v6')"
-                                       class="text-sky-600 hover:text-sky-700 font-medium text-sm flex items-center">
-                                        <i class="fas fa-download mr-1"></i>
-                                        下载
-                                    </button>
-                                </div>
+                        <article class="contact" id="support" data-reveal style="--d:.2s">
+                            <div class="cardhead"><h2>需要帮助</h2></div>
+                            <p class="copy" style="margin:0 0 18px">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。页面不再拦截右键和开发者工具，避免不必要的使用干扰。</p>
+                            <div class="support">
+                                <a href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></a>
+                                <a href="index.html"><i class="fa-solid fa-arrow-left"></i><span>返回首页</span></a>
                             </div>
-                        </div>
-                        <!-- Version 5.0.0 -->
-                        <div class="version-item p-4 border-b border-slate-100">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between">
-                                <div class="flex items-center space-x-4 mb-3 md:mb-0">
-                                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span class="text-slate-600 font-bold text-sm">5.0</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-slate-800">V5.0.0</p>
-                                        <p class="text-slate-500 text-sm">2026-03-10</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4">
-                                    <button onclick="showDownloadModal('v5')"
-                                       class="text-sky-600 hover:text-sky-700 font-medium text-sm flex items-center">
-                                        <i class="fas fa-download mr-1"></i>
-                                        下载
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Version 4.0.0 -->
-                        <div class="version-item p-4">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between">
-                                <div class="flex items-center space-x-4 mb-3 md:mb-0">
-                                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span class="text-slate-600 font-bold text-sm">4.0</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-slate-800">V4.0.0</p>
-                                        <p class="text-slate-500 text-sm">2026-03-07</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4">
-                                    <button onclick="showDownloadModal('v4')"
-                                       class="text-sky-600 hover:text-sky-700 font-medium text-sm flex items-center">
-                                        <i class="fas fa-download mr-1"></i>
-                                        下载
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
+            </section>
+        </main>
 
-                <!-- Help Section -->
-                <div class="mt-8 p-6 bg-sky-50 rounded-2xl border border-sky-100">
-                    <h4 class="font-semibold text-slate-800 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-sky-500 mr-2"></i>
-                        安装帮助
-                    </h4>
-                    <p class="text-slate-600 text-sm font-light leading-relaxed">
-                        下载完成后，双击安装程序按照提示完成安装。如遇到问题，请访问我们的
-                        <a href="index.html#contact" class="text-sky-600 hover:text-sky-700 underline">帮助中心</a>
-                        或发送邮件至
-                        <a href="mailto:bysmj1213897@163.com" class="text-sky-600 hover:text-sky-700 underline">bysmj1213897@163.com</a>
-                        获取技术支持。
-                    </p>
-                </div>
+        <footer class="foot">
+            <div class="footrow">
+                <div class="brand"><span class="logo"><i class="fa-solid fa-wave-square"></i></span><span>OmniAI</span></div>
+                <div>© 2026 OmniAI · 南京万物可爱文化传媒有限公司</div>
             </div>
-        </div>
-    </main>
+        </footer>
 
-    <!-- Footer -->
-    <footer class="bg-slate-800 text-white py-8 mt-auto">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center space-x-3 mb-4 md:mb-0">
-                    <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center">
-                        <i class="fas fa-robot text-white text-lg"></i>
+        <div class="modal" id="modal" aria-hidden="true">
+            <div class="modalCard" id="modalCard">
+                <div class="modalHead">
+                    <div class="modalTitle"><i class="fa-solid fa-shield-halved"></i><span>下载验证</span></div>
+                    <button class="close" type="button" onclick="closeDownloadModal()" aria-label="关闭弹窗"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modalBody">
+                    <p class="copy" style="margin:0 0 18px">请输入下载授权密码，验证成功后将自动开始跳转下载。</p>
+                    <input class="field" id="password" type="password" placeholder="输入下载密码" autocomplete="off">
+                    <p class="error" id="error"><i class="fa-solid fa-circle-exclamation"></i><span> 密码错误，请重新输入。</span></p>
+                    <div class="modalActions">
+                        <button class="ghost" type="button" onclick="closeDownloadModal()">取消</button>
+                        <button class="btn" type="button" onclick="verifyPassword()">确认下载</button>
                     </div>
-                    <span class="text-2xl font-black">OmniAI</span>
-                </div>
-                <p class="text-slate-400 font-light text-sm">
-                    © 2026 OmniAI 南京万物可爱文化传媒有限公司
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Password Modal -->
-    <div id="passwordModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
-            <div class="hero-gradient p-6 text-white">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-bold flex items-center">
-                        <i class="fas fa-lock mr-3"></i>
-                        下载验证
-                    </h3>
-                    <button onclick="closeDownloadModal()" class="text-white/80 hover:text-white transition-colors">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <p class="text-slate-600 mb-4 font-light">请输入下载密码以继续下载</p>
-                <div class="mb-4">
-                    <input type="password" id="downloadPassword"
-                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
-                           placeholder="请输入密码"
-                           onkeypress="if(event.key === 'Enter') verifyPassword()">
-                </div>
-                <p id="passwordError" class="text-red-500 text-sm mb-4 hidden">
-                    <i class="fas fa-exclamation-circle mr-1"></i>
-                    密码错误，请重新输入
-                </p>
-                <div class="flex gap-3">
-                    <button onclick="closeDownloadModal()"
-                            class="flex-1 px-4 py-3 border border-slate-300 text-slate-700 rounded-xl font-semibold hover:bg-slate-50 transition-all">
-                        取消
-                    </button>
-                    <button onclick="verifyPassword()"
-                            class="flex-1 btn-primary text-white px-4 py-3 rounded-xl font-semibold">
-                        确认下载
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ========== Security Configuration ==========
-        // URL storage (Base64 encoded)
-        const _u = {
-            v7: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNy4wLjAuZXhl',
-            v6: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNi4wLjAuZXhl',
-            v5: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNS4wLjAuZXhl',
-            v4: 'aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNC4wLjAuZXhl'
+        const urls = {
+            v7: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNy4wLjAuZXhl",
+            v6: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNi4wLjAuZXhl",
+            v5: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNS4wLjAuZXhl",
+            v4: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNC4wLjAuZXhl"
         };
+        const pw = [111,109,110,105,97,105,50,48,50,54];
+        let lastAction = 0;
+        let currentVersion = "";
 
-        // Obfuscated password storage
-        // Uses character code array for "omniai2026"
-        const _pw = [111, 109, 110, 105, 97, 105, 50, 48, 50, 54];
+        const nav = document.getElementById("nav");
+        const menuBtn = document.getElementById("menuBtn");
+        const mobileBox = document.getElementById("mobileBox");
+        const modal = document.getElementById("modal");
+        const modalCard = document.getElementById("modalCard");
+        const password = document.getElementById("password");
+        const error = document.getElementById("error");
+        const toggleBtn = document.getElementById("toggleBtn");
+        const accordion = document.getElementById("accordion");
+        const toggleText = document.getElementById("toggleText");
+        const toggleIcon = document.getElementById("toggleIcon");
 
-        let _lt = 0;
-        let _cv = '';
+        const decode = (s) => { try { return atob(s); } catch { return ""; } };
+        const decodePw = () => String.fromCharCode.apply(null, pw);
+        const rateLimit = () => { const now = Date.now(); if (now - lastAction < 2000) return false; lastAction = now; return true; };
+        const syncNav = () => nav.classList.toggle("scrolled", window.scrollY > 10);
+        const closeMenu = () => { mobileBox.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); };
 
-        // Decode URL
-        function _du(e) {
-            try {
-                return atob(e);
-            } catch {
-                return '';
-            }
-        }
-
-        // Decode password from char codes
-        function _dp() {
-            return String.fromCharCode.apply(null, _pw);
-        }
-
-        // Verify password
-        function _vp(p) {
-            return p && p === _dp();
-        }
-
-        // Rate limit
-        function _cl() {
-            const n = Date.now();
-            if (n - _lt < 2000) return false;
-            _lt = n;
-            return true;
-        }
-
-        // ========== UI Functions ==========
         function showDownloadModal(version) {
-            if (!_cl()) {
-                alert('操作过于频繁，请稍后再试');
-                return;
-            }
-            _cv = version;
-            document.getElementById('passwordModal').classList.remove('hidden');
-            document.getElementById('downloadPassword').value = '';
-            document.getElementById('passwordError').classList.add('hidden');
-            setTimeout(() => document.getElementById('downloadPassword').focus(), 100);
+            if (!rateLimit()) return;
+            currentVersion = version;
+            modal.classList.add("open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("modal-open");
+            password.value = "";
+            error.classList.remove("show");
+            modalCard.classList.remove("shake");
+            setTimeout(() => password.focus(), 120);
         }
 
         function closeDownloadModal() {
-            document.getElementById('passwordModal').classList.add('hidden');
-            _cv = '';
+            modal.classList.remove("open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("modal-open");
+            currentVersion = "";
         }
 
         function verifyPassword() {
-            const input = document.getElementById('downloadPassword').value;
-            if (_vp(input)) {
-                const url = _du(_u[_cv]);
+            if (password.value === decodePw()) {
+                const url = decode(urls[currentVersion]);
                 closeDownloadModal();
                 if (url) window.location.href = url;
-            } else {
-                document.getElementById('passwordError').classList.remove('hidden');
-                document.getElementById('downloadPassword').value = '';
-                document.getElementById('downloadPassword').focus();
+                return;
             }
+            error.classList.add("show");
+            modalCard.classList.remove("shake");
+            void modalCard.offsetWidth;
+            modalCard.classList.add("shake");
+            password.value = "";
+            password.focus();
         }
 
-        // Close modal on outside click
-        document.getElementById('passwordModal').addEventListener('click', function(e) {
-            if (e.target === this) closeDownloadModal();
+        menuBtn.addEventListener("click", () => {
+            const open = menuBtn.getAttribute("aria-expanded") === "true";
+            menuBtn.setAttribute("aria-expanded", String(!open));
+            mobileBox.classList.toggle("open");
         });
-
-        // Anti-scraping: Disable dev tools
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()))) {
-                e.preventDefault();
-            }
+        document.querySelectorAll(".mobile a,.links a").forEach((a) => a.addEventListener("click", closeMenu));
+        password.addEventListener("keydown", (e) => { if (e.key === "Enter") verifyPassword(); });
+        modal.addEventListener("click", (e) => { if (e.target === modal) closeDownloadModal(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeDownloadModal(); });
+        toggleBtn.addEventListener("click", () => {
+            const open = toggleBtn.getAttribute("aria-expanded") === "true";
+            toggleBtn.setAttribute("aria-expanded", String(!open));
+            accordion.classList.toggle("open");
+            toggleText.textContent = open ? "展开全部" : "收起";
+            toggleIcon.style.transform = open ? "rotate(0deg)" : "rotate(180deg)";
         });
-
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.closest('.btn-primary') || e.target.closest('.text-sky-600')) {
-                e.preventDefault();
-            }
-        });
-
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        }
-
-        function toggleVersionHistory() {
-            const history = document.getElementById('versionHistory');
-            const toggleText = document.getElementById('toggleText');
-            const toggleIcon = document.getElementById('toggleIcon');
-
-            if (history.classList.contains('hidden')) {
-                history.classList.remove('hidden');
-                toggleText.textContent = '收起';
-                toggleIcon.style.transform = 'rotate(180deg)';
-            } else {
-                history.classList.add('hidden');
-                toggleText.textContent = '展开全部';
-                toggleIcon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        // Enhanced scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-lg');
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                nav.classList.remove('shadow-lg');
-                nav.style.background = '';
-            }
-        });
+        window.addEventListener("scroll", syncNav, { passive: true }); syncNav();
+        const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
+        document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
     </script>
 </body>
 </html>
