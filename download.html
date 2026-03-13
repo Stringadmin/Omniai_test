@@ -10,26 +10,107 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{--bg:#eef5f7;--card:rgba(255,255,255,.82);--line:rgba(15,23,42,.08);--ink:#0f172a;--muted:#556476;--brand:#0f766e;--brand2:#06b6d4;--ok:#22c55e;--warn:#ef4444;--shadow:0 24px 60px rgba(15,23,42,.12);--soft:0 16px 32px rgba(15,23,42,.08)}
-        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 10% 8%,rgba(20,184,166,.16),transparent 28%),radial-gradient(circle at 92% 12%,rgba(6,182,212,.16),transparent 22%),linear-gradient(180deg,#f8fbfc 0%,var(--bg) 55%,#f9fbfc 100%);overflow-x:hidden}body.modal-open{overflow:hidden}a{text-decoration:none;color:inherit}button,input{font:inherit}
-        .wrap{width:min(1180px,calc(100% - 40px));margin:0 auto}.nav,.hero,.layout,.stack,.heroMeta,.tiles,.support,.foot{display:grid;gap:18px}.nav{position:fixed;inset:0 0 auto;z-index:40;transition:.3s}.nav.scrolled{background:rgba(248,251,252,.82);backdrop-filter:blur(16px);box-shadow:0 10px 30px rgba(15,23,42,.08);border-bottom:1px solid rgba(15,23,42,.06)}.navrow,.footrow,.cardhead{display:flex;justify-content:space-between;gap:14px;align-items:center}.navrow,.mobilebox{width:min(1180px,calc(100% - 40px));margin:0 auto}.navrow{padding:18px 0}.brand{display:inline-flex;align-items:center;gap:14px;font:700 1.15rem "Sora","Noto Sans SC",sans-serif}.logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6);box-shadow:0 18px 28px rgba(15,118,110,.22)}
-        .links{display:flex;gap:28px;color:var(--muted)}.links a,.mobile a{position:relative;transition:.25s}.links a:after,.mobile a:after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand2));transform:scaleX(0);transform-origin:left;transition:.25s}.links a:hover,.mobile a:hover{color:var(--brand)}.links a:hover:after,.mobile a:hover:after{transform:scaleX(1)}
-        .navbtn,.btn,.ghost,.support a{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:18px;font-weight:700;transition:.28s}.navbtn,.btn{color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6);box-shadow:0 20px 36px rgba(15,118,110,.24)}.ghost,.support a{background:rgba(255,255,255,.8);border:1px solid var(--line);box-shadow:var(--soft)}.navbtn:hover,.btn:hover,.ghost:hover,.support a:hover{transform:translateY(-3px)}.menu{display:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.78)}.mobilebox{display:none;padding-bottom:18px}.mobilebox.open{display:block}.mobile{display:grid;gap:14px;padding:18px;border-radius:24px;background:rgba(255,255,255,.92);border:1px solid var(--line);box-shadow:var(--soft)}
-        .hero{padding:138px 0 34px}.heroCard,.dl,.side,.history,.contact,.glass,.modalCard{background:var(--card);border:1px solid var(--line);box-shadow:var(--soft)}.heroCard{position:relative;overflow:hidden;padding:34px;border-radius:34px;background:radial-gradient(circle at 14% 18%,rgba(20,184,166,.18),transparent 28%),linear-gradient(140deg,rgba(255,255,255,.96),rgba(245,251,252,.9))}.heroCard:after,.glass:after{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(6,182,212,.65),transparent);animation:line 5s linear infinite}.heroGrid,.layout,.heroMeta,.tiles,.modalActions{display:grid}.heroGrid{grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr);gap:26px}.pill{display:inline-flex;align-items:center;gap:10px;width:max-content;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(15,118,110,.14);box-shadow:var(--soft);color:var(--brand)}.dot{width:9px;height:9px;border-radius:999px;background:linear-gradient(180deg,#14b8a6,#06b6d4);box-shadow:0 0 0 8px rgba(6,182,212,.1);animation:pulse 2.4s ease-in-out infinite}
-        h1,h2,h3{margin:0}h1{margin:22px 0 16px;font:800 clamp(2.7rem,5vw,4.5rem)/.96 "Sora","Noto Sans SC",sans-serif;letter-spacing:-.05em}h2{font:800 1.28rem/1.2 "Sora","Noto Sans SC",sans-serif}.grad{background:linear-gradient(135deg,#0b4f4a 0%,#14b8a6 55%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.copy{color:var(--muted);line-height:1.9}.heroMeta,.tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.meta,.tile{padding:18px;border-radius:22px;background:rgba(255,255,255,.78);border:1px solid var(--line);box-shadow:var(--soft)}.meta span,.tile span{display:block;color:var(--muted);font-size:.9rem}.meta strong,.tile strong{display:block;margin-top:8px;font:800 1.2rem "Sora","Noto Sans SC",sans-serif;letter-spacing:-.04em}
-        .glass{position:relative;overflow:hidden;padding:24px;border-radius:28px;background:linear-gradient(160deg,rgba(11,79,74,.95),rgba(7,26,43,.94));box-shadow:0 28px 80px rgba(7,26,43,.25);color:rgba(255,255,255,.92)}.glass:before{content:"";position:absolute;width:220px;height:220px;top:-50px;left:-20px;border-radius:999px;background:rgba(45,212,191,.12);filter:blur(10px);animation:drift 13s ease-in-out infinite}.state{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}.signal{width:10px;height:10px;border-radius:999px;background:#5eead4;box-shadow:0 0 0 8px rgba(94,234,212,.16);animation:pulse 2.2s ease-in-out infinite}.glass p{margin:14px 0 18px;color:rgba(255,255,255,.68)}.glist{display:grid;gap:12px}.gitem{display:flex;align-items:center;gap:12px;padding:14px 15px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07)}
-        .layout{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:22px}.stack{gap:22px}.dl,.side,.history,.contact{position:relative;overflow:hidden;padding:24px;border-radius:28px}.dl:before,.side:before,.history:before,.contact:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--brand),var(--brand2))}.cardpill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(15,118,110,.08);color:var(--brand);font-size:.9rem;font-weight:700}
-        .check,.sys,.install{margin:0;padding:0;list-style:none;display:grid;gap:12px;color:var(--muted)}.check li,.sys li,.install li{display:flex;gap:12px;line-height:1.8}.check i{color:var(--ok);margin-top:5px}.sys i,.install i{color:var(--brand);margin-top:5px}
-        .actions{display:grid;gap:12px;margin-top:20px}.note{margin-top:16px;padding:16px 18px;border-radius:18px;background:rgba(15,118,110,.06);border:1px solid rgba(15,118,110,.08);color:var(--muted);line-height:1.8}
-        .accordion{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}.accordion.open{grid-template-rows:1fr}.inner{overflow:hidden;padding-top:4px}.historyList{display:grid;gap:14px}.item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:18px;border-radius:22px;background:#f5fbfc;border:1px solid rgba(15,23,42,.05);transition:.28s}.item:hover{transform:translateY(-4px);box-shadow:var(--soft)}.badge{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font:800 .98rem "Sora","Noto Sans SC",sans-serif;color:var(--brand);background:rgba(15,118,110,.08)}.item strong{display:block}.item span{display:block;margin-top:6px;color:var(--muted);font-size:.92rem}.act,.toggle{border:none;background:none;color:var(--brand);font-weight:700;cursor:pointer}.toggle{display:inline-flex;align-items:center;gap:8px}
-        .support{gap:12px}.foot{padding:26px 0 36px}.footrow{padding-top:22px;border-top:1px solid var(--line);color:#6b7280}
-        .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(7,26,43,.5);backdrop-filter:blur(8px)}.modal.open{display:grid}.modalCard{width:min(100%,460px);overflow:hidden;border-radius:28px;background:#fff;box-shadow:0 40px 100px rgba(7,26,43,.24);transform:translateY(16px) scale(.98);opacity:0;transition:.24s}.modal.open .modalCard{transform:none;opacity:1}.modalCard.shake{animation:shake .35s linear}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:22px 24px;color:#fff;background:linear-gradient(135deg,#0b4f4a,#14b8a6)}.modalTitle{display:inline-flex;align-items:center;gap:12px;font-weight:700}.close{width:40px;height:40px;border:none;border-radius:14px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.modalBody{padding:24px}.field{width:100%;padding:15px 16px;border-radius:18px;border:1px solid rgba(15,23,42,.1);background:#fbfefe;outline:none;transition:.2s}.field:focus{border-color:rgba(15,118,110,.4);box-shadow:0 0 0 4px rgba(20,184,166,.12)}.error{display:none;margin:12px 0 0;color:var(--warn);font-size:.92rem}.error.show{display:block}.modalActions{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
-        [data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .85s ease,transform .85s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}[data-reveal].show{opacity:1;transform:none}
-        @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-20px,0) scale(1.08)}}@keyframes line{0%{transform:translateX(-28%)}100%{transform:translateX(28%)}}@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:1}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}
-        @media (max-width:1024px){.heroGrid,.layout{grid-template-columns:1fr}}
-        @media (max-width:920px){.links,.navbtn{display:none}.menu{display:inline-grid;place-items:center}.hero{padding-top:120px}}
-        @media (max-width:720px){.wrap{width:min(100% - 28px,1180px)}.heroCard,.dl,.side,.history,.contact,.modalBody{padding:22px}.heroMeta,.tiles,.modalActions{grid-template-columns:1fr}.item{grid-template-columns:1fr;justify-items:start}.footrow{flex-direction:column;align-items:flex-start}}
-        @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:0s!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}}
+        :root { --bg:#eef6f7; --card:rgba(255,255,255,.84); --line:rgba(15,23,42,.08); --ink:#0f172a; --muted:#556476; --brand:#0f766e; --brand2:#06b6d4; --ok:#22c55e; --warn:#ef4444; --shadow:0 22px 52px rgba(15,23,42,.12); --soft:0 14px 28px rgba(15,23,42,.08); }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { margin:0; color:var(--ink); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; background:radial-gradient(circle at 10% 8%,rgba(20,184,166,.16),transparent 28%),radial-gradient(circle at 92% 12%,rgba(6,182,212,.16),transparent 22%),linear-gradient(180deg,#f8fbfc 0%,var(--bg) 55%,#f9fbfc 100%); overflow-x:hidden; }
+        body.modal-open { overflow:hidden; }
+        a { color:inherit; text-decoration:none; }
+        button, input { font:inherit; }
+        .wrap { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
+        .nav { position:fixed; inset:0 0 auto; z-index:40; transition:.3s; }
+        .nav.scrolled { background:rgba(248,251,252,.82); backdrop-filter:blur(16px); box-shadow:0 10px 30px rgba(15,23,42,.08); border-bottom:1px solid rgba(15,23,42,.06); }
+        .navrow,.footrow,.head { display:flex; align-items:center; justify-content:space-between; gap:14px; }
+        .navrow,.mobilebox { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
+        .navrow { padding:18px 0; }
+        .brand { display:inline-flex; align-items:center; gap:14px; font:700 1.15rem "Sora","Noto Sans SC",sans-serif; }
+        .logo { width:48px; height:48px; border-radius:16px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); box-shadow:0 18px 28px rgba(15,118,110,.22); }
+        .links { display:flex; gap:28px; color:var(--muted); }
+        .links a,.mobile a { position:relative; transition:.25s; }
+        .links a::after,.mobile a::after { content:""; position:absolute; left:0; bottom:-6px; width:100%; height:2px; border-radius:999px; background:linear-gradient(90deg,var(--brand),var(--brand2)); transform:scaleX(0); transform-origin:left; transition:.25s; }
+        .links a:hover,.mobile a:hover { color:var(--brand); }
+        .links a:hover::after,.mobile a:hover::after { transform:scaleX(1); }
+        .navbtn,.btn,.ghost,.support a { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 18px; border-radius:18px; font-weight:700; transition:.28s; }
+        .navbtn,.btn { color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); box-shadow:0 20px 36px rgba(15,118,110,.24); border:none; }
+        .ghost,.support a { background:rgba(255,255,255,.8); border:1px solid var(--line); box-shadow:var(--soft); }
+        .navbtn:hover,.btn:hover,.ghost:hover,.support a:hover { transform:translateY(-3px); }
+        .menu { display:none; width:46px; height:46px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.78); }
+        .mobilebox { display:none; padding-bottom:18px; }
+        .mobilebox.open { display:block; }
+        .mobile { display:grid; gap:14px; padding:18px; border-radius:24px; background:rgba(255,255,255,.92); border:1px solid var(--line); box-shadow:var(--soft); }
+        .hero { padding:138px 0 34px; }
+        .heroCard,.sectionCard,.sideCard,.historyCard,.supportCard,.glass,.modalCard { background:var(--card); border:1px solid var(--line); box-shadow:var(--soft); }
+        .heroCard { position:relative; overflow:hidden; padding:34px; border-radius:34px; background:radial-gradient(circle at 14% 18%,rgba(20,184,166,.18),transparent 28%),linear-gradient(140deg,rgba(255,255,255,.96),rgba(245,251,252,.90)); }
+        .heroCard::after,.glass::after { content:""; position:absolute; left:-20%; right:-20%; bottom:0; height:1px; background:linear-gradient(90deg,transparent,rgba(6,182,212,.65),transparent); animation:line 5s linear infinite; }
+        .heroGrid,.layout,.heroMeta,.tiles,.modalActions,.stack,.support,.historyList { display:grid; }
+        .heroGrid { grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr); gap:26px; }
+        .pill { display:inline-flex; align-items:center; gap:10px; width:max-content; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.78); border:1px solid rgba(15,118,110,.14); box-shadow:var(--soft); color:var(--brand); }
+        .dot { width:9px; height:9px; border-radius:999px; background:linear-gradient(180deg,#14b8a6,#06b6d4); box-shadow:0 0 0 8px rgba(6,182,212,.1); animation:pulse 2.4s ease-in-out infinite; }
+        h1,h2,h3 { margin:0; }
+        h1 { margin:22px 0 16px; font:800 clamp(2.7rem,5vw,4.5rem)/.96 "Sora","Noto Sans SC",sans-serif; letter-spacing:-.05em; }
+        h2 { font:800 1.28rem/1.2 "Sora","Noto Sans SC",sans-serif; }
+        .grad { background:linear-gradient(135deg,#0b4f4a 0%,#14b8a6 55%,#06b6d4 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .copy { color:var(--muted); line-height:1.9; }
+        .heroMeta,.tiles { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+        .meta,.tile { padding:18px; border-radius:22px; background:rgba(255,255,255,.78); border:1px solid var(--line); box-shadow:var(--soft); }
+        .meta span,.tile span { display:block; color:var(--muted); font-size:.9rem; }
+        .meta strong,.tile strong { display:block; margin-top:8px; font:800 1.2rem "Sora","Noto Sans SC",sans-serif; letter-spacing:-.04em; }
+        .glass { position:relative; overflow:hidden; padding:24px; border-radius:28px; background:linear-gradient(160deg,rgba(11,79,74,.95),rgba(7,26,43,.94)); box-shadow:0 28px 80px rgba(7,26,43,.25); color:rgba(255,255,255,.92); }
+        .glass::before { content:""; position:absolute; width:220px; height:220px; top:-50px; left:-20px; border-radius:999px; background:rgba(45,212,191,.12); filter:blur(10px); animation:drift 13s ease-in-out infinite; }
+        .state { display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); color:rgba(255,255,255,.78); }
+        .signal { width:10px; height:10px; border-radius:999px; background:#5eead4; box-shadow:0 0 0 8px rgba(94,234,212,.16); animation:pulse 2.2s ease-in-out infinite; }
+        .glass p { margin:14px 0 18px; color:rgba(255,255,255,.68); }
+        .glist { display:grid; gap:12px; }
+        .gitem { display:flex; align-items:center; gap:12px; padding:14px 15px; border-radius:18px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.07); }
+        .layout { grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr); gap:22px; }
+        .stack { gap:22px; }
+        .sectionCard,.sideCard,.historyCard,.supportCard { position:relative; overflow:hidden; padding:24px; border-radius:28px; }
+        .sectionCard::before,.sideCard::before,.historyCard::before,.supportCard::before { content:""; position:absolute; inset:0 0 auto; height:3px; background:linear-gradient(90deg,var(--brand),var(--brand2)); }
+        .cardpill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; background:rgba(15,118,110,.08); color:var(--brand); font-size:.9rem; font-weight:700; }
+        .check,.sys,.install { margin:0; padding:0; list-style:none; display:grid; gap:12px; color:var(--muted); }
+        .check li,.sys li,.install li { display:flex; gap:12px; line-height:1.8; }
+        .check i { color:var(--ok); margin-top:5px; }
+        .sys i,.install i { color:var(--brand); margin-top:5px; }
+        .actions { display:grid; gap:12px; margin-top:20px; }
+        .note { margin-top:16px; padding:16px 18px; border-radius:18px; background:rgba(15,118,110,.06); border:1px solid rgba(15,118,110,.08); color:var(--muted); line-height:1.8; }
+        .accordion { display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+        .accordion.open { grid-template-rows:1fr; }
+        .inner { overflow:hidden; padding-top:4px; }
+        .historyList { gap:14px; }
+        .item { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:18px; border-radius:22px; background:#f5fbfc; border:1px solid rgba(15,23,42,.05); transition:.28s; }
+        .item:hover { transform:translateY(-4px); box-shadow:var(--soft); }
+        .badge { width:52px; height:52px; border-radius:18px; display:grid; place-items:center; font:800 .98rem "Sora","Noto Sans SC",sans-serif; color:var(--brand); background:rgba(15,118,110,.08); }
+        .item strong { display:block; }
+        .item span { display:block; margin-top:6px; color:var(--muted); font-size:.92rem; }
+        .act,.toggle { border:none; background:none; color:var(--brand); font-weight:700; cursor:pointer; }
+        .toggle { display:inline-flex; align-items:center; gap:8px; }
+        .support { gap:12px; }
+        .foot { padding:26px 0 36px; }
+        .footrow { padding-top:22px; border-top:1px solid var(--line); color:#6b7280; }
+        .modal { position:fixed; inset:0; z-index:100; display:none; place-items:center; padding:20px; background:rgba(7,26,43,.5); backdrop-filter:blur(8px); }
+        .modal.open { display:grid; }
+        .modalCard { width:min(100%,460px); overflow:hidden; border-radius:28px; background:#fff; box-shadow:0 40px 100px rgba(7,26,43,.24); transform:translateY(16px) scale(.98); opacity:0; transition:.24s; }
+        .modal.open .modalCard { transform:none; opacity:1; }
+        .modalCard.shake { animation:shake .35s linear; }
+        .modalHead { display:flex; justify-content:space-between; align-items:center; gap:14px; padding:22px 24px; color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); }
+        .modalTitle { display:inline-flex; align-items:center; gap:12px; font-weight:700; }
+        .close { width:40px; height:40px; border:none; border-radius:14px; background:rgba(255,255,255,.14); color:#fff; cursor:pointer; }
+        .modalBody { padding:24px; }
+        .field { width:100%; padding:15px 16px; border-radius:18px; border:1px solid rgba(15,23,42,.1); background:#fbfefe; outline:none; transition:.2s; }
+        .field:focus { border-color:rgba(15,118,110,.4); box-shadow:0 0 0 4px rgba(20,184,166,.12); }
+        .error { display:none; margin:12px 0 0; color:var(--warn); font-size:.92rem; }
+        .error.show { display:block; }
+        .modalActions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:22px; }
+        [data-reveal] { opacity:0; transform:translateY(34px); transition:opacity .85s ease,transform .85s cubic-bezier(.22,1,.36,1); transition-delay:var(--d,0s); }
+        [data-reveal].show { opacity:1; transform:none; }
+        @keyframes drift { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(18px,-20px,0) scale(1.08)} }
+        @keyframes line { 0%{transform:translateX(-28%)} 100%{transform:translateX(28%)} }
+        @keyframes pulse { 0%,100%{transform:scale(1);opacity:.9} 50%{transform:scale(1.18);opacity:1} }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 50%{transform:translateX(8px)} 75%{transform:translateX(-5px)} }
+        @media (max-width:1024px) { .heroGrid,.layout { grid-template-columns:1fr; } }
+        @media (max-width:920px) { .links,.navbtn { display:none; } .menu { display:inline-grid; place-items:center; } .hero { padding-top:120px; } }
+        @media (max-width:720px) { .wrap { width:min(100% - 28px,1180px); } .heroCard,.sectionCard,.sideCard,.historyCard,.supportCard,.modalBody { padding:22px; } .heroMeta,.tiles,.modalActions { grid-template-columns:1fr; } .item { grid-template-columns:1fr; justify-items:start; } .footrow { flex-direction:column; align-items:flex-start; } }
+        @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition-duration:0s !important; scroll-behavior:auto !important; } [data-reveal] { opacity:1; transform:none; } }
     </style>
 </head>
 <body>
@@ -64,24 +145,24 @@
                     <div class="heroGrid">
                         <div>
                             <div class="pill"><span class="dot"></span><span>OmniAI 下载中心</span></div>
-                            <h1>下载更直接， <span class="grad">信息也更清楚</span></h1>
-                            <p class="copy">这一页改成了更正式的下载入口布局。版本、体积、更新日期、安装提示和历史版本都集中展示，动效更丰富，但不会干扰阅读。</p>
+                            <h1>下载更直接，<span class="grad">版本也已更新到 V8</span></h1>
+                            <p class="copy">当前最新版本已切换为 V8.0.0，原来的 V7.0.0 已移动到历史版本列表。下载验证逻辑保持不变。</p>
                             <div class="heroMeta">
-                                <div class="meta"><span>当前版本</span><strong>V7.0.0</strong></div>
-                                <div class="meta"><span>更新时间</span><strong>2026-03-11</strong></div>
+                                <div class="meta"><span>当前版本</span><strong>V8.0.0</strong></div>
+                                <div class="meta"><span>更新时间</span><strong>2026-03-13</strong></div>
                                 <div class="meta"><span>适用系统</span><strong>Windows 10/11</strong></div>
                             </div>
                         </div>
                         <aside class="glass">
-                            <div class="cardhead">
-                                <h2>这次版本包含</h2>
+                            <div class="head">
+                                <h2>当前版本说明</h2>
                                 <div class="state"><span class="signal"></span><span>稳定发布</span></div>
                             </div>
-                            <p>保留原有下载验证逻辑，同时把下载页视觉层次、按钮反馈和信息组织方式都重新整理了一遍。</p>
+                            <p>V8.0.0 作为当前默认下载版本展示，页面入口、版本信息、弹窗下载和历史版本列表已经同步调整。</p>
                             <div class="glist">
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>页面结构重新梳理</span></div>
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>下载入口层级更清晰</span></div>
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>动画反馈更完整但不过度</span></div>
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>最新下载按钮切换到 V8.0.0</span></div>
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>V7.0.0 调整到历史版本</span></div>
+                                <div class="gitem"><i class="fa-solid fa-check"></i><span>下载链接映射已补充 V8 地址</span></div>
                             </div>
                         </aside>
                     </div>
@@ -91,36 +172,37 @@
             <section id="latest">
                 <div class="layout">
                     <div class="stack">
-                        <article class="dl" data-reveal>
-                            <div class="cardhead">
+                        <article class="sectionCard" data-reveal>
+                            <div class="head">
                                 <h2>最新版本下载</h2>
                                 <span class="cardpill"><i class="fa-brands fa-windows"></i> Windows</span>
                             </div>
                             <div class="tiles">
-                                <div class="tile"><span>版本号</span><strong>V7.0.0</strong></div>
-                                <div class="tile"><span>文件大小</span><strong>约 130 MB</strong></div>
-                                <div class="tile"><span>更新时间</span><strong>2026-03-11</strong></div>
+                                <div class="tile"><span>版本号</span><strong>V8.0.0</strong></div>
+                                <div class="tile"><span>文件大小</span><strong>以实际下载文件为准</strong></div>
+                                <div class="tile"><span>更新时间</span><strong>2026-03-13</strong></div>
                             </div>
                             <ul class="check">
-                                <li><i class="fa-solid fa-circle-check"></i><span>界面结构优化，首屏层次和主要操作更容易识别。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>下载页视觉更新，按钮、卡片和弹窗动效更完整。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>保留历史版本入口，便于按需回退。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>当前默认下载版本已更新为 V8.0.0。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>历史版本入口保留，方便回退到旧版本。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>下载前仍需输入授权密码验证。</span></li>
                             </ul>
                             <div class="actions">
-                                <button class="btn" type="button" onclick="showDownloadModal('v7')"><i class="fa-solid fa-download"></i><span>立即下载 V7.0.0</span></button>
+                                <button class="btn" type="button" onclick="showDownloadModal('v8')"><i class="fa-solid fa-download"></i><span>立即下载 V8.0.0</span></button>
                                 <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
                             </div>
-                            <div class="note">下载需要输入授权密码。验证成功后会直接跳转到对应的安装包地址。</div>
+                            <div class="note">如果只是更新版本，不需要改动授权密码。验证通过后会直接跳转到对应版本的安装包地址。</div>
                         </article>
 
-                        <article class="history" id="history" data-reveal style="--d:.08s">
-                            <div class="cardhead">
+                        <article class="historyCard" id="history" data-reveal style="--d:.08s">
+                            <div class="head">
                                 <h2>历史版本</h2>
                                 <button class="toggle" id="toggleBtn" aria-expanded="false"><span id="toggleText">展开全部</span><i class="fa-solid fa-chevron-down" id="toggleIcon"></i></button>
                             </div>
                             <div class="accordion" id="accordion">
                                 <div class="inner">
                                     <div class="historyList">
+                                        <div class="item"><div class="badge">7.0</div><div><strong>V7.0.0</strong><span>2026-03-11</span></div><button class="act" type="button" onclick="showDownloadModal('v7')">下载</button></div>
                                         <div class="item"><div class="badge">6.0</div><div><strong>V6.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v6')">下载</button></div>
                                         <div class="item"><div class="badge">5.0</div><div><strong>V5.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v5')">下载</button></div>
                                         <div class="item"><div class="badge">4.0</div><div><strong>V4.0.0</strong><span>2026-03-07</span></div><button class="act" type="button" onclick="showDownloadModal('v4')">下载</button></div>
@@ -131,8 +213,8 @@
                     </div>
 
                     <div class="stack">
-                        <article class="side" data-reveal style="--d:.08s">
-                            <div class="cardhead"><h2>系统要求</h2></div>
+                        <article class="sideCard" data-reveal style="--d:.08s">
+                            <div class="head"><h2>系统要求</h2></div>
                             <ul class="sys">
                                 <li><i class="fa-solid fa-desktop"></i><span>Windows 10 或更高版本</span></li>
                                 <li><i class="fa-solid fa-microchip"></i><span>Intel Core i5 或同等级处理器</span></li>
@@ -141,8 +223,8 @@
                             </ul>
                         </article>
 
-                        <article class="side" data-reveal style="--d:.14s">
-                            <div class="cardhead"><h2>安装说明</h2></div>
+                        <article class="sideCard" data-reveal style="--d:.14s">
+                            <div class="head"><h2>安装说明</h2></div>
                             <ul class="install">
                                 <li><i class="fa-solid fa-1"></i><span>下载安装包后双击运行。</span></li>
                                 <li><i class="fa-solid fa-2"></i><span>按提示完成安装路径和桌面快捷方式设置。</span></li>
@@ -150,9 +232,9 @@
                             </ul>
                         </article>
 
-                        <article class="contact" id="support" data-reveal style="--d:.2s">
-                            <div class="cardhead"><h2>需要帮助</h2></div>
-                            <p class="copy" style="margin:0 0 18px">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。页面不再拦截右键和开发者工具，避免不必要的使用干扰。</p>
+                        <article class="supportCard" id="support" data-reveal style="--d:.2s">
+                            <div class="head"><h2>需要帮助</h2></div>
+                            <p class="copy" style="margin:0 0 18px">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。当前页面已同步使用 V8 作为默认下载版本。</p>
                             <div class="support">
                                 <a href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></a>
                                 <a href="index.html"><i class="fa-solid fa-arrow-left"></i><span>返回首页</span></a>
@@ -177,7 +259,7 @@
                     <button class="close" type="button" onclick="closeDownloadModal()" aria-label="关闭弹窗"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modalBody">
-                    <p class="copy" style="margin:0 0 18px">请输入下载授权密码，验证成功后将自动开始跳转下载。</p>
+                    <p class="copy" style="margin:0 0 18px">请输入下载授权密码，验证成功后将自动跳转到对应版本的安装包地址。</p>
                     <input class="field" id="password" type="password" placeholder="输入下载密码" autocomplete="off">
                     <p class="error" id="error"><i class="fa-solid fa-circle-exclamation"></i><span> 密码错误，请重新输入。</span></p>
                     <div class="modalActions">
@@ -191,6 +273,7 @@
 
     <script>
         const urls = {
+            v8: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWOC4wLjAuZXhl",
             v7: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNy4wLjAuZXhl",
             v6: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNi4wLjAuZXhl",
             v5: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNS4wLjAuZXhl",
@@ -268,8 +351,9 @@
             toggleText.textContent = open ? "展开全部" : "收起";
             toggleIcon.style.transform = open ? "rotate(0deg)" : "rotate(180deg)";
         });
-        window.addEventListener("scroll", syncNav, { passive: true }); syncNav();
-        const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
+        window.addEventListener("scroll", syncNav, { passive:true });
+        syncNav();
+        const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold:.14, rootMargin:"0px 0px -40px 0px" });
         document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
     </script>
 </body>
