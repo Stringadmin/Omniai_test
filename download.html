@@ -3,209 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniAI | 下载中心</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>OmniAI | 内部工作台下载</title>
+    <meta name="description" content="OmniAI 下载页，提供动画团队内部工作台的最新版本、历史版本、系统要求与授权下载入口。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg:#eef6f7; --card:rgba(255,255,255,.84); --line:rgba(15,23,42,.08); --ink:#0f172a; --muted:#556476; --brand:#0f766e; --brand2:#06b6d4; --ok:#22c55e; --warn:#ef4444; --shadow:0 22px 52px rgba(15,23,42,.12); --soft:0 14px 28px rgba(15,23,42,.08); }
-        * { box-sizing:border-box; }
-        html { scroll-behavior:smooth; }
-        body { margin:0; color:var(--ink); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; background:radial-gradient(circle at 10% 8%,rgba(20,184,166,.16),transparent 28%),radial-gradient(circle at 92% 12%,rgba(6,182,212,.16),transparent 22%),linear-gradient(180deg,#f8fbfc 0%,var(--bg) 55%,#f9fbfc 100%); overflow-x:hidden; }
-        body.modal-open { overflow:hidden; }
-        a { color:inherit; text-decoration:none; }
-        button, input { font:inherit; }
-        .wrap { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
-        .nav { position:fixed; inset:0 0 auto; z-index:40; transition:.3s; }
-        .nav.scrolled { background:rgba(248,251,252,.82); backdrop-filter:blur(16px); box-shadow:0 10px 30px rgba(15,23,42,.08); border-bottom:1px solid rgba(15,23,42,.06); }
-        .navrow,.footrow,.head { display:flex; align-items:center; justify-content:space-between; gap:14px; }
-        .navrow,.mobilebox { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
-        .navrow { padding:18px 0; }
-        .brand { display:inline-flex; align-items:center; gap:14px; font:700 1.15rem "Sora","Noto Sans SC",sans-serif; }
-        .logo { width:48px; height:48px; border-radius:16px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); box-shadow:0 18px 28px rgba(15,118,110,.22); }
-        .links { display:flex; gap:28px; color:var(--muted); }
-        .links a,.mobile a { position:relative; transition:.25s; }
-        .links a::after,.mobile a::after { content:""; position:absolute; left:0; bottom:-6px; width:100%; height:2px; border-radius:999px; background:linear-gradient(90deg,var(--brand),var(--brand2)); transform:scaleX(0); transform-origin:left; transition:.25s; }
-        .links a:hover,.mobile a:hover { color:var(--brand); }
-        .links a:hover::after,.mobile a:hover::after { transform:scaleX(1); }
-        .navbtn,.btn,.ghost,.support a { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 18px; border-radius:18px; font-weight:700; transition:.28s; }
-        .navbtn,.btn { color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); box-shadow:0 20px 36px rgba(15,118,110,.24); border:none; }
-        .ghost,.support a { background:rgba(255,255,255,.8); border:1px solid var(--line); box-shadow:var(--soft); }
-        .navbtn:hover,.btn:hover,.ghost:hover,.support a:hover { transform:translateY(-3px); }
-        .menu { display:none; width:46px; height:46px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.78); }
-        .mobilebox { display:none; padding-bottom:18px; }
-        .mobilebox.open { display:block; }
-        .mobile { display:grid; gap:14px; padding:18px; border-radius:24px; background:rgba(255,255,255,.92); border:1px solid var(--line); box-shadow:var(--soft); }
-        .hero { padding:138px 0 34px; }
-        .heroCard,.sectionCard,.sideCard,.historyCard,.supportCard,.glass,.modalCard { background:var(--card); border:1px solid var(--line); box-shadow:var(--soft); }
-        .heroCard { position:relative; overflow:hidden; padding:34px; border-radius:34px; background:radial-gradient(circle at 14% 18%,rgba(20,184,166,.18),transparent 28%),linear-gradient(140deg,rgba(255,255,255,.96),rgba(245,251,252,.90)); }
-        .heroCard::after,.glass::after { content:""; position:absolute; left:-20%; right:-20%; bottom:0; height:1px; background:linear-gradient(90deg,transparent,rgba(6,182,212,.65),transparent); animation:line 5s linear infinite; }
-        .heroGrid,.layout,.heroMeta,.tiles,.modalActions,.stack,.support,.historyList { display:grid; }
-        .heroGrid { grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr); gap:26px; }
-        .pill { display:inline-flex; align-items:center; gap:10px; width:max-content; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.78); border:1px solid rgba(15,118,110,.14); box-shadow:var(--soft); color:var(--brand); }
-        .dot { width:9px; height:9px; border-radius:999px; background:linear-gradient(180deg,#14b8a6,#06b6d4); box-shadow:0 0 0 8px rgba(6,182,212,.1); animation:pulse 2.4s ease-in-out infinite; }
-        h1,h2,h3 { margin:0; }
-        h1 { margin:22px 0 16px; font:800 clamp(2.7rem,5vw,4.5rem)/.96 "Sora","Noto Sans SC",sans-serif; letter-spacing:-.05em; }
-        h2 { font:800 1.28rem/1.2 "Sora","Noto Sans SC",sans-serif; }
-        .grad { background:linear-gradient(135deg,#0b4f4a 0%,#14b8a6 55%,#06b6d4 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
-        .copy { color:var(--muted); line-height:1.9; }
-        .heroMeta,.tiles { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
-        .meta,.tile { padding:18px; border-radius:22px; background:rgba(255,255,255,.78); border:1px solid var(--line); box-shadow:var(--soft); }
-        .meta span,.tile span { display:block; color:var(--muted); font-size:.9rem; }
-        .meta strong,.tile strong { display:block; margin-top:8px; font:800 1.2rem "Sora","Noto Sans SC",sans-serif; letter-spacing:-.04em; }
-        .glass { position:relative; overflow:hidden; padding:24px; border-radius:28px; background:linear-gradient(160deg,rgba(11,79,74,.95),rgba(7,26,43,.94)); box-shadow:0 28px 80px rgba(7,26,43,.25); color:rgba(255,255,255,.92); }
-        .glass::before { content:""; position:absolute; width:220px; height:220px; top:-50px; left:-20px; border-radius:999px; background:rgba(45,212,191,.12); filter:blur(10px); animation:drift 13s ease-in-out infinite; }
-        .state { display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); color:rgba(255,255,255,.78); }
-        .signal { width:10px; height:10px; border-radius:999px; background:#5eead4; box-shadow:0 0 0 8px rgba(94,234,212,.16); animation:pulse 2.2s ease-in-out infinite; }
-        .glass p { margin:14px 0 18px; color:rgba(255,255,255,.68); }
-        .glist { display:grid; gap:12px; }
-        .gitem { display:flex; align-items:center; gap:12px; padding:14px 15px; border-radius:18px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.07); }
-        .layout { grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr); gap:22px; }
-        .stack { gap:22px; }
-        .sectionCard,.sideCard,.historyCard,.supportCard { position:relative; overflow:hidden; padding:24px; border-radius:28px; }
-        .sectionCard::before,.sideCard::before,.historyCard::before,.supportCard::before { content:""; position:absolute; inset:0 0 auto; height:3px; background:linear-gradient(90deg,var(--brand),var(--brand2)); }
-        .cardpill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; background:rgba(15,118,110,.08); color:var(--brand); font-size:.9rem; font-weight:700; }
-        .check,.sys,.install { margin:0; padding:0; list-style:none; display:grid; gap:12px; color:var(--muted); }
-        .check li,.sys li,.install li { display:flex; gap:12px; line-height:1.8; }
-        .check i { color:var(--ok); margin-top:5px; }
-        .sys i,.install i { color:var(--brand); margin-top:5px; }
-        .actions { display:grid; gap:12px; margin-top:20px; }
-        .note { margin-top:16px; padding:16px 18px; border-radius:18px; background:rgba(15,118,110,.06); border:1px solid rgba(15,118,110,.08); color:var(--muted); line-height:1.8; }
-        .accordion { display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
-        .accordion.open { grid-template-rows:1fr; }
-        .inner { overflow:hidden; padding-top:4px; }
-        .historyList { gap:14px; }
-        .item { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:18px; border-radius:22px; background:#f5fbfc; border:1px solid rgba(15,23,42,.05); transition:.28s; }
-        .item:hover { transform:translateY(-4px); box-shadow:var(--soft); }
-        .badge { width:52px; height:52px; border-radius:18px; display:grid; place-items:center; font:800 .98rem "Sora","Noto Sans SC",sans-serif; color:var(--brand); background:rgba(15,118,110,.08); }
-        .item strong { display:block; }
-        .item span { display:block; margin-top:6px; color:var(--muted); font-size:.92rem; }
-        .act,.toggle { border:none; background:none; color:var(--brand); font-weight:700; cursor:pointer; }
-        .toggle { display:inline-flex; align-items:center; gap:8px; }
-        .support { gap:12px; }
-        .foot { padding:26px 0 36px; }
-        .footrow { padding-top:22px; border-top:1px solid var(--line); color:#6b7280; }
-        .modal { position:fixed; inset:0; z-index:100; display:none; place-items:center; padding:20px; background:rgba(7,26,43,.5); backdrop-filter:blur(8px); }
-        .modal.open { display:grid; }
-        .modalCard { width:min(100%,460px); overflow:hidden; border-radius:28px; background:#fff; box-shadow:0 40px 100px rgba(7,26,43,.24); transform:translateY(16px) scale(.98); opacity:0; transition:.24s; }
-        .modal.open .modalCard { transform:none; opacity:1; }
-        .modalCard.shake { animation:shake .35s linear; }
-        .modalHead { display:flex; justify-content:space-between; align-items:center; gap:14px; padding:22px 24px; color:#fff; background:linear-gradient(135deg,#0b4f4a,#14b8a6); }
-        .modalTitle { display:inline-flex; align-items:center; gap:12px; font-weight:700; }
-        .close { width:40px; height:40px; border:none; border-radius:14px; background:rgba(255,255,255,.14); color:#fff; cursor:pointer; }
-        .modalBody { padding:24px; }
-        .field { width:100%; padding:15px 16px; border-radius:18px; border:1px solid rgba(15,23,42,.1); background:#fbfefe; outline:none; transition:.2s; }
-        .field:focus { border-color:rgba(15,118,110,.4); box-shadow:0 0 0 4px rgba(20,184,166,.12); }
-        .error { display:none; margin:12px 0 0; color:var(--warn); font-size:.92rem; }
-        .error.show { display:block; }
-        .modalActions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:22px; }
-        [data-reveal] { opacity:0; transform:translateY(34px); transition:opacity .85s ease,transform .85s cubic-bezier(.22,1,.36,1); transition-delay:var(--d,0s); }
-        [data-reveal].show { opacity:1; transform:none; }
-        @keyframes drift { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(18px,-20px,0) scale(1.08)} }
-        @keyframes line { 0%{transform:translateX(-28%)} 100%{transform:translateX(28%)} }
-        @keyframes pulse { 0%,100%{transform:scale(1);opacity:.9} 50%{transform:scale(1.18);opacity:1} }
-        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 50%{transform:translateX(8px)} 75%{transform:translateX(-5px)} }
-        @media (max-width:1024px) { .heroGrid,.layout { grid-template-columns:1fr; } }
-        @media (max-width:920px) { .links,.navbtn { display:none; } .menu { display:inline-grid; place-items:center; } .hero { padding-top:120px; } }
-        @media (max-width:720px) { .wrap { width:min(100% - 28px,1180px); } .heroCard,.sectionCard,.sideCard,.historyCard,.supportCard,.modalBody { padding:22px; } .heroMeta,.tiles,.modalActions { grid-template-columns:1fr; } .item { grid-template-columns:1fr; justify-items:start; } .footrow { flex-direction:column; align-items:flex-start; } }
-        @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition-duration:0s !important; scroll-behavior:auto !important; } [data-reveal] { opacity:1; transform:none; } }
+        :root{--bg:#f5efe6;--paper:rgba(255,255,255,.8);--line:rgba(15,23,42,.1);--ink:#0f172a;--muted:#5b6472;--blue:#1368e8;--cyan:#1ac7e7;--orange:#ff7c56;--deep:#08162c;--ok:#5cf0c9;--warn:#ef4444;--shadow:0 24px 60px rgba(8,22,44,.12);--shadow-lg:0 36px 90px rgba(8,22,44,.2)}
+        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 12% 10%,rgba(19,104,232,.18),transparent 26%),radial-gradient(circle at 88% 12%,rgba(26,199,231,.14),transparent 22%),radial-gradient(circle at 50% 100%,rgba(255,124,86,.08),transparent 30%),linear-gradient(180deg,#fffdf8 0%,var(--bg) 60%,#f8f2e8 100%);overflow-x:hidden}body.modal-open{overflow:hidden}
+        body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(15,23,42,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.03) 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(180deg,rgba(0,0,0,.45),transparent 82%)}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}button,input{font:inherit}h1,h2,h3,strong,.num,.badge{font-family:"Outfit","Noto Sans SC",sans-serif}
+        .wrap{width:min(1220px,calc(100% - 36px));margin:0 auto}.nav{position:fixed;inset:0 0 auto;z-index:50;transition:.25s ease}.nav.scrolled{background:rgba(255,250,244,.82);backdrop-filter:blur(18px);box-shadow:0 12px 36px rgba(8,22,44,.08);border-bottom:1px solid rgba(15,23,42,.06)}
+        .nav-row,.mobile-box,.hero,.hero-meta,.proof,.layout,.stack,.tiles,.history-list,.support-links,.modal-actions,.footer-row{display:grid;gap:22px}.nav-row,.mobile-box{width:min(1220px,calc(100% - 36px));margin:0 auto}.nav-row{grid-template-columns:auto 1fr auto;align-items:center;padding:20px 0}
+        .brand{display:inline-flex;align-items:center;gap:14px;font:700 1.05rem/1 "Outfit","Noto Sans SC",sans-serif}.brand-mark{width:48px;height:48px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(19,104,232,.15),rgba(26,199,231,.16));border:1px solid rgba(19,104,232,.14);box-shadow:0 16px 28px rgba(19,104,232,.12)}.brand small{display:block;margin-top:4px;color:var(--muted);font:500 .76rem/1.2 "Noto Sans SC",sans-serif}
+        .links{display:flex;justify-content:center;gap:30px;color:var(--muted)}.links a,.mobile-links a{position:relative;transition:color .2s ease}.links a:after,.mobile-links a:after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .2s ease}.links a:hover,.mobile-links a:hover{color:var(--blue)}.links a:hover:after,.mobile-links a:hover:after{transform:scaleX(1)}
+        .btn,.ghost,.nav-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 22px;border-radius:18px;font-weight:700;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.btn,.nav-btn{color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 18px 34px rgba(19,104,232,.22);border:none}.ghost,.link-btn{background:rgba(255,255,255,.72);border:1px solid var(--line);box-shadow:var(--shadow)}.btn:hover,.ghost:hover,.nav-btn:hover,.link-btn:hover{transform:translateY(-3px)}
+        .menu{display:none;width:48px;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.74)}.mobile-box{display:none;padding-bottom:18px}.mobile-box.open{display:block}.mobile-links{display:grid;gap:18px;padding:20px;border-radius:26px;background:rgba(255,255,255,.92);border:1px solid var(--line);box-shadow:var(--shadow)}
+        main{padding-top:118px}section{padding:24px 0 96px}.pill{display:inline-flex;align-items:center;gap:10px;width:max-content;padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.76);border:1px solid rgba(19,104,232,.12);box-shadow:var(--shadow);color:var(--blue);font-weight:700}.dot,.pulse{width:10px;height:10px;border-radius:999px;background:linear-gradient(180deg,var(--cyan),var(--orange));box-shadow:0 0 0 8px rgba(26,199,231,.12);animation:pulse 2.6s ease-in-out infinite}
+        .hero{grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);align-items:center;gap:48px}h1{margin:24px 0 18px;font-size:clamp(3rem,7vw,5.6rem);line-height:.95;letter-spacing:-.06em}h2{margin:14px 0 0;font-size:clamp(2rem,4vw,3.1rem);line-height:1.02;letter-spacing:-.05em}.grad{background:linear-gradient(135deg,var(--blue),var(--cyan) 60%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}.copy,.section-copy,.card p,.release-card p,.item span,.modal-copy{color:var(--muted);line-height:1.9}
+        .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}.hero-meta{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:32px}.card,.release-card,.side-card,.history-card,.support-card,.modal-card{position:relative;overflow:hidden;padding:26px;border-radius:28px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.metric strong,.tile strong{display:block;font-size:1.22rem;letter-spacing:-.04em}.metric span,.tile span{display:block;margin-top:8px;color:var(--muted)}
+        .release-card{color:rgba(255,255,255,.94);background:radial-gradient(circle at 14% 12%,rgba(26,199,231,.16),transparent 24%),radial-gradient(circle at 84% 16%,rgba(255,124,86,.12),transparent 20%),linear-gradient(160deg,rgba(8,22,44,.98),rgba(15,35,66,.96));box-shadow:var(--shadow-lg)}.release-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);animation:grid 18s linear infinite}.release-card>*{position:relative;z-index:1}.release-top,.release-state,.section-head,.history-top,.modal-head,.support-note{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .release-kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.56)}.release-title{display:block;margin-top:8px;font-size:1.34rem;letter-spacing:-.03em}.release-state{width:max-content;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}.release-list,.check-list,.spec-list,.install-list{display:grid;gap:14px}
+        .release-item,.history-item{padding:16px;border-radius:18px}.release-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.release-item strong{display:block}.release-item span{display:block;margin-top:6px;color:rgba(255,255,255,.62);line-height:1.7}
+        .proof{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:6px}.card h3,.history-item strong{margin:20px 0 12px;font-size:1.16rem;letter-spacing:-.04em}.icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 14px 26px rgba(19,104,232,.18)}
+        .section-head{margin-bottom:30px;align-items:flex-end}.section-copy{max-width:560px}.layout{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr)}.stack{gap:22px}.section-card,.side-card,.history-card,.support-card{padding:28px}.section-card:before,.side-card:before,.history-card:before,.support-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+        .chip{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:10px 14px;border-radius:999px;background:rgba(19,104,232,.08);color:var(--blue);font-weight:700}.tiles{grid-template-columns:repeat(3,minmax(0,1fr));margin:22px 0}.tile{padding:22px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--line)}.check-list,.spec-list,.install-list{margin:0;padding:0;list-style:none}.check-list li,.spec-list li,.install-list li{display:flex;gap:12px;line-height:1.9;color:var(--muted)}.check-list i{color:var(--ok);margin-top:5px}.spec-list i,.install-list i{color:var(--blue);margin-top:5px}
+        .actions{display:grid;gap:14px;margin-top:24px}.note,.support-note{margin-top:20px;padding:18px 20px;border-radius:20px;background:rgba(19,104,232,.06);border:1px solid rgba(19,104,232,.08);color:var(--muted);line-height:1.8}
+        .accordion{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}.accordion.open{grid-template-rows:1fr}.accordion-inner{overflow:hidden}.history-list{margin-top:22px}.history-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;background:rgba(255,255,255,.72);border:1px solid var(--line);transition:transform .25s ease,box-shadow .25s ease}.history-item:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.badge{width:52px;height:52px;display:grid;place-items:center;border-radius:18px;background:rgba(19,104,232,.08);color:var(--blue);font-weight:800}.act,.toggle,.close{border:none;background:none;cursor:pointer}.act,.toggle{color:var(--blue);font-weight:700}.toggle{display:inline-flex;align-items:center;gap:8px}
+        .support-links{margin-top:18px}.footer{padding:32px 0 44px}.footer-row{align-items:center;padding-top:28px;border-top:1px solid rgba(15,23,42,.08);grid-template-columns:auto auto;justify-content:space-between;color:var(--muted)}
+        .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(8,22,44,.46);backdrop-filter:blur(10px)}.modal.open{display:grid}.modal-card{width:min(100%,460px);background:rgba(255,255,255,.96);transform:translateY(16px) scale(.98);opacity:0;transition:.24s}.modal.open .modal-card{transform:none;opacity:1}.modal-card.shake{animation:shake .35s linear}.modal-head{padding:22px 24px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan))}.modal-title{display:inline-flex;align-items:center;gap:12px;font-weight:700}.close{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.16);color:#fff}.modal-body{padding:28px}.field{width:100%;padding:15px 16px;border-radius:18px;border:1px solid rgba(15,23,42,.1);background:#fbfdff;outline:none;transition:.2s}.field:focus{border-color:rgba(19,104,232,.4);box-shadow:0 0 0 4px rgba(19,104,232,.12)}.error{display:none;margin:12px 0 0;color:var(--warn);font-size:.92rem}.error.show{display:block}.modal-actions{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:24px}
+        [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}[data-reveal].show{opacity:1;transform:none}
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:1}}@keyframes grid{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(34px,34px,0)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}
+        @media (max-width:1100px){.hero,.proof,.layout{grid-template-columns:1fr}}@media (max-width:920px){.links,.nav-btn{display:none}.menu{display:inline-grid;place-items:center}main{padding-top:108px}}@media (max-width:720px){.wrap,.nav-row,.mobile-box{width:min(100% - 28px,1220px)}section{padding-bottom:80px}h1{font-size:clamp(2.8rem,16vw,4.2rem)}.hero-meta,.proof,.tiles,.modal-actions,.contact-actions{grid-template-columns:1fr}.history-item{grid-template-columns:1fr;justify-items:start}.section-head,.history-top,.support-note{flex-direction:column;align-items:flex-start}.hero-actions{flex-direction:column;align-items:stretch}.btn,.ghost,.link-btn{width:100%}.release-card,.section-card,.side-card,.history-card,.support-card,.modal-body{padding:24px}.footer-row{grid-template-columns:1fr;justify-content:start}}@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:0s!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}}
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <nav class="nav" id="nav">
-            <div class="navrow">
-                <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-wave-square"></i></span><span>OmniAI</span></a>
-                <div class="links">
-                    <a href="index.html">首页</a>
-                    <a href="#latest">最新版本</a>
-                    <a href="#history">历史版本</a>
-                    <a href="#support">帮助</a>
-                </div>
-                <div style="display:flex;align-items:center;gap:16px">
-                    <a class="navbtn" href="index.html#contact"><i class="fa-regular fa-envelope"></i><span>联系支持</span></a>
-                    <button class="menu" id="menuBtn" aria-label="打开菜单" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                </div>
+    <nav class="nav" id="nav">
+        <div class="nav-row">
+            <a class="brand" href="index.html" aria-label="返回 OmniAI 首页">
+                <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
+                <span>OmniAI<small>动画团队 / 工作台下载</small></span>
+            </a>
+            <div class="links">
+                <a href="index.html">首页</a>
+                <a href="#latest">最新版本</a>
+                <a href="#history">历史版本</a>
+                <a href="#support">帮助</a>
             </div>
-            <div class="mobilebox" id="mobileBox">
-                <div class="mobile">
-                    <a href="index.html">首页</a>
-                    <a href="#latest">最新版本</a>
-                    <a href="#history">历史版本</a>
-                    <a href="#support">帮助</a>
-                </div>
+            <div style="display:flex;align-items:center;gap:14px">
+                <a class="nav-btn" href="index.html#contact"><i class="fa-regular fa-envelope"></i><span>联系团队</span></a>
+                <button class="menu" id="menuBtn" aria-label="打开菜单" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
             </div>
-        </nav>
-
-        <main>
-            <section class="hero">
-                <div class="heroCard" data-reveal>
-                    <div class="heroGrid">
-                        <div>
-                            <div class="pill"><span class="dot"></span><span>OmniAI 下载中心</span></div>
-                            <h1>下载更直接，<span class="grad">版本也已更新到 V8</span></h1>
-                            <p class="copy">当前最新版本已切换为 V8.0.0，原来的 V7.0.0 已移动到历史版本列表。下载验证逻辑保持不变。</p>
-                            <div class="heroMeta">
-                                <div class="meta"><span>当前版本</span><strong>V8.0.0</strong></div>
-                                <div class="meta"><span>更新时间</span><strong>2026-03-13</strong></div>
-                                <div class="meta"><span>适用系统</span><strong>Windows 10/11</strong></div>
-                            </div>
+        </div>
+        <div class="mobile-box" id="mobileBox">
+            <div class="mobile-links">
+                <a href="index.html">首页</a>
+                <a href="#latest">最新版本</a>
+                <a href="#history">历史版本</a>
+                <a href="#support">帮助</a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <section>
+            <div class="wrap">
+                <div class="hero">
+                    <div data-reveal>
+                        <div class="pill"><span class="dot"></span><span>动画团队内部工作台下载</span></div>
+                        <h1>需要时再下载，<span class="grad">版本信息一次看清</span></h1>
+                        <p class="copy">OmniAI 以动画项目为主，桌面工作台作为内部流程工具开放下载。当前主版本已更新到 V9.0.0，V8 已转入历史版本。</p>
+                        <div class="hero-actions">
+                            <button class="btn" type="button" onclick="showDownloadModal('v9')"><i class="fa-solid fa-download"></i><span>立即下载 V9.0.0</span></button>
+                            <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
                         </div>
-                        <aside class="glass">
-                            <div class="head">
-                                <h2>当前版本说明</h2>
-                                <div class="state"><span class="signal"></span><span>稳定发布</span></div>
-                            </div>
-                            <p>V8.0.0 作为当前默认下载版本展示，页面入口、版本信息、弹窗下载和历史版本列表已经同步调整。</p>
-                            <div class="glist">
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>最新下载按钮切换到 V8.0.0</span></div>
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>V7.0.0 调整到历史版本</span></div>
-                                <div class="gitem"><i class="fa-solid fa-check"></i><span>下载链接映射已补充 V8 地址</span></div>
-                            </div>
-                        </aside>
+                        <div class="hero-meta">
+                            <div class="card metric" data-reveal style="--d:.05s"><strong>当前版本</strong><span>V9.0.0</span></div>
+                            <div class="card metric" data-reveal style="--d:.1s"><strong>更新时间</strong><span>2026-03-16</span></div>
+                            <div class="card metric" data-reveal style="--d:.15s"><strong>适用系统</strong><span>Windows 10 / 11</span></div>
+                        </div>
                     </div>
+                    <aside class="release-card" data-reveal style="--d:.08s">
+                        <div class="release-top">
+                            <div>
+                                <span class="release-kicker">Release Channel</span>
+                                <span class="release-title">V9 作为当前版本发布</span>
+                            </div>
+                            <div class="release-state"><span class="pulse"></span><span>Stable</span></div>
+                        </div>
+                        <p style="margin:18px 0 22px;color:rgba(255,255,255,.68)">最新入口、版本说明、历史列表和授权弹窗都已经同步切到 V9 版本线。你可以直接下载，也可以回退到 V8 及更早版本。</p>
+                        <div class="release-list">
+                            <div class="release-item"><strong>动作迁移已添加</strong><span>新版本补上动作迁移能力，方便项目素材继续沿用。</span></div>
+                            <div class="release-item"><strong>UI 显示已更新</strong><span>下载页与工作台版本信息都改成更清晰的展示方式。</span></div>
+                            <div class="release-item"><strong>任务超时已修复</strong><span>任务超时 bug 已处理，主版本可直接作为默认下载入口。</span></div>
+                        </div>
+                    </aside>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="latest">
+        <section>
+            <div class="wrap">
+                <div class="proof">
+                    <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-download"></i></div><h3>主入口切到 V9</h3><p>当前下载按钮只指向最新版本，进入路径更直接。</p></article>
+                    <article class="card" data-reveal style="--d:.08s"><div class="icon"><i class="fa-solid fa-shield-halved"></i></div><h3>授权下载逻辑不变</h3><p>继续通过密码验证后跳转，原有下载方式保持不动。</p></article>
+                    <article class="card" data-reveal style="--d:.16s"><div class="icon"><i class="fa-solid fa-box-archive"></i></div><h3>V8 已转入历史版本</h3><p>需要兼容旧项目时，仍然可以从历史列表回退。</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section id="latest">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <div class="pill"><i class="fa-solid fa-hard-drive"></i><span>最新版本</span></div>
+                        <h2>先下当前版本，再按项目回退</h2>
+                    </div>
+                    <p class="section-copy">当前默认版本为 V9.0.0。下载前仍需要授权密码验证，但主按钮、更新日志和历史版本都已经集中到同一页。</p>
+                </div>
                 <div class="layout">
                     <div class="stack">
-                        <article class="sectionCard" data-reveal>
-                            <div class="head">
-                                <h2>最新版本下载</h2>
-                                <span class="cardpill"><i class="fa-brands fa-windows"></i> Windows</span>
+                        <article class="section-card" data-reveal>
+                            <div class="history-top">
+                                <div>
+                                    <h3 style="margin:0">Windows 默认下载</h3>
+                                    <p class="copy" style="margin:8px 0 0">用于新安装、常规升级和新项目直接上手。</p>
+                                </div>
+                                <span class="chip"><i class="fa-brands fa-windows"></i><span>Windows</span></span>
                             </div>
                             <div class="tiles">
-                                <div class="tile"><span>版本号</span><strong>V8.0.0</strong></div>
-                                <div class="tile"><span>文件大小</span><strong>以实际下载文件为准</strong></div>
-                                <div class="tile"><span>更新时间</span><strong>2026-03-13</strong></div>
+                                <div class="tile"><span>版本号</span><strong>V9.0.0</strong></div>
+                                <div class="tile"><span>更新时间</span><strong>2026-03-16</strong></div>
+                                <div class="tile"><span>文件大小</span><strong>以安装包实际大小为准</strong></div>
                             </div>
-                            <ul class="check">
-                                <li><i class="fa-solid fa-circle-check"></i><span>当前默认下载版本已更新为 V8.0.0。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>历史版本入口保留，方便回退到旧版本。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>下载前仍需输入授权密码验证。</span></li>
+                            <div class="chip"><i class="fa-solid fa-sparkles"></i><span>V9.0.0 更新日志</span></div>
+                            <ul class="check-list">
+                                <li><i class="fa-solid fa-circle-check"></i><span>添加了动作迁移。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>更新了 UI 显示。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>修复了任务超时的 bug。</span></li>
                             </ul>
                             <div class="actions">
-                                <button class="btn" type="button" onclick="showDownloadModal('v8')"><i class="fa-solid fa-download"></i><span>立即下载 V8.0.0</span></button>
+                                <button class="btn" type="button" onclick="showDownloadModal('v9')"><i class="fa-solid fa-download"></i><span>立即下载 V9.0.0</span></button>
                                 <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
                             </div>
-                            <div class="note">如果只是更新版本，不需要改动授权密码。验证通过后会直接跳转到对应版本的安装包地址。</div>
+                            <div class="note">如果只是从旧版本升级，不需要改动授权密码。V8 已转入历史版本，验证通过后会自动跳转到对应安装包地址。</div>
                         </article>
 
-                        <article class="historyCard" id="history" data-reveal style="--d:.08s">
-                            <div class="head">
-                                <h2>历史版本</h2>
+                        <article class="history-card" id="history" data-reveal style="--d:.08s">
+                            <div class="history-top">
+                                <div>
+                                    <h3 style="margin:0">历史版本</h3>
+                                    <p class="copy" style="margin:8px 0 0">为兼容旧项目或特定环境保留。</p>
+                                </div>
                                 <button class="toggle" id="toggleBtn" aria-expanded="false"><span id="toggleText">展开全部</span><i class="fa-solid fa-chevron-down" id="toggleIcon"></i></button>
                             </div>
                             <div class="accordion" id="accordion">
-                                <div class="inner">
-                                    <div class="historyList">
-                                        <div class="item"><div class="badge">7.0</div><div><strong>V7.0.0</strong><span>2026-03-11</span></div><button class="act" type="button" onclick="showDownloadModal('v7')">下载</button></div>
-                                        <div class="item"><div class="badge">6.0</div><div><strong>V6.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v6')">下载</button></div>
-                                        <div class="item"><div class="badge">5.0</div><div><strong>V5.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v5')">下载</button></div>
-                                        <div class="item"><div class="badge">4.0</div><div><strong>V4.0.0</strong><span>2026-03-07</span></div><button class="act" type="button" onclick="showDownloadModal('v4')">下载</button></div>
+                                <div class="accordion-inner">
+                                    <div class="history-list">
+                                        <div class="history-item"><div class="badge">8.0</div><div><strong>V8.0.0</strong><span>2026-03-13</span></div><button class="act" type="button" onclick="showDownloadModal('v8')">下载</button></div>
+                                        <div class="history-item"><div class="badge">7.0</div><div><strong>V7.0.0</strong><span>2026-03-11</span></div><button class="act" type="button" onclick="showDownloadModal('v7')">下载</button></div>
+                                        <div class="history-item"><div class="badge">6.0</div><div><strong>V6.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v6')">下载</button></div>
+                                        <div class="history-item"><div class="badge">5.0</div><div><strong>V5.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v5')">下载</button></div>
+                                        <div class="history-item"><div class="badge">4.0</div><div><strong>V4.0.0</strong><span>2026-03-07</span></div><button class="act" type="button" onclick="showDownloadModal('v4')">下载</button></div>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +171,9 @@
                     </div>
 
                     <div class="stack">
-                        <article class="sideCard" data-reveal style="--d:.08s">
-                            <div class="head"><h2>系统要求</h2></div>
-                            <ul class="sys">
+                        <article class="side-card" data-reveal style="--d:.08s">
+                            <h3 style="margin:0 0 16px">系统要求</h3>
+                            <ul class="spec-list">
                                 <li><i class="fa-solid fa-desktop"></i><span>Windows 10 或更高版本</span></li>
                                 <li><i class="fa-solid fa-microchip"></i><span>Intel Core i5 或同等级处理器</span></li>
                                 <li><i class="fa-solid fa-memory"></i><span>8 GB RAM 及以上</span></li>
@@ -223,49 +181,55 @@
                             </ul>
                         </article>
 
-                        <article class="sideCard" data-reveal style="--d:.14s">
-                            <div class="head"><h2>安装说明</h2></div>
-                            <ul class="install">
+                        <article class="side-card" data-reveal style="--d:.14s">
+                            <h3 style="margin:0 0 16px">安装说明</h3>
+                            <ul class="install-list">
                                 <li><i class="fa-solid fa-1"></i><span>下载安装包后双击运行。</span></li>
-                                <li><i class="fa-solid fa-2"></i><span>按提示完成安装路径和桌面快捷方式设置。</span></li>
+                                <li><i class="fa-solid fa-2"></i><span>根据提示完成安装路径和快捷方式设置。</span></li>
                                 <li><i class="fa-solid fa-3"></i><span>首次启动建议先完成项目目录配置。</span></li>
                             </ul>
                         </article>
 
-                        <article class="supportCard" id="support" data-reveal style="--d:.2s">
-                            <div class="head"><h2>需要帮助</h2></div>
-                            <p class="copy" style="margin:0 0 18px">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。当前页面已同步使用 V8 作为默认下载版本。</p>
-                            <div class="support">
-                                <a href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></a>
-                                <a href="index.html"><i class="fa-solid fa-arrow-left"></i><span>返回首页</span></a>
+                        <article class="support-card" id="support" data-reveal style="--d:.2s">
+                            <h3 style="margin:0">需要帮助？</h3>
+                            <p class="copy" style="margin:10px 0 0">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。当前下载页默认版本为 V9.0.0。</p>
+                            <div class="support-links">
+                                <a class="link-btn" href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></a>
+                                <a class="link-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>返回首页</span></a>
                             </div>
+                            <div class="support-note"><span>当前平台</span><strong>Windows 10 / 11</strong></div>
                         </article>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+    </main>
 
-        <footer class="foot">
-            <div class="footrow">
-                <div class="brand"><span class="logo"><i class="fa-solid fa-wave-square"></i></span><span>OmniAI</span></div>
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-row">
+                <div class="brand">
+                    <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
+                    <span>OmniAI<small>动画团队 / 工作台下载</small></span>
+                </div>
                 <div>© 2026 OmniAI · 南京万物可爱文化传媒有限公司</div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <div class="modal" id="modal" aria-hidden="true">
-            <div class="modalCard" id="modalCard">
-                <div class="modalHead">
-                    <div class="modalTitle"><i class="fa-solid fa-shield-halved"></i><span>下载验证</span></div>
-                    <button class="close" type="button" onclick="closeDownloadModal()" aria-label="关闭弹窗"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="modalBody">
-                    <p class="copy" style="margin:0 0 18px">请输入下载授权密码，验证成功后将自动跳转到对应版本的安装包地址。</p>
-                    <input class="field" id="password" type="password" placeholder="输入下载密码" autocomplete="off">
-                    <p class="error" id="error"><i class="fa-solid fa-circle-exclamation"></i><span> 密码错误，请重新输入。</span></p>
-                    <div class="modalActions">
-                        <button class="ghost" type="button" onclick="closeDownloadModal()">取消</button>
-                        <button class="btn" type="button" onclick="verifyPassword()">确认下载</button>
-                    </div>
+    <div class="modal" id="modal" aria-hidden="true">
+        <div class="modal-card" id="modalCard">
+            <div class="modal-head">
+                <div class="modal-title"><i class="fa-solid fa-shield-halved"></i><span>下载验证</span></div>
+                <button class="close" type="button" onclick="closeDownloadModal()" aria-label="关闭弹窗"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-copy" style="margin:0 0 18px">请输入下载授权密码，验证成功后将自动跳转到对应版本的安装包地址。</p>
+                <input class="field" id="password" type="password" placeholder="输入下载密码" autocomplete="off">
+                <p class="error" id="error"><i class="fa-solid fa-circle-exclamation"></i><span> 密码错误，请重新输入。</span></p>
+                <div class="modal-actions">
+                    <button class="ghost" type="button" onclick="closeDownloadModal()">取消</button>
+                    <button class="btn" type="button" onclick="verifyPassword()">确认下载</button>
                 </div>
             </div>
         </div>
@@ -273,6 +237,7 @@
 
     <script>
         const urls = {
+            v9: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWOS4wLjAuZXhl",
             v8: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWOC4wLjAuZXhl",
             v7: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNy4wLjAuZXhl",
             v6: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNi4wLjAuZXhl",
@@ -297,9 +262,17 @@
 
         const decode = (s) => { try { return atob(s); } catch { return ""; } };
         const decodePw = () => String.fromCharCode.apply(null, pw);
-        const rateLimit = () => { const now = Date.now(); if (now - lastAction < 2000) return false; lastAction = now; return true; };
-        const syncNav = () => nav.classList.toggle("scrolled", window.scrollY > 10);
-        const closeMenu = () => { mobileBox.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); };
+        const rateLimit = () => {
+            const now = Date.now();
+            if (now - lastAction < 2000) return false;
+            lastAction = now;
+            return true;
+        };
+        const syncNav = () => nav.classList.toggle("scrolled", window.scrollY > 12);
+        const closeMenu = () => {
+            mobileBox.classList.remove("open");
+            menuBtn.setAttribute("aria-expanded", "false");
+        };
 
         function showDownloadModal(version) {
             if (!rateLimit()) return;
@@ -340,10 +313,10 @@
             menuBtn.setAttribute("aria-expanded", String(!open));
             mobileBox.classList.toggle("open");
         });
-        document.querySelectorAll(".mobile a,.links a").forEach((a) => a.addEventListener("click", closeMenu));
-        password.addEventListener("keydown", (e) => { if (e.key === "Enter") verifyPassword(); });
-        modal.addEventListener("click", (e) => { if (e.target === modal) closeDownloadModal(); });
-        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeDownloadModal(); });
+        document.querySelectorAll(".mobile-links a, .links a").forEach((link) => link.addEventListener("click", closeMenu));
+        password.addEventListener("keydown", (event) => { if (event.key === "Enter") verifyPassword(); });
+        modal.addEventListener("click", (event) => { if (event.target === modal) closeDownloadModal(); });
+        document.addEventListener("keydown", (event) => { if (event.key === "Escape" && modal.classList.contains("open")) closeDownloadModal(); });
         toggleBtn.addEventListener("click", () => {
             const open = toggleBtn.getAttribute("aria-expanded") === "true";
             toggleBtn.setAttribute("aria-expanded", String(!open));
@@ -351,10 +324,15 @@
             toggleText.textContent = open ? "展开全部" : "收起";
             toggleIcon.style.transform = open ? "rotate(0deg)" : "rotate(180deg)";
         });
-        window.addEventListener("scroll", syncNav, { passive:true });
+        window.addEventListener("scroll", syncNav, { passive: true });
         syncNav();
-        const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold:.14, rootMargin:"0px 0px -40px 0px" });
-        document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+        const io = new IntersectionObserver((entries) => entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                io.unobserve(entry.target);
+            }
+        }), { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
+        document.querySelectorAll("[data-reveal]").forEach((node) => io.observe(node));
     </script>
 </body>
 </html>
