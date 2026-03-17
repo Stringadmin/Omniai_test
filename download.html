@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniAI | 内部工作台下载</title>
-    <meta name="description" content="OmniAI 下载页，提供动画团队内部工作台的最新版本、历史版本、系统要求与授权下载入口。">
+    <title>OmniAI | 正式版 1.0.0 工作台下载</title>
+    <meta name="description" content="OmniAI 下载页，提供正式版 1.0.0 最新安装包、历史版本、系统要求与授权下载入口。">
+    <link rel="icon" href="logo.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +17,7 @@
         body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(15,23,42,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.03) 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(180deg,rgba(0,0,0,.45),transparent 82%)}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}button,input{font:inherit}h1,h2,h3,strong,.num,.badge{font-family:"Outfit","Noto Sans SC",sans-serif}
         .wrap{width:min(1220px,calc(100% - 36px));margin:0 auto}.nav{position:fixed;inset:0 0 auto;z-index:50;transition:.25s ease}.nav.scrolled{background:rgba(255,250,244,.82);backdrop-filter:blur(18px);box-shadow:0 12px 36px rgba(8,22,44,.08);border-bottom:1px solid rgba(15,23,42,.06)}
         .nav-row,.mobile-box,.hero,.hero-meta,.proof,.layout,.stack,.tiles,.history-list,.support-links,.modal-actions,.footer-row{display:grid;gap:22px}.nav-row,.mobile-box{width:min(1220px,calc(100% - 36px));margin:0 auto}.nav-row{grid-template-columns:auto 1fr auto;align-items:center;padding:20px 0}
-        .brand{display:inline-flex;align-items:center;gap:14px;font:700 1.05rem/1 "Outfit","Noto Sans SC",sans-serif}.brand-mark{width:48px;height:48px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(19,104,232,.15),rgba(26,199,231,.16));border:1px solid rgba(19,104,232,.14);box-shadow:0 16px 28px rgba(19,104,232,.12)}.brand small{display:block;margin-top:4px;color:var(--muted);font:500 .76rem/1.2 "Noto Sans SC",sans-serif}
+        .brand{display:inline-flex;align-items:center;gap:14px;font:700 1.05rem/1 "Outfit","Noto Sans SC",sans-serif}.brand-mark{width:48px;height:48px;border-radius:16px;overflow:hidden;background:transparent;border:1px solid rgba(19,104,232,.14);box-shadow:0 16px 28px rgba(19,104,232,.12)}.brand-mark img{width:100%;height:100%;object-fit:contain}.brand small{display:block;margin-top:4px;color:var(--muted);font:500 .76rem/1.2 "Noto Sans SC",sans-serif}
         .links{display:flex;justify-content:center;gap:30px;color:var(--muted)}.links a,.mobile-links a{position:relative;transition:color .2s ease}.links a:after,.mobile-links a:after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .2s ease}.links a:hover,.mobile-links a:hover{color:var(--blue)}.links a:hover:after,.mobile-links a:hover:after{transform:scaleX(1)}
         .btn,.ghost,.nav-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 22px;border-radius:18px;font-weight:700;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.btn,.nav-btn{color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 18px 34px rgba(19,104,232,.22);border:none}.ghost,.link-btn{background:rgba(255,255,255,.72);border:1px solid var(--line);box-shadow:var(--shadow)}.btn:hover,.ghost:hover,.nav-btn:hover,.link-btn:hover{transform:translateY(-3px)}
         .menu{display:none;width:48px;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.74)}.mobile-box{display:none;padding-bottom:18px}.mobile-box.open{display:block}.mobile-links{display:grid;gap:18px;padding:20px;border-radius:26px;background:rgba(255,255,255,.92);border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -25,6 +27,7 @@
         .release-card{color:rgba(255,255,255,.94);background:radial-gradient(circle at 14% 12%,rgba(26,199,231,.16),transparent 24%),radial-gradient(circle at 84% 16%,rgba(255,124,86,.12),transparent 20%),linear-gradient(160deg,rgba(8,22,44,.98),rgba(15,35,66,.96));box-shadow:var(--shadow-lg)}.release-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);animation:grid 18s linear infinite}.release-card>*{position:relative;z-index:1}.release-top,.release-state,.section-head,.history-top,.modal-head,.support-note{display:flex;align-items:center;justify-content:space-between;gap:16px}
         .release-kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.56)}.release-title{display:block;margin-top:8px;font-size:1.34rem;letter-spacing:-.03em}.release-state{width:max-content;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78)}.release-list,.check-list,.spec-list,.install-list{display:grid;gap:14px}
         .release-item,.history-item{padding:16px;border-radius:18px}.release-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.release-item strong{display:block}.release-item span{display:block;margin-top:6px;color:rgba(255,255,255,.62);line-height:1.7}
+        .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(19,104,232,.08);border:1px solid rgba(19,104,232,.14);color:var(--blue);font-weight:700}.hero-tag.warm{background:rgba(255,124,86,.1);border-color:rgba(255,124,86,.16);color:#c25b37}.history-item.current-prev{border-color:rgba(19,104,232,.18);background:linear-gradient(135deg,rgba(19,104,232,.08),rgba(26,199,231,.05))}
         .proof{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:6px}.card h3,.history-item strong{margin:20px 0 12px;font-size:1.16rem;letter-spacing:-.04em}.icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 14px 26px rgba(19,104,232,.18)}
         .section-head{margin-bottom:30px;align-items:flex-end}.section-copy{max-width:560px}.layout{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr)}.stack{gap:22px}.section-card,.side-card,.history-card,.support-card{padding:28px}.section-card:before,.side-card:before,.history-card:before,.support-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
         .chip{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:10px 14px;border-radius:999px;background:rgba(19,104,232,.08);color:var(--blue);font-weight:700}.tiles{grid-template-columns:repeat(3,minmax(0,1fr));margin:22px 0}.tile{padding:22px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--line)}.check-list,.spec-list,.install-list{margin:0;padding:0;list-style:none}.check-list li,.spec-list li,.install-list li{display:flex;gap:12px;line-height:1.9;color:var(--muted)}.check-list i{color:var(--ok);margin-top:5px}.spec-list i,.install-list i{color:var(--blue);margin-top:5px}
@@ -41,7 +44,7 @@
     <nav class="nav" id="nav">
         <div class="nav-row">
             <a class="brand" href="index.html" aria-label="返回 OmniAI 首页">
-                <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
+                <span class="brand-mark"><img src="logo.svg" alt="OmniAI Logo"></span>
                 <span>OmniAI<small>动画团队 / 工作台下载</small></span>
             </a>
             <div class="links">
@@ -69,19 +72,24 @@
             <div class="wrap">
                 <div class="hero">
                     <div data-reveal>
-                        <div class="pill"><span class="dot"></span><span>动画团队内部工作台下载</span></div>
-                        <h1 class="hero-title" aria-label="需要时再下载，版本信息一次看清" data-reveal style="--d:.04s">
-                            <span class="type-line type-target" data-text="需要时再下载，"></span>
-                            <span class="type-line grad type-target" data-text="版本信息一次看清"></span>
+                        <div class="pill"><span class="dot"></span><span>正式版 1.0.0 已发布</span></div>
+                        <h1 class="hero-title" aria-label="正式版 1.0.0 已上线，默认下载已切换" data-reveal style="--d:.04s">
+                            <span class="type-line type-target" data-text="正式版 1.0.0 已上线，"></span>
+                            <span class="type-line grad type-target" data-text="默认下载已切换"></span>
                         </h1>
-                        <p class="copy">OmniAI 以动画项目为主，桌面工作台作为内部流程工具开放下载。当前主版本已更新到 V9.0.0，V8 已转入历史版本。</p>
+                        <p class="copy">OmniAI 桌面工作台当前主版本已切换为正式版 1.0.0。当前下载页重点同步了正式版命名、默认安装包链接和历史版本顺序，V10.0.0 已转入历史版本。</p>
                         <div class="hero-actions">
-                            <button class="btn" type="button" onclick="showDownloadModal('v9')"><i class="fa-solid fa-download"></i><span>立即下载 V9.0.0</span></button>
+                            <button class="btn" type="button" onclick="showDownloadModal('r100')"><i class="fa-solid fa-download"></i><span>立即下载正式版 1.0.0</span></button>
                             <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
                         </div>
+                        <div class="hero-tags">
+                            <span class="hero-tag"><i class="fa-solid fa-certificate"></i><span>正式版 1.0.0</span></span>
+                            <span class="hero-tag warm"><i class="fa-solid fa-link"></i><span>默认下载链接已切换</span></span>
+                            <span class="hero-tag"><i class="fa-solid fa-clock-rotate-left"></i><span>V10.0.0 转入历史版本</span></span>
+                        </div>
                         <div class="hero-meta">
-                            <div class="card metric" data-reveal style="--d:.05s"><strong>当前版本</strong><span>V9.0.0</span></div>
-                            <div class="card metric" data-reveal style="--d:.1s"><strong>更新时间</strong><span>2026-03-16</span></div>
+                            <div class="card metric" data-reveal style="--d:.05s"><strong>当前版本</strong><span>正式版 1.0.0</span></div>
+                            <div class="card metric" data-reveal style="--d:.1s"><strong>更新时间</strong><span>2026-03-18</span></div>
                             <div class="card metric" data-reveal style="--d:.15s"><strong>适用系统</strong><span>Windows 10 / 11</span></div>
                         </div>
                     </div>
@@ -89,15 +97,15 @@
                         <div class="release-top">
                             <div>
                                 <span class="release-kicker">Release Channel</span>
-                                <span class="release-title">V9 作为当前版本发布</span>
+                                <span class="release-title">正式版 1.0.0 作为当前默认版本发布</span>
                             </div>
                             <div class="release-state"><span class="pulse"></span><span>Stable</span></div>
                         </div>
-                        <p style="margin:18px 0 22px;color:rgba(255,255,255,.68)">最新入口、版本说明、历史列表和授权弹窗都已经同步切到 V9 版本线。你可以直接下载，也可以回退到 V8 及更早版本。</p>
+                        <p style="margin:18px 0 22px;color:rgba(255,255,255,.68)">最新入口、版本说明、历史列表和授权弹窗都已经同步切到正式版 1.0.0。你可以直接下载，也可以按项目需求回退到 V10.0.0 及更早版本。</p>
                         <div class="release-list">
-                            <div class="release-item"><strong>动作迁移已添加</strong><span>新版本补上动作迁移能力，方便项目素材继续沿用。</span></div>
-                            <div class="release-item"><strong>UI 显示已更新</strong><span>下载页与工作台版本信息都改成更清晰的展示方式。</span></div>
-                            <div class="release-item"><strong>任务超时已修复</strong><span>任务超时 bug 已处理，主版本可直接作为默认下载入口。</span></div>
+                            <div class="release-item"><strong>正式版命名切换完成</strong><span>当前默认下载入口已经从 V 系列版本线切换为正式版 1.0.0。</span></div>
+                            <div class="release-item"><strong>下载链接同步更新</strong><span>默认安装包已经切换到新的 1.0.0 正式版下载地址，验证后会直接跳转。</span></div>
+                            <div class="release-item"><strong>V10.0.0 转入历史版本</strong><span>旧的默认版本已归档到历史列表，方便兼容旧项目或按需回退。</span></div>
                         </div>
                     </aside>
                 </div>
@@ -107,9 +115,9 @@
         <section>
             <div class="wrap">
                 <div class="proof">
-                    <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-download"></i></div><h3>主入口切到 V9</h3><p>当前下载按钮只指向最新版本，进入路径更直接。</p></article>
-                    <article class="card" data-reveal style="--d:.08s"><div class="icon"><i class="fa-solid fa-shield-halved"></i></div><h3>授权下载逻辑不变</h3><p>继续通过密码验证后跳转，原有下载方式保持不动。</p></article>
-                    <article class="card" data-reveal style="--d:.16s"><div class="icon"><i class="fa-solid fa-box-archive"></i></div><h3>V8 已转入历史版本</h3><p>需要兼容旧项目时，仍然可以从历史列表回退。</p></article>
+                    <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-download"></i></div><h3>正式版 1.0.0 作为默认下载</h3><p>当前主下载按钮已经切到正式版 1.0.0，进入路径更直接。</p></article>
+                    <article class="card" data-reveal style="--d:.08s"><div class="icon"><i class="fa-solid fa-link"></i></div><h3>默认下载链接已更新</h3><p>验证成功后会直接跳转到新的正式版 1.0.0 安装包地址。</p></article>
+                    <article class="card" data-reveal style="--d:.16s"><div class="icon"><i class="fa-solid fa-clock-rotate-left"></i></div><h3>V10.0.0 已归档</h3><p>旧的默认版本已经下沉到历史版本区，方便按需回退。</p></article>
                 </div>
             </div>
         </section>
@@ -121,7 +129,7 @@
                         <div class="pill"><i class="fa-solid fa-hard-drive"></i><span>最新版本</span></div>
                         <h2>先下当前版本，再按项目回退</h2>
                     </div>
-                    <p class="section-copy">当前默认版本为 V9.0.0。下载前仍需要授权密码验证，但主按钮、更新日志和历史版本都已经集中到同一页。</p>
+                    <p class="section-copy">当前默认版本为正式版 1.0.0。下载前仍需要授权密码验证，但主按钮、发布说明和历史版本都已经集中到同一页，V10.0.0 已转入历史版本。</p>
                 </div>
                 <div class="layout">
                     <div class="stack">
@@ -129,26 +137,26 @@
                             <div class="history-top">
                                 <div>
                                     <h3 style="margin:0">Windows 默认下载</h3>
-                                    <p class="copy" style="margin:8px 0 0">用于新安装、常规升级和新项目直接上手。</p>
+                                    <p class="copy" style="margin:8px 0 0">用于新安装、常规升级和希望直接使用正式版 1.0.0 的项目。</p>
                                 </div>
                                 <span class="chip"><i class="fa-brands fa-windows"></i><span>Windows</span></span>
                             </div>
                             <div class="tiles">
-                                <div class="tile"><span>版本号</span><strong>V9.0.0</strong></div>
-                                <div class="tile"><span>更新时间</span><strong>2026-03-16</strong></div>
+                                <div class="tile"><span>版本号</span><strong>正式版 1.0.0</strong></div>
+                                <div class="tile"><span>更新时间</span><strong>2026-03-18</strong></div>
                                 <div class="tile"><span>文件大小</span><strong>以安装包实际大小为准</strong></div>
                             </div>
-                            <div class="chip"><i class="fa-solid fa-sparkles"></i><span>V9.0.0 更新日志</span></div>
+                            <div class="chip"><i class="fa-solid fa-sparkles"></i><span>正式版 1.0.0 发布说明</span></div>
                             <ul class="check-list">
-                                <li><i class="fa-solid fa-circle-check"></i><span>添加了动作迁移。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>更新了 UI 显示。</span></li>
-                                <li><i class="fa-solid fa-circle-check"></i><span>修复了任务超时的 bug。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>默认下载版本切换为正式版 1.0.0。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>默认下载链接更新为新的正式版安装包。</span></li>
+                                <li><i class="fa-solid fa-circle-check"></i><span>V10.0.0 已转入历史版本列表。</span></li>
                             </ul>
                             <div class="actions">
-                                <button class="btn" type="button" onclick="showDownloadModal('v9')"><i class="fa-solid fa-download"></i><span>立即下载 V9.0.0</span></button>
+                                <button class="btn" type="button" onclick="showDownloadModal('r100')"><i class="fa-solid fa-download"></i><span>立即下载正式版 1.0.0</span></button>
                                 <a class="ghost" href="#history"><i class="fa-solid fa-clock-rotate-left"></i><span>查看历史版本</span></a>
                             </div>
-                            <div class="note">如果只是从旧版本升级，不需要改动授权密码。V8 已转入历史版本，验证通过后会自动跳转到对应安装包地址。</div>
+                            <div class="note">如果只是从 V10.0.0 或更早版本升级，不需要改动授权密码。验证通过后会自动跳转到对应安装包地址。</div>
                         </article>
 
                         <article class="history-card" id="history" data-reveal style="--d:.08s">
@@ -162,6 +170,8 @@
                             <div class="accordion" id="accordion">
                                 <div class="accordion-inner">
                                     <div class="history-list">
+                                        <div class="history-item current-prev"><div class="badge">10</div><div><strong>V10.0.0</strong><span>2026-03-17</span></div><button class="act" type="button" onclick="showDownloadModal('v10')">下载</button></div>
+                                        <div class="history-item"><div class="badge">9.0</div><div><strong>V9.0.0</strong><span>2026-03-16</span></div><button class="act" type="button" onclick="showDownloadModal('v9')">下载</button></div>
                                         <div class="history-item"><div class="badge">8.0</div><div><strong>V8.0.0</strong><span>2026-03-13</span></div><button class="act" type="button" onclick="showDownloadModal('v8')">下载</button></div>
                                         <div class="history-item"><div class="badge">7.0</div><div><strong>V7.0.0</strong><span>2026-03-11</span></div><button class="act" type="button" onclick="showDownloadModal('v7')">下载</button></div>
                                         <div class="history-item"><div class="badge">6.0</div><div><strong>V6.0.0</strong><span>2026-03-10</span></div><button class="act" type="button" onclick="showDownloadModal('v6')">下载</button></div>
@@ -195,7 +205,7 @@
 
                         <article class="support-card" id="support" data-reveal style="--d:.2s">
                             <h3 style="margin:0">需要帮助？</h3>
-                            <p class="copy" style="margin:10px 0 0">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。当前下载页默认版本为 V9.0.0。</p>
+                            <p class="copy" style="margin:10px 0 0">如果下载、安装或授权过程中遇到问题，可以直接通过邮件联系。当前下载页默认版本为正式版 1.0.0。</p>
                             <div class="support-links">
                                 <a class="link-btn" href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></a>
                                 <a class="link-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>返回首页</span></a>
@@ -212,7 +222,7 @@
         <div class="wrap">
             <div class="footer-row">
                 <div class="brand">
-                    <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
+                    <span class="brand-mark"><img src="logo.svg" alt="OmniAI Logo"></span>
                     <span>OmniAI<small>动画团队 / 工作台下载</small></span>
                 </div>
                 <div>© 2026 OmniAI · 南京万物可爱文化传媒有限公司</div>
@@ -240,6 +250,8 @@
 
     <script>
         const urls = {
+            r100: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjAxLjAuMC5leGU=",
+            v10: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWMTAuMC4wLmV4ZQ==",
             v9: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWOS4wLjAuZXhl",
             v8: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWOC4wLjAuZXhl",
             v7: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWNy4wLjAuZXhl",

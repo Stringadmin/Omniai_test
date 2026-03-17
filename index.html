@@ -1,259 +1,1432 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniAI | 动画团队与内部工作台</title>
-    <meta name="description" content="OmniAI 是一家动画创作团队，也把内部的拆镜、角色统一、批量推进与交付流程整理成可直接使用的桌面工作台。">
+    <title>OmniAI | 正式版 1.0.0 已发布</title>
+    <meta name="description" content="Stringadmin 的个人工作室主页，当前同步 OmniAI 正式版 1.0.0 的下载入口、版本状态与维护记录。">
+    <meta name="theme-color" content="#101826">
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <link rel="icon" href="logo.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{--bg:#f4eee5;--paper:rgba(255,255,255,.8);--paper-strong:rgba(255,255,255,.92);--line:rgba(15,23,42,.1);--ink:#0f172a;--muted:#5d6774;--blue:#1368e8;--cyan:#1ac7e7;--orange:#ff825d;--deep:#08162c;--deep-2:#122747;--shadow:0 24px 60px rgba(8,22,44,.12);--shadow-lg:0 40px 100px rgba(8,22,44,.2);--radius:28px}
-        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 10% 10%,rgba(19,104,232,.18),transparent 24%),radial-gradient(circle at 88% 14%,rgba(26,199,231,.16),transparent 22%),radial-gradient(circle at 50% 100%,rgba(255,130,93,.1),transparent 28%),linear-gradient(180deg,#fffdf9 0%,var(--bg) 58%,#f8f2e9 100%);overflow-x:hidden}
-        body:before,body:after{content:"";position:fixed;inset:0;pointer-events:none}body:before{background-image:linear-gradient(rgba(15,23,42,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.03) 1px,transparent 1px);background-size:88px 88px;mask-image:linear-gradient(180deg,rgba(0,0,0,.48),transparent 82%)}body:after{background:radial-gradient(circle at 20% 18%,rgba(19,104,232,.08),transparent 20%),radial-gradient(circle at 78% 24%,rgba(26,199,231,.08),transparent 18%),radial-gradient(circle at 55% 72%,rgba(255,130,93,.06),transparent 18%);animation:aurora 16s ease-in-out infinite;mix-blend-mode:screen}
-        a{text-decoration:none;color:inherit}img{display:block;max-width:100%}button{font:inherit}h1,h2,h3,strong,.step-num,.signal-num{font-family:"Outfit","Noto Sans SC",sans-serif}
-        .wrap{width:min(1220px,calc(100% - 40px));margin:0 auto}.nav{position:fixed;inset:0 0 auto;z-index:80;transition:background .25s ease,box-shadow .25s ease,border-color .25s ease}.nav.scrolled{background:rgba(255,250,244,.8);backdrop-filter:blur(20px);box-shadow:0 12px 36px rgba(8,22,44,.08);border-bottom:1px solid rgba(15,23,42,.06)}
-        .nav-row,.mobile-box,.hero-grid,.hero-points,.hero-actions,.spot-grid,.proof-grid,.feature-grid,.flow-grid,.scene-grid,.contact-grid,.footer-row{display:grid;gap:22px}.nav-row,.mobile-box{width:min(1220px,calc(100% - 40px));margin:0 auto}.nav-row{grid-template-columns:auto 1fr auto;align-items:center;padding:20px 0}
-        .brand{display:inline-flex;align-items:center;gap:14px;font:700 1.04rem/1 "Outfit","Noto Sans SC",sans-serif}.brand-mark{width:48px;height:48px;border-radius:16px;overflow:hidden;border:1px solid rgba(19,104,232,.14);background:linear-gradient(135deg,rgba(19,104,232,.15),rgba(26,199,231,.18));box-shadow:0 16px 30px rgba(19,104,232,.12)}.brand small{display:block;margin-top:4px;color:var(--muted);font:500 .76rem/1.2 "Noto Sans SC",sans-serif}
-        .links{display:flex;justify-content:center;gap:30px;color:var(--muted)}.links a,.mobile-links a{position:relative;transition:color .2s ease}.links a:after,.mobile-links a:after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .2s ease}.links a:hover,.mobile-links a:hover{color:var(--blue)}.links a:hover:after,.mobile-links a:hover:after{transform:scaleX(1)}
-        .btn,.ghost,.nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:14px 22px;border-radius:18px;font-weight:700;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.btn,.nav-btn{color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 18px 34px rgba(19,104,232,.22)}.ghost{background:rgba(255,255,255,.74);border:1px solid var(--line);box-shadow:var(--shadow)}.btn:hover,.ghost:hover,.nav-btn:hover{transform:translateY(-3px)}
-        .menu{display:none;width:48px;height:48px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.76)}.mobile-box{display:none;padding-bottom:18px}.mobile-box.open{display:block}.mobile-links{display:grid;gap:18px;padding:20px;border-radius:26px;background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:var(--shadow)}
-        main{padding-top:118px}section{padding:24px 0 94px}.pill{display:inline-flex;align-items:center;gap:10px;width:max-content;padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(19,104,232,.12);box-shadow:var(--shadow);color:var(--blue);font-weight:700}.dot,.pulse{width:10px;height:10px;border-radius:999px;background:linear-gradient(180deg,var(--cyan),var(--orange));box-shadow:0 0 0 8px rgba(26,199,231,.12);animation:pulse 2.8s ease-in-out infinite}
-        .hero-grid{grid-template-columns:minmax(0,1.04fr) minmax(340px,.96fr);align-items:center;gap:54px}.hero-copy,.hero-stage{position:relative;min-width:0}.hero-copy{z-index:2}.hero-copy p,.section-copy,.card p,.flow-copy p,.scene-card p,.contact-card p,.footer-row{color:var(--muted);line-height:1.85}.hero-title{max-width:100%;margin:22px 0 18px;font-size:clamp(3rem,7vw,5.9rem);line-height:.96;letter-spacing:-.065em}
-        .hero-title .type-line{display:block;width:max-content;max-width:100%;min-height:1.08em;position:relative;overflow-wrap:anywhere}.hero-title .type-line:last-child{margin-top:8px}.hero-title .type-line.gradient{background:linear-gradient(135deg,var(--blue),var(--cyan) 58%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}.type-line.typing:after,.type-line.done:after{content:"";position:absolute;top:.1em;right:-.14em;width:2px;height:.88em;background:currentColor;animation:caret .9s steps(1,end) infinite}.type-line.done:after{opacity:0;animation:none}
-        .hero-sub{max-width:560px;font-size:1.02rem}.hero-actions{display:flex;grid-template-columns:none;flex-wrap:wrap;gap:16px;margin-top:30px}.hero-points{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:28px}.mini-pill,.card,.feature-card,.scene-card,.contact-card{position:relative;overflow:hidden;padding:18px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
-        .mini-pill{display:flex;align-items:center;gap:12px;font-weight:700;animation:floatCard 7s ease-in-out infinite}.mini-pill:nth-child(2){animation-delay:-2s}.mini-pill:nth-child(3){animation-delay:-4s}.mini-pill i{color:var(--blue)}
-        .hero-stage{position:relative;min-height:640px;display:grid;place-items:center;padding:64px 24px 54px;overflow:hidden}.stage-glow,.stage-glow:before,.stage-glow:after{position:absolute;border-radius:999px}.stage-glow{inset:40px 32px auto auto;width:240px;height:240px;background:radial-gradient(circle,rgba(26,199,231,.18),transparent 60%);filter:blur(4px);animation:drift 12s ease-in-out infinite}.stage-glow:before,.stage-glow:after{content:"";inset:0;border:1px solid rgba(26,199,231,.16);animation:spin 20s linear infinite}.stage-glow:after{inset:26px;animation-duration:14s;animation-direction:reverse}
-        .spot-card{position:relative;overflow:hidden;width:min(100%,540px);margin:36px 0 20px;padding:30px;border-radius:34px;background:radial-gradient(circle at 12% 12%,rgba(26,199,231,.16),transparent 24%),radial-gradient(circle at 84% 18%,rgba(255,130,93,.14),transparent 20%),linear-gradient(160deg,rgba(8,22,44,.98),rgba(18,39,71,.96));color:rgba(255,255,255,.94);box-shadow:var(--shadow-lg);transform-style:preserve-3d}.spot-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);animation:grid 16s linear infinite}.spot-card:after{content:"";position:absolute;top:0;left:-36%;width:38%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);transform:skewX(-22deg);animation:beam 7s linear infinite}.spot-card>*{position:relative;z-index:1}
-        .spot-top,.spot-head,.section-head,.contact-head,.contact-note{display:flex;justify-content:space-between;gap:16px}.spot-top{align-items:flex-start}.spot-kicker{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.56)}.spot-title{display:block;margin-top:8px;font-size:1.38rem;letter-spacing:-.04em}.spot-state{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.78);white-space:nowrap}
-        .spot-grid{grid-template-columns:1fr 1fr;margin-top:24px}.spot-panel{padding:20px;border-radius:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px)}.spot-head{align-items:center;margin-bottom:16px;color:rgba(255,255,255,.82);font-size:.94rem}.queue,.signal-list,.flow-steps,.scene-grid,.contact-actions{display:grid;gap:14px}
-        .queue-item,.signal-item{padding:16px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.queue-item.active{background:linear-gradient(135deg,rgba(19,104,232,.24),rgba(26,199,231,.18));border-color:rgba(26,199,231,.24)}.queue-item strong,.signal-item strong{display:block}.queue-item small,.signal-item span{display:block;margin-top:6px;color:rgba(255,255,255,.62);line-height:1.7}
-        .bar{width:100%;height:8px;margin-top:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.bar i{display:block;width:var(--w,50%);height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--orange));animation:progress 5s ease-in-out infinite alternate}
-        .edge-chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:10px;max-width:210px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.88);border:1px solid rgba(15,23,42,.08);box-shadow:var(--shadow);backdrop-filter:blur(12px);line-height:1.45;animation:floatChip 7s ease-in-out infinite}.edge-chip i{color:var(--blue)}.edge-chip.a{top:12px;right:18px}.edge-chip.b{left:12px;bottom:140px;animation-delay:-2s}.edge-chip.c{right:18px;bottom:18px;animation-delay:-4s}
-        .proof-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.card,.feature-card,.scene-card,.contact-card{padding:26px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}.card:after,.feature-card:after,.scene-card:after{content:"";position:absolute;left:-34%;right:-34%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(26,199,231,.8),transparent);animation:scan 5s linear infinite}.card:hover,.feature-card:hover,.scene-card:hover,.contact-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}.icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 14px 26px rgba(19,104,232,.18)}.card h3,.feature-card h3,.scene-card h3,.contact-card h3{margin:20px 0 10px;font-size:1.16rem;letter-spacing:-.04em}
-        .section-head{align-items:flex-end;margin-bottom:30px}.section-copy{max-width:480px}.feature-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.feature-card .mini{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--blue);font-weight:700}
-        .flow-band{position:relative;overflow:hidden;padding:40px;border-radius:40px;background:radial-gradient(circle at 12% 20%,rgba(26,199,231,.16),transparent 24%),radial-gradient(circle at 84% 18%,rgba(255,130,93,.14),transparent 22%),linear-gradient(160deg,rgba(8,22,44,.98),rgba(18,39,71,.96));box-shadow:var(--shadow-lg)}.flow-band:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 100%);animation:grid 18s linear infinite}.flow-grid{position:relative;z-index:1;grid-template-columns:minmax(0,1fr) minmax(280px,.9fr);align-items:start}.flow-copy{color:#fff}.flow-copy p{max-width:620px;color:rgba(255,255,255,.68)}.flow-steps{margin-top:24px}.flow-step{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:20px;border-radius:24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.92)}.step-num{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.08);font-weight:800}
-        .signal-wall{display:grid;gap:16px}.signal-card{padding:24px;border-radius:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.88)}.signal-card strong{display:block;color:#fff;font-size:1.14rem}.signal-card p{margin:8px 0 16px;color:rgba(255,255,255,.62);line-height:1.75}.signal-num{display:block;font-size:1.58rem;color:#fff;letter-spacing:-.05em}
-        .scene-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-        .contact-grid{grid-template-columns:minmax(0,1fr) minmax(320px,.88fr);padding:40px;border-radius:40px;background:radial-gradient(circle at 0 0,rgba(19,104,232,.12),transparent 24%),radial-gradient(circle at 100% 18%,rgba(255,130,93,.12),transparent 24%),rgba(255,255,255,.82);border:1px solid var(--line);box-shadow:var(--shadow-lg);backdrop-filter:blur(20px)}.contact-head{align-items:flex-start}.contact-note{margin-top:22px;padding:18px 20px;border-radius:20px;background:rgba(19,104,232,.06);border:1px solid rgba(19,104,232,.08)}
-        .footer{padding:32px 0 44px}.footer-row{align-items:center;padding-top:28px;border-top:1px solid rgba(15,23,42,.08);grid-template-columns:auto auto;justify-content:space-between;color:var(--muted)}
-        [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .82s ease,transform .82s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}[data-reveal].show{opacity:1;transform:none}.tilt{transition:transform .18s ease-out;will-change:transform}
-        @keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:1}}@keyframes grid{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(42px,42px,0)}}@keyframes aurora{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(10px,-18px,0) scale(1.04)}}@keyframes drift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-20px,0)}}@keyframes beam{0%{transform:translateX(-180%) skewX(-22deg)}100%{transform:translateX(320%) skewX(-22deg)}}@keyframes scan{0%{transform:translateX(-30%)}100%{transform:translateX(30%)}}@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes floatChip{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@keyframes progress{0%{opacity:.7}100%{opacity:1}}@keyframes caret{0%,50%{opacity:1}50.01%,100%{opacity:0}}
-        @media (max-width:1320px){.hero-grid{gap:40px}.hero-stage{padding:56px 18px 44px}.edge-chip{max-width:180px;font-size:.92rem}.edge-chip.b{left:0}.edge-chip.c{right:0}}
-        @media (max-width:1120px){.hero-grid,.proof-grid,.feature-grid,.flow-grid,.scene-grid,.contact-grid,.spot-grid,.hero-points{grid-template-columns:1fr}.hero-stage{min-height:auto;padding:0;overflow:visible}.spot-card{margin:0}.edge-chip{position:static;max-width:none}}
-        @media (max-width:920px){.links,.nav-btn{display:none}.menu{display:inline-grid;place-items:center}main{padding-top:108px}}
-        @media (max-width:720px){.wrap,.nav-row,.mobile-box{width:min(100% - 28px,1220px)}section{padding-bottom:80px}.hero-title{font-size:clamp(2.7rem,16vw,4.3rem)}.type-line.typing:after,.type-line.done:after{display:none}.hero-actions{flex-direction:column;align-items:stretch}.btn,.ghost{width:100%}.spot-card,.card,.feature-card,.scene-card,.contact-card,.flow-band,.contact-grid{padding:24px}.section-head,.spot-top,.contact-head,.contact-note,.footer-row{flex-direction:column;align-items:flex-start}.footer-row{grid-template-columns:1fr;justify-content:start}}
-        @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:0s!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}}
+        :root {
+            --bg: #f2eadf;
+            --surface: rgba(255, 255, 255, 0.82);
+            --surface-strong: rgba(255, 255, 255, 0.92);
+            --text: #101826;
+            --muted: #576479;
+            --line: rgba(16, 24, 38, 0.12);
+            --brand: #1958d9;
+            --teal: #0f766e;
+            --copper: #bd6d35;
+            --shadow: 0 24px 70px rgba(16, 24, 38, 0.12);
+            --shadow-lg: 0 40px 110px rgba(16, 24, 38, 0.18);
+            --radius-sm: 20px;
+            --radius-md: 28px;
+            --radius-lg: 38px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(25, 88, 217, 0.16), transparent 24%),
+                radial-gradient(circle at 86% 14%, rgba(189, 109, 53, 0.16), transparent 22%),
+                radial-gradient(circle at 50% 100%, rgba(15, 118, 110, 0.1), transparent 28%),
+                linear-gradient(180deg, #fffdf9 0%, var(--bg) 46%, #ebe1d2 100%);
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::before {
+            background-image:
+                linear-gradient(rgba(16, 24, 38, 0.038) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 24, 38, 0.038) 1px, transparent 1px);
+            background-size: 90px 90px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.54), transparent 82%);
+        }
+
+        body::after {
+            background:
+                radial-gradient(circle at 22% 24%, rgba(25, 88, 217, 0.12), transparent 18%),
+                radial-gradient(circle at 78% 18%, rgba(15, 118, 110, 0.1), transparent 18%),
+                radial-gradient(circle at 56% 78%, rgba(189, 109, 53, 0.1), transparent 20%);
+            animation: drift 18s ease-in-out infinite;
+        }
+
+        ::selection {
+            color: #fff;
+            background: rgba(25, 88, 217, 0.8);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        h1,
+        h2,
+        h3,
+        strong,
+        .brand,
+        .button,
+        .meta-value,
+        .timeline-date,
+        .timeline-order {
+            font-family: "Outfit", "Noto Sans SC", sans-serif;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            z-index: 120;
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: #101826;
+            color: #fff;
+            transform: translateY(-150%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(25, 88, 217, 0.34);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .nav {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 90;
+            transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(251, 246, 238, 0.82);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 14px 40px rgba(16, 24, 38, 0.08);
+            border-bottom: 1px solid rgba(16, 24, 38, 0.06);
+        }
+
+        .nav-row,
+        .mobile-box,
+        .hero,
+        .hero-actions,
+        .hero-metrics,
+        .section-head,
+        .about-layout,
+        .focus-grid,
+        .log-grid,
+        .timeline-list,
+        .contact-shell,
+        .contact-actions,
+        .footer-row {
+            display: grid;
+            gap: 22px;
+        }
+
+        .nav-row,
+        .mobile-box {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .nav-row {
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font: 700 1.04rem/1 "Outfit", "Noto Sans SC", sans-serif;
+        }
+
+        .brand-mark {
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(25, 88, 217, 0.14);
+            box-shadow: 0 16px 28px rgba(25, 88, 217, 0.12);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font: 500 0.76rem/1.2 "Noto Sans SC", sans-serif;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            color: var(--muted);
+        }
+
+        .links a,
+        .mobile-links a {
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.2s ease;
+        }
+
+        .links a::after,
+        .mobile-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--brand), var(--teal));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+        }
+
+        .links a:hover,
+        .mobile-links a:hover {
+            color: var(--brand);
+        }
+
+        .links a:hover::after,
+        .mobile-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .button,
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 14px 22px;
+            border-radius: 18px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .button:hover,
+        .nav-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .button.primary,
+        .nav-button {
+            color: #fff;
+            background: linear-gradient(135deg, var(--brand), var(--teal));
+            box-shadow: 0 18px 34px rgba(25, 88, 217, 0.22);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: var(--line);
+            box-shadow: var(--shadow);
+        }
+
+        .button.ghost-light {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.16);
+            color: #fff;
+        }
+
+        .menu {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .mobile-box {
+            display: none;
+            padding-bottom: 18px;
+        }
+
+        .mobile-box.open {
+            display: block;
+        }
+
+        .mobile-links {
+            display: grid;
+            gap: 18px;
+            padding: 20px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+
+        main {
+            padding-top: 108px;
+        }
+
+        section,
+        #download {
+            scroll-margin-top: 120px;
+        }
+
+        section {
+            padding: 28px 0 104px;
+        }
+
+        .hero {
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+            align-items: stretch;
+            gap: 34px;
+            min-height: calc(100dvh - 176px);
+        }
+
+        .hero-copy,
+        .hero-board {
+            min-width: 0;
+        }
+
+        .eyebrow,
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: max-content;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(25, 88, 217, 0.14);
+            box-shadow: var(--shadow);
+            color: var(--brand);
+            font: 700 0.82rem/1 "Outfit", "Noto Sans SC", sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot,
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, var(--teal), var(--copper));
+            box-shadow: 0 0 0 8px rgba(15, 118, 110, 0.12);
+            animation: pulse 2.6s ease-in-out infinite;
+        }
+
+        h1 {
+            margin: 24px 0 18px;
+            font-size: clamp(3.2rem, 7vw, 6.4rem);
+            line-height: 0.92;
+            letter-spacing: -0.07em;
+        }
+
+        .hero-title .serif {
+            font-family: "Noto Serif SC", "Noto Sans SC", serif;
+            font-weight: 700;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--brand), var(--teal) 54%, var(--copper));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-lede,
+        .section-copy,
+        .manifesto-card p,
+        .focus-card p,
+        .log-card p,
+        .timeline-body p,
+        .contact-copy p,
+        .contact-card p,
+        .footer-row {
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .hero-lede {
+            max-width: 680px;
+            font-size: 1.05rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .hero-metrics {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 34px;
+        }
+
+        .metric-card,
+        .manifesto-card,
+        .focus-card,
+        .log-card,
+        .timeline-shell,
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+        }
+
+        .metric-card::before,
+        .focus-card::before,
+        .log-card::before,
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand), var(--teal), var(--copper));
+        }
+
+        .meta-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .meta-value {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.28rem;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-board {
+            position: relative;
+            padding: 34px;
+            border-radius: var(--radius-lg);
+            background:
+                radial-gradient(circle at 14% 14%, rgba(15, 118, 110, 0.18), transparent 24%),
+                radial-gradient(circle at 84% 18%, rgba(189, 109, 53, 0.16), transparent 22%),
+                linear-gradient(160deg, rgba(16, 24, 38, 0.98), rgba(23, 36, 56, 0.96));
+            color: rgba(255, 255, 255, 0.94);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-board::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 100%);
+            animation: gridShift 20s linear infinite;
+        }
+
+        .hero-board > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .board-top,
+        .contact-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .board-label {
+            color: rgba(255, 255, 255, 0.58);
+            font: 700 0.8rem/1 "Outfit", "Noto Sans SC", sans-serif;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .board-title {
+            margin: 10px 0 0;
+            font-size: 1.58rem;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.84);
+            white-space: nowrap;
+        }
+
+        .board-copy,
+        .signal-card p,
+        .contact-copy .light,
+        .contact-card,
+        .contact-card a {
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.8;
+        }
+
+        .board-copy {
+            margin-top: 18px;
+        }
+
+        .signal-list {
+            display: grid;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .signal-card {
+            padding: 18px 20px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .signal-card strong,
+        .focus-card h3,
+        .log-card h3,
+        .timeline-body h3,
+        .contact-card h3 {
+            display: block;
+            font-size: 1.14rem;
+            letter-spacing: -0.04em;
+        }
+
+        .signal-card p {
+            margin-top: 8px;
+        }
+
+        .board-foot {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .mono-pill,
+        .log-meta,
+        .commit-pill,
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: max-content;
+            min-height: 38px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            font: 600 0.84rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+        }
+
+        .mono-pill {
+            color: rgba(255, 255, 255, 0.84);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .js [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.82s ease, transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--d, 0s);
+        }
+
+        .js [data-reveal].show {
+            opacity: 1;
+            transform: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: scale(1.18);
+                opacity: 1;
+            }
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+                transform: translate3d(10px, -16px, 0) scale(1.04);
+            }
+        }
+
+        @keyframes gridShift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(42px, 42px, 0);
+            }
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            margin: 18px 0 0;
+            font-size: clamp(2.1rem, 4vw, 3.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.06em;
+        }
+
+        .section-copy {
+            max-width: 540px;
+        }
+
+        .about-layout {
+            grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+            align-items: stretch;
+        }
+
+        .manifesto-card {
+            padding: 34px;
+            border-radius: 34px;
+            background: var(--surface-strong);
+        }
+
+        .quote {
+            margin: 0 0 24px;
+            font: 700 clamp(1.56rem, 3vw, 2.45rem)/1.4 "Noto Serif SC", "Noto Sans SC", serif;
+            letter-spacing: -0.04em;
+        }
+
+        .manifesto-card p + p {
+            margin-top: 16px;
+        }
+
+        .focus-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .focus-card {
+            min-height: 220px;
+        }
+
+        .focus-icon,
+        .log-icon {
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--brand), var(--teal));
+            box-shadow: 0 14px 28px rgba(25, 88, 217, 0.18);
+        }
+
+        .focus-card h3,
+        .log-card h3 {
+            margin: 20px 0 10px;
+        }
+
+        .log-grid {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+        }
+
+        .log-card {
+            display: grid;
+            align-content: start;
+            gap: 16px;
+        }
+
+        .log-feature {
+            grid-column: span 7;
+            padding: 34px;
+            border-radius: 34px;
+            background:
+                radial-gradient(circle at 0 0, rgba(25, 88, 217, 0.1), transparent 26%),
+                radial-gradient(circle at 100% 18%, rgba(189, 109, 53, 0.1), transparent 20%),
+                rgba(255, 255, 255, 0.88);
+        }
+
+        .log-compact {
+            grid-column: span 5;
+        }
+
+        .log-half {
+            grid-column: span 6;
+        }
+
+        .log-meta {
+            color: var(--teal);
+            background: rgba(15, 118, 110, 0.08);
+            border: 1px solid rgba(15, 118, 110, 0.12);
+        }
+
+        .log-card ul,
+        .contact-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .log-card li,
+        .contact-list li {
+            display: flex;
+            gap: 12px;
+            line-height: 1.8;
+        }
+
+        .log-card li i {
+            margin-top: 5px;
+            color: var(--brand);
+        }
+
+        .commit-pill {
+            color: var(--brand);
+            background: rgba(25, 88, 217, 0.08);
+            border: 1px solid rgba(25, 88, 217, 0.12);
+        }
+
+        .timeline-shell {
+            padding: 36px;
+            border-radius: 36px;
+            background:
+                radial-gradient(circle at 10% 16%, rgba(25, 88, 217, 0.12), transparent 24%),
+                radial-gradient(circle at 88% 18%, rgba(15, 118, 110, 0.1), transparent 20%),
+                rgba(255, 255, 255, 0.84);
+        }
+
+        .timeline-list {
+            position: relative;
+            gap: 18px;
+        }
+
+        .timeline-list::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            bottom: 18px;
+            left: 142px;
+            width: 1px;
+            background: linear-gradient(180deg, rgba(25, 88, 217, 0.3), rgba(15, 118, 110, 0.3));
+        }
+
+        .timeline-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 124px minmax(0, 1fr);
+            gap: 22px;
+            padding-left: 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 135px;
+            top: 18px;
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, var(--brand), var(--teal));
+            box-shadow: 0 0 0 10px rgba(25, 88, 217, 0.1);
+        }
+
+        .timeline-meta-card {
+            display: grid;
+            gap: 8px;
+            align-content: start;
+            padding-top: 6px;
+        }
+
+        .timeline-date {
+            color: var(--brand);
+            font-size: 0.98rem;
+            letter-spacing: 0.04em;
+            font-weight: 700;
+        }
+
+        .timeline-order {
+            color: rgba(16, 24, 38, 0.3);
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .timeline-body {
+            padding: 24px 26px;
+            border-radius: 26px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid var(--line);
+        }
+
+        .timeline-body p {
+            margin-top: 12px;
+        }
+
+        .timeline-body .commit-pill {
+            margin-top: 16px;
+        }
+
+        .section-marker {
+            height: 0;
+        }
+
+        .contact-shell {
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+            align-items: stretch;
+            padding: 40px;
+            border-radius: 40px;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(25, 88, 217, 0.2), transparent 22%),
+                radial-gradient(circle at 88% 16%, rgba(189, 109, 53, 0.18), transparent 20%),
+                linear-gradient(160deg, rgba(16, 24, 38, 0.98), rgba(23, 36, 56, 0.96));
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-shell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), transparent 100%);
+        }
+
+        .contact-shell > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-kicker.light {
+            color: rgba(255, 255, 255, 0.86);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: none;
+        }
+
+        .contact-copy h2 {
+            color: #fff;
+            max-width: 720px;
+        }
+
+        .contact-copy p {
+            margin-top: 18px;
+            max-width: 620px;
+        }
+
+        .contact-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .contact-badge {
+            color: rgba(255, 255, 255, 0.84);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: none;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .contact-card::before {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(25, 88, 217, 0.4), rgba(15, 118, 110, 0.4));
+        }
+
+        .contact-card p {
+            margin-top: 10px;
+        }
+
+        .contact-list {
+            margin-top: 22px;
+        }
+
+        .contact-list li {
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 12px;
+        }
+
+        .contact-list span {
+            color: rgba(255, 255, 255, 0.58);
+        }
+
+        .contact-list strong {
+            text-align: right;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .footer {
+            padding: 24px 0 40px;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 28px;
+            border-top: 1px solid rgba(16, 24, 38, 0.08);
+            color: var(--muted);
+        }
+
+        @media (max-width: 1120px) {
+            .hero,
+            .about-layout,
+            .contact-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .log-feature,
+            .log-compact,
+            .log-half {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 940px) {
+            .links,
+            .nav-button {
+                display: none;
+            }
+
+            .menu {
+                display: inline-grid;
+                place-items: center;
+            }
+
+            .timeline-list::before {
+                left: 24px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding-left: 42px;
+            }
+
+            .timeline-item::before {
+                left: 17px;
+            }
+
+            .timeline-meta-card {
+                display: flex;
+                align-items: baseline;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .wrap,
+            .nav-row,
+            .mobile-box {
+                width: min(100% - 28px, 1180px);
+            }
+
+            main {
+                padding-top: 98px;
+            }
+
+            section {
+                padding-bottom: 84px;
+            }
+
+            h1 {
+                font-size: clamp(2.8rem, 15vw, 4.7rem);
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-actions,
+            .contact-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button,
+            .button.primary,
+            .button.secondary,
+            .button.ghost-light {
+                width: 100%;
+            }
+
+            .hero-metrics,
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-board,
+            .manifesto-card,
+            .focus-card,
+            .log-card,
+            .timeline-shell,
+            .contact-shell,
+            .contact-card {
+                padding: 24px;
+            }
+
+            .section-head,
+            .board-top,
+            .contact-meta,
+            .footer-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-row {
+                justify-content: flex-start;
+            }
+
+            .contact-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-list strong {
+                text-align: left;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition-duration: 0s !important;
+            }
+
+            [data-reveal] {
+                opacity: 1;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
     <nav class="nav" id="nav">
         <div class="nav-row">
-            <a class="brand" href="#home" aria-label="OmniAI 首页">
-                <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
-                <span>OmniAI<small>动画团队 / 内部工作台</small></span>
+            <a class="brand" href="#home" aria-label="返回 OmniAI 首页">
+                <span class="brand-mark"><img src="logo.svg" alt="OmniAI Logo"></span>
+                <span>OmniAI<small>Stringadmin / Personal Studio</small></span>
             </a>
-            <div class="links">
-                <a href="#capabilities">方式</a>
-                <a href="#workflow">流程</a>
-                <a href="#scenes">场景</a>
-                <a href="#contact">联系</a>
+
+            <div class="links" aria-label="站点导航">
+                <a href="#about">工作方式</a>
+                <a href="#journal">近期更新</a>
+                <a href="#timeline">时间线</a>
+                <a href="#download">联系与下载</a>
             </div>
-            <div style="display:flex;align-items:center;gap:14px">
-                <a class="nav-btn" href="download.html"><i class="fa-solid fa-download"></i><span>下载工作台</span></a>
-                <button class="menu" id="menuBtn" aria-label="打开菜单" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+
+            <div class="nav-actions">
+                <a class="nav-button" href="download.html"><i class="fa-solid fa-download"></i><span>下载工作台</span></a>
+                <button class="menu" id="menuBtn" type="button" aria-label="打开菜单" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
+
         <div class="mobile-box" id="mobileBox">
             <div class="mobile-links">
-                <a href="#capabilities">方式</a>
-                <a href="#workflow">流程</a>
-                <a href="#scenes">场景</a>
-                <a href="#contact">联系</a>
+                <a href="#about">工作方式</a>
+                <a href="#journal">近期更新</a>
+                <a href="#timeline">时间线</a>
+                <a href="#download">联系与下载</a>
                 <a href="download.html">下载工作台</a>
             </div>
         </div>
     </nav>
-    <main>
+
+    <main id="main">
         <section id="home">
             <div class="wrap">
-                <div class="hero-grid">
+                <div class="hero">
                     <div class="hero-copy">
-                        <div class="pill" data-reveal><span class="dot"></span><span>我们先做动画，也做自己的工作台</span></div>
-                        <h1 class="hero-title" aria-label="我们做动画，也把内部流程做成真正可执行的工具" data-reveal style="--d:.06s">
-                            <span class="type-line type-target" data-text="我们做动画，也把内部流程"></span>
-                            <span class="type-line gradient type-target" data-text="做成真正可执行的工具"></span>
+                        <div class="eyebrow" data-reveal><span class="eyebrow-dot"></span><span>Personal Studio / OmniAI</span></div>
+                        <h1 class="hero-title" data-reveal style="--d:.06s">
+                            Stringadmin 的个人主页，<br>
+                            <span class="serif">不写空话</span>，只写 <span class="gradient-text">OmniAI 正在发生的迭代</span>
                         </h1>
-                        <p class="hero-sub" data-reveal style="--d:.12s">以动画项目为主，把拆镜、角色统一、批量推进和交付整理成一套顺手的桌面工作台。</p>
+                        <p class="hero-lede" data-reveal style="--d:.12s">我负责官网首页、下载页和版本说明的持续维护。这里不再是脱离上下文的泛化介绍，而是一份公开可读的工作日志：版本状态、界面调整、下载入口和联系路径都放在同一个视野里。</p>
                         <div class="hero-actions" data-reveal style="--d:.18s">
-                            <a class="btn" href="download.html"><i class="fa-solid fa-download"></i><span>下载工作台</span></a>
-                            <a class="ghost" href="#capabilities"><i class="fa-solid fa-arrow-down"></i><span>看工作方式</span></a>
+                            <a class="button primary" href="download.html"><i class="fa-solid fa-download"></i><span>下载工作台</span></a>
+                            <a class="button secondary" href="#journal"><i class="fa-solid fa-book-open"></i><span>查看近期更新</span></a>
                         </div>
-                        <div class="hero-points" data-reveal style="--d:.24s">
-                            <div class="mini-pill"><i class="fa-solid fa-film"></i><span>品牌动画</span></div>
-                            <div class="mini-pill"><i class="fa-solid fa-clapperboard"></i><span>角色内容</span></div>
-                            <div class="mini-pill"><i class="fa-solid fa-desktop"></i><span>内部工作台</span></div>
+                        <div class="hero-metrics" data-reveal style="--d:.24s">
+                            <article class="metric-card">
+                                <span class="meta-label">当前版本</span>
+                                <strong class="meta-value">正式版 1.0.0</strong>
+                            </article>
+                            <article class="metric-card">
+                                <span class="meta-label">最近同步</span>
+                                <strong class="meta-value">2026-03-18</strong>
+                            </article>
+                            <article class="metric-card">
+                                <span class="meta-label">维护范围</span>
+                                <strong class="meta-value">首页 / 下载页 / 发布说明</strong>
+                            </article>
                         </div>
                     </div>
 
-                    <div class="hero-stage" data-reveal style="--d:.08s">
-                        <div class="stage-glow" aria-hidden="true"></div>
-                        <div class="edge-chip a"><i class="fa-solid fa-wand-magic-sparkles"></i><span>镜头语义自动整理</span></div>
-                        <div class="edge-chip b"><i class="fa-solid fa-bolt"></i><span>状态反馈更即时</span></div>
-                        <div class="edge-chip c"><i class="fa-solid fa-share-nodes"></i><span>交付路径更干净</span></div>
-
-                        <div class="spot-card tilt">
-                            <div class="spot-top">
-                                <div>
-                                    <span class="spot-kicker">Studio Pipeline</span>
-                                    <span class="spot-title">品牌动画项目 / 12 镜头并行推进</span>
-                                </div>
-                                <div class="spot-state"><span class="pulse"></span><span>Queue Active</span></div>
+                    <aside class="hero-board" data-reveal style="--d:.1s" aria-label="当前版本状态">
+                        <div class="board-top">
+                            <div>
+                                <span class="board-label">Current Release</span>
+                                <h2 class="board-title">正式版 1.0.0 正在作为默认下载入口发布</h2>
                             </div>
-                            <div class="spot-grid">
-                                <div class="spot-panel">
-                                    <div class="spot-head"><span>任务队列</span><span>04 / 06</span></div>
-                                    <div class="queue">
-                                        <div class="queue-item active"><strong>脚本拆镜</strong><small>从文案直接落成镜头骨架。</small></div>
-                                        <div class="queue-item"><strong>角色一致</strong><small>同一角色持续沿用统一设定。</small></div>
-                                        <div class="queue-item"><strong>批量生成</strong><small>镜头、版本、素材并行推进。</small></div>
-                                    </div>
-                                </div>
-                                <div class="spot-panel">
-                                    <div class="spot-head"><span>状态面板</span><span>Live</span></div>
-                                    <div class="signal-list">
-                                        <div class="signal-item"><strong>镜头推进</strong><span>核心镜头已开始批量跑图。</span><div class="bar"><i style="--w:84%"></i></div></div>
-                                        <div class="signal-item"><strong>风格锁定</strong><span>角色与场景参考进入稳定阶段。</span><div class="bar"><i style="--w:72%"></i></div></div>
-                                        <div class="signal-item"><strong>导出归档</strong><span>命名与版本标记已统一。</span><div class="bar"><i style="--w:66%"></i></div></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="status-badge"><span class="status-dot"></span><span>Active</span></div>
                         </div>
-                    </div>
+                        <p class="board-copy">下载页已经切到正式版 1.0.0，首页信息层级也同步重排。当前版本信号聚焦在三个点：正式版命名上线、默认下载链接切换，以及 V10.0.0 转入历史版本。</p>
+                        <div class="signal-list">
+                            <article class="signal-card">
+                                <strong>正式版 1.0.0 已上线</strong>
+                                <p>当前默认下载主线已经从 V 系列切换到正式版命名，页面文案也已同步更新。</p>
+                            </article>
+                            <article class="signal-card">
+                                <strong>默认下载链接已切换</strong>
+                                <p>下载页验证通过后会直接跳转到新的 1.0.0 正式版安装包地址。</p>
+                            </article>
+                            <article class="signal-card">
+                                <strong>V10.0.0 转入历史版本</strong>
+                                <p>旧的默认版本已经归档到历史列表，兼容回退路径仍然保留。</p>
+                            </article>
+                        </div>
+                        <div class="board-foot">
+                            <span class="mono-pill"><i class="fa-regular fa-folder-open"></i><span>download.html</span></span>
+                            <span class="mono-pill"><i class="fa-regular fa-envelope"></i><span>bysmj1213897@163.com</span></span>
+                            <span class="mono-pill"><i class="fa-brands fa-windows"></i><span>Windows 10 / 11</span></span>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="wrap">
-                <div class="proof-grid">
-                    <article class="card" data-reveal>
-                        <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
-                        <h3>先看到团队</h3>
-                        <p>首页先表达我们在做动画，再补充工具入口。</p>
-                    </article>
-                    <article class="card" data-reveal style="--d:.08s">
-                        <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3>工具服务创作</h3>
-                        <p>工作台来自真实项目流程，不抢主站角色。</p>
-                    </article>
-                    <article class="card" data-reveal style="--d:.16s">
-                        <div class="icon"><i class="fa-solid fa-desktop"></i></div>
-                        <h3>需要时再下载</h3>
-                        <p>真正有项目需求的人，可以直接进入下载页。</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="capabilities">
+        <section id="about">
             <div class="wrap">
                 <div class="section-head" data-reveal>
                     <div>
-                        <div class="pill"><i class="fa-solid fa-sliders"></i><span>工作方式</span></div>
-                        <h2>动画怎么做，工具就怎么配</h2>
+                        <div class="section-kicker">工作方式</div>
+                        <h2>把官网写成公开工作台，而不是脱离上下文的宣传页。</h2>
                     </div>
-                    <p class="section-copy">先服务项目生产，再把稳定流程沉淀成工具。</p>
+                    <p class="section-copy">首页承担三件事：告诉访客现在版本到哪、我最近在维护什么、遇到下载或安装问题该去哪里。这样页面即使继续迭代，也不会失去可读性。</p>
                 </div>
-                <div class="feature-grid">
-                    <article class="feature-card" data-reveal>
-                        <div class="icon"><i class="fa-solid fa-film"></i></div>
-                        <h3>脚本先变成镜头</h3>
-                        <p>先把创意落成结构，再开始生成。</p>
-                        <span class="mini">前期更稳</span>
+
+                <div class="about-layout">
+                    <article class="manifesto-card" data-reveal>
+                        <p class="quote">“我更愿意把真实提交、真实版本和真实入口摆出来，而不是事后补一段看起来很完整的介绍。”</p>
+                        <p>我是 Stringadmin，现在主要围绕 OmniAI 维护官网首页、下载页和发布说明。和传统个人主页不同，这里不会堆太多抽象标签，而是优先展示页面现在处于什么状态、最近刚做了什么、下一步要把什么继续打磨。</p>
+                        <p>这也是我保留日志式写法的原因：首页负责承接上下文，下载页负责完成真正的安装路径，版本更新和交互优化则用明确日期继续往下追加。</p>
                     </article>
-                    <article class="feature-card" data-reveal style="--d:.06s">
-                        <div class="icon"><i class="fa-solid fa-people-group"></i></div>
-                        <h3>角色设定持续沿用</h3>
-                        <p>同一项目的视觉规则不轻易跑偏。</p>
-                        <span class="mini">返工更少</span>
-                    </article>
-                    <article class="feature-card" data-reveal style="--d:.12s">
-                        <div class="icon"><i class="fa-solid fa-bars-progress"></i></div>
-                        <h3>多镜头并行推进</h3>
-                        <p>镜头、版本和素材一起走也更清楚。</p>
-                        <span class="mini">状态更好追踪</span>
-                    </article>
-                    <article class="feature-card" data-reveal style="--d:.18s">
-                        <div class="icon"><i class="fa-solid fa-box-archive"></i></div>
-                        <h3>交付前统一整理</h3>
-                        <p>导出、命名和版本留存一起完成。</p>
-                        <span class="mini">交接更顺</span>
-                    </article>
-                </div>
-            </div>
-        </section>
-        <section id="workflow">
-            <div class="wrap">
-                <div class="flow-band" data-reveal>
-                    <div class="flow-grid">
-                        <div class="flow-copy">
-                            <div class="pill" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08);color:#ccfbff;box-shadow:none"><i class="fa-solid fa-route"></i><span>项目流程</span></div>
-                            <h2 style="color:#fff">这是我们做动画的方式，也顺手做成了工具</h2>
-                            <p>先立结构，再推进镜头，最后统一交付。</p>
-                            <div class="flow-steps">
-                                <article class="flow-step"><div class="step-num">01</div><div><h3>建立项目骨架</h3><p>主题、镜头目标、角色设定先整理好。</p></div></article>
-                                <article class="flow-step"><div class="step-num">02</div><div><h3>批量推进任务</h3><p>镜头、版本和素材在同一条队列里走。</p></div></article>
-                                <article class="flow-step"><div class="step-num">03</div><div><h3>统一归档交付</h3><p>命名、导出、版本留存一起完成。</p></div></article>
-                            </div>
-                        </div>
-                        <aside class="signal-wall">
-                            <div class="signal-card"><strong>团队视角</strong><p>先讲项目怎么推进，再讲工具怎么帮忙。</p><span class="signal-num">创作优先</span></div>
-                            <div class="signal-card"><strong>内部工具</strong><p>工作台从真实制作流程里长出来，更贴近现场。</p><span class="signal-num">不是单独软件站</span></div>
-                            <div class="signal-card"><strong>可直接使用</strong><p>需要时再进入下载页，把这套节奏带走。</p><span class="signal-num">Windows 10 / 11</span></div>
-                        </aside>
+
+                    <div class="focus-grid">
+                        <article class="focus-card" data-reveal style="--d:.05s">
+                            <div class="focus-icon"><i class="fa-solid fa-house"></i></div>
+                            <h3>首页</h3>
+                            <p>重排首屏、维护状态和内容层级，让访客先看到“现在发生了什么”，再进入细节。</p>
+                        </article>
+                        <article class="focus-card" data-reveal style="--d:.1s">
+                            <div class="focus-icon"><i class="fa-solid fa-download"></i></div>
+                            <h3>下载页</h3>
+                            <p>继续维护默认版本、授权路径、历史版本和系统要求，下载入口保持稳定。</p>
+                        </article>
+                        <article class="focus-card" data-reveal style="--d:.15s">
+                            <div class="focus-icon"><i class="fa-solid fa-box-open"></i></div>
+                            <h3>发布说明</h3>
+                            <p>把重要变化压缩成用户一眼能看懂的更新点，避免版本信息散落在多个页面。</p>
+                        </article>
+                        <article class="focus-card" data-reveal style="--d:.2s">
+                            <div class="focus-icon"><i class="fa-regular fa-envelope"></i></div>
+                            <h3>联系路径</h3>
+                            <p>邮箱继续公开，安装、授权或版本切换遇到问题时，可以直接找到我。</p>
+                        </article>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="scenes">
+        <section id="journal">
             <div class="wrap">
                 <div class="section-head" data-reveal>
                     <div>
-                        <div class="pill"><i class="fa-solid fa-briefcase"></i><span>适用场景</span></div>
-                        <h2>更适合持续做动画内容</h2>
+                        <div class="section-kicker">近期更新</div>
+                        <h2>先给出当前状态，再把最近动作拆开讲清楚。</h2>
                     </div>
-                    <p class="section-copy">品牌片、角色内容和连续镜头项目都能套进这套方法。</p>
+                    <p class="section-copy">这里把“当前页面状态”和“最近几次可见变更”分开写，避免版本状态和 Git 提交混在一起，读起来更直接。</p>
                 </div>
-                <div class="scene-grid">
-                    <article class="scene-card" data-reveal><div class="icon"><i class="fa-solid fa-clapperboard"></i></div><h3>内容团队</h3><p>高频更新也能保持镜头节奏稳定。</p></article>
-                    <article class="scene-card" data-reveal style="--d:.08s"><div class="icon"><i class="fa-solid fa-palette"></i></div><h3>品牌动画工作室</h3><p>更容易把制作路径讲给客户听。</p></article>
-                    <article class="scene-card" data-reveal style="--d:.16s"><div class="icon"><i class="fa-solid fa-user-astronaut"></i></div><h3>IP 角色项目</h3><p>长期维护角色设定会更顺手。</p></article>
-                    <article class="scene-card" data-reveal style="--d:.24s"><div class="icon"><i class="fa-solid fa-bolt"></i></div><h3>独立创作者</h3><p>把个人流程慢慢做成稳定系统。</p></article>
+
+                <div class="log-grid">
+                    <article class="log-card log-feature" data-reveal>
+                        <span class="log-meta"><i class="fa-solid fa-signal"></i><span>当前站点状态 · 2026-03-18</span></span>
+                        <h3>下载页默认版本已经切到正式版 1.0.0</h3>
+                        <p>这部分不是历史提交摘要，而是当前页面状态。下载入口、版本说明和历史版本结构已经以正式版 1.0.0 为主线展开，首页也同步把这条主线抬到首屏。</p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i><span>默认下载版本：正式版 1.0.0。</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>关键变化：正式版命名上线、默认下载链接切换、V10.0.0 转入历史版本。</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>历史版本仍保留在下载页，下载入口继续维持为 download.html。</span></li>
+                        </ul>
+                        <div class="hero-actions" style="margin-top:8px">
+                            <a class="button primary" href="download.html"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>打开下载页</span></a>
+                        </div>
+                    </article>
+
+                    <article class="log-card log-compact" data-reveal style="--d:.06s">
+                        <span class="log-meta"><i class="fa-regular fa-keyboard"></i><span>2026-03-16</span></span>
+                        <div class="log-icon"><i class="fa-solid fa-keyboard"></i></div>
+                        <h3>下载页加入 typing animation</h3>
+                        <p>最近一条可见提交是 “Add typing animation to download page”，说明下载页首屏已经从静态信息进入到更明确的动态反馈阶段。</p>
+                        <span class="commit-pill">Add typing animation to download page</span>
+                    </article>
+
+                    <article class="log-card log-half" data-reveal style="--d:.12s">
+                        <span class="log-meta"><i class="fa-regular fa-pen-to-square"></i><span>2026-03-16</span></span>
+                        <h3>首页与下载体验被作为一组内容一起刷新</h3>
+                        <p>“Refresh homepage and download experience” 说明这两个页面一直是联动维护的：首页负责解释当前状态，下载页负责完成真正的版本分发。</p>
+                        <span class="commit-pill">Refresh homepage and download experience</span>
+                    </article>
+
+                    <article class="log-card log-half" data-reveal style="--d:.18s">
+                        <span class="log-meta"><i class="fa-solid fa-box-open"></i><span>2026-03-13</span></span>
+                        <h3>下载页进入 V8 发布节奏</h3>
+                        <p>“Update download page for V8 release” 和 “Refine landing page and download UI” 一起说明，版本推进和页面结构整理本来就是同步发生的。</p>
+                        <span class="commit-pill">Update download page for V8 release</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="timeline">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <div class="section-kicker">提交时间线</div>
+                        <h2>最近的维护轨迹，直接来自当前仓库可见的 Git 历史。</h2>
+                    </div>
+                    <p class="section-copy">时间线保留具体日期和提交主题，后面继续往下追加时，页面结构也不会被打散。</p>
+                </div>
+
+                <div class="timeline-shell" data-reveal>
+                    <div class="timeline-list">
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-18</span>
+                                <span class="timeline-order">01</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>下载页切到正式版 1.0.0</h3>
+                                <p>默认下载版本切换为正式版 1.0.0，新安装包链接生效，同时 V10.0.0 下沉到历史版本列表。</p>
+                                <span class="commit-pill">Release official 1.0.0 download update</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-16</span>
+                                <span class="timeline-order">02</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>下载页补上 typing animation</h3>
+                                <p>下载页首屏加入打字动效，让版本入口不再只是静态信息堆叠，而是有了更直接的状态反馈。</p>
+                                <span class="commit-pill">Add typing animation to download page</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-16</span>
+                                <span class="timeline-order">03</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>首页与下载体验同步刷新</h3>
+                                <p>首页和下载页被当成一组整体体验处理，这也是当前首页改成工作日志式表达的直接来源。</p>
+                                <span class="commit-pill">Refresh homepage and download experience</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-13</span>
+                                <span class="timeline-order">04</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>下载页更新到 V8 发布</h3>
+                                <p>版本发布页在这一天完成了一轮更明确的推进，下载页承担了主版本切换的说明责任。</p>
+                                <span class="commit-pill">Update download page for V8 release</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-13</span>
+                                <span class="timeline-order">05</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>继续整理 landing page 和下载 UI</h3>
+                                <p>页面结构和视觉表达继续被压紧，说明首页与下载页的联动设计在这一阶段已经形成固定节奏。</p>
+                                <span class="commit-pill">Refine landing page and download UI</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-11</span>
+                                <span class="timeline-order">06</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>下载页推进到 V7</h3>
+                                <p>更早一轮的版本节奏继续延续，说明下载页从一开始就是版本状态最集中的承接位置。</p>
+                                <span class="commit-pill">Update download page for V7 release</span>
+                            </div>
+                        </article>
+
+                        <article class="timeline-item">
+                            <div class="timeline-meta-card">
+                                <span class="timeline-date">2026-03-10</span>
+                                <span class="timeline-order">07</span>
+                            </div>
+                            <div class="timeline-body">
+                                <h3>确立首页 + 下载页的双页结构</h3>
+                                <p>“Update UI with cool color scheme and add download page” 基本定义了现在这套首页承接说明、下载页承接安装的结构起点。</p>
+                                <span class="commit-pill">Update UI with cool color scheme and add download page</span>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact">
+            <div id="download" class="section-marker" aria-hidden="true"></div>
             <div class="wrap">
-                <div class="contact-grid" data-reveal>
-                    <div>
-                        <div class="pill"><i class="fa-solid fa-paper-plane"></i><span>准备开始</span></div>
-                        <h2>先聊项目，也可以直接下载工作台</h2>
-                        <p class="section-copy">如果你在做品牌动画、角色内容或连续镜头项目，可以先看我们怎么推进，也可以直接体验这套内部工作台。</p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>下载内部工作台</h3>
-                        <p>进入下载中心，直接获取 Windows 安装包。</p>
-                        <div class="hero-actions" style="margin-top:22px">
-                            <a class="btn" href="download.html"><i class="fa-solid fa-download"></i><span>进入下载页</span></a>
-                            <a class="ghost" href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>邮箱联系</span></a>
+                <div class="contact-shell" data-reveal>
+                    <div class="contact-copy">
+                        <div class="section-kicker light">联系与下载</div>
+                        <h2>需要安装包就去下载页。遇到授权、安装或版本切换问题，直接联系我。</h2>
+                        <p class="light">下载入口保持不变，主页负责承接状态和说明；真正的下载流程、版本验证和历史版本逻辑继续在下载页维护。这样主页不会变成一页无穷扩张的安装文档。</p>
+                        <div class="contact-badges">
+                            <span class="contact-badge"><i class="fa-solid fa-box-open"></i><span>默认版本 正式版 1.0.0</span></span>
+                            <span class="contact-badge"><i class="fa-brands fa-windows"></i><span>Windows 10 / 11</span></span>
+                            <span class="contact-badge"><i class="fa-solid fa-link"></i><span>入口保持为 download.html</span></span>
                         </div>
-                        <div class="contact-note"><span>当前平台</span><strong>Windows 10 / 11</strong></div>
                     </div>
+
+                    <aside class="contact-card">
+                        <div class="contact-meta">
+                            <div>
+                                <h3>Stringadmin / 联系方式</h3>
+                                <p>如果你在下载、安装或授权验证上遇到问题，可以直接通过邮件联系我。</p>
+                            </div>
+                        </div>
+                        <ul class="contact-list">
+                            <li><span>邮箱</span><strong>bysmj1213897@163.com</strong></li>
+                            <li><span>默认入口</span><strong>download.html</strong></li>
+                            <li><span>当前平台</span><strong>Windows 10 / 11</strong></li>
+                            <li><span>主页角色</span><strong>状态承接 / 日志索引</strong></li>
+                        </ul>
+                        <div class="contact-actions">
+                            <a class="button primary" href="download.html"><i class="fa-solid fa-download"></i><span>下载工作台</span></a>
+                            <a class="button ghost-light" href="mailto:bysmj1213897@163.com"><i class="fa-regular fa-envelope"></i><span>发送邮件</span></a>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -263,10 +1436,10 @@
         <div class="wrap">
             <div class="footer-row">
                 <div class="brand">
-                    <span class="brand-mark"><img src="logo.png" alt="OmniAI Logo"></span>
-                    <span>OmniAI<small>动画团队 / 内部工作台</small></span>
+                    <span class="brand-mark"><img src="logo.svg" alt="OmniAI Logo"></span>
+                    <span>OmniAI<small>Stringadmin / 维护记录与下载索引</small></span>
                 </div>
-                <div>© 2026 OmniAI · 南京万物可爱文化传媒有限公司</div>
+                <div>© 2026 Stringadmin · OmniAI Personal Studio</div>
             </div>
         </div>
     </footer>
@@ -275,17 +1448,19 @@
         const nav = document.getElementById("nav");
         const menuBtn = document.getElementById("menuBtn");
         const mobileBox = document.getElementById("mobileBox");
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        const syncNav = () => nav.classList.toggle("scrolled", window.scrollY > 12);
+        const syncNav = () => {
+            nav.classList.toggle("scrolled", window.scrollY > 12);
+        };
+
         const closeMenu = () => {
             mobileBox.classList.remove("open");
             menuBtn.setAttribute("aria-expanded", "false");
         };
 
         menuBtn.addEventListener("click", () => {
-            const open = menuBtn.getAttribute("aria-expanded") === "true";
-            menuBtn.setAttribute("aria-expanded", String(!open));
+            const isOpen = menuBtn.getAttribute("aria-expanded") === "true";
+            menuBtn.setAttribute("aria-expanded", String(!isOpen));
             mobileBox.classList.toggle("open");
         });
 
@@ -294,6 +1469,11 @@
         });
 
         window.addEventListener("scroll", syncNav, { passive: true });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 940) {
+                closeMenu();
+            }
+        });
         syncNav();
 
         const io = new IntersectionObserver((entries) => {
@@ -306,48 +1486,6 @@
         }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
 
         document.querySelectorAll("[data-reveal]").forEach((node) => io.observe(node));
-
-        const typeTargets = Array.from(document.querySelectorAll(".type-target"));
-        if (reduceMotion) {
-            typeTargets.forEach((node) => {
-                node.textContent = node.dataset.text || "";
-                node.classList.add("done");
-            });
-        } else {
-            let startDelay = 260;
-            typeTargets.forEach((node, index) => {
-                const text = node.dataset.text || "";
-                const speed = index === 0 ? 95 : 82;
-                node.textContent = "";
-                setTimeout(() => {
-                    node.classList.add("typing");
-                    let cursor = 0;
-                    const timer = window.setInterval(() => {
-                        cursor += 1;
-                        node.textContent = text.slice(0, cursor);
-                        if (cursor >= text.length) {
-                            clearInterval(timer);
-                            node.classList.remove("typing");
-                            node.classList.add("done");
-                        }
-                    }, speed);
-                }, startDelay);
-                startDelay += text.length * speed + 260;
-            });
-        }
-
-        document.querySelectorAll(".tilt").forEach((card) => {
-            card.addEventListener("mousemove", (event) => {
-                if (window.matchMedia("(max-width: 1120px)").matches || reduceMotion) return;
-                const rect = card.getBoundingClientRect();
-                const x = (event.clientX - rect.left) / rect.width - 0.5;
-                const y = (event.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = "perspective(1200px) rotateX(" + ((-y * 10).toFixed(2)) + "deg) rotateY(" + ((x * 10).toFixed(2)) + "deg) translateY(-4px)";
-            });
-            card.addEventListener("mouseleave", () => {
-                card.style.transform = "";
-            });
-        });
     </script>
 </body>
 </html>
