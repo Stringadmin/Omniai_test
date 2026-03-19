@@ -33,7 +33,26 @@ body {
         radial-gradient(circle at top left, rgba(88, 106, 121, 0.11), transparent 24%),
         radial-gradient(circle at bottom right, rgba(141, 107, 80, 0.09), transparent 26%),
         linear-gradient(180deg, #fbf8f3 0%, var(--bg) 100%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     overflow-x: hidden;
+}
+
+body.page-home {
+    background-image:
+        linear-gradient(180deg, rgba(251, 248, 243, 0.76), rgba(244, 239, 231, 0.92)),
+        radial-gradient(circle at top left, rgba(88, 106, 121, 0.18), transparent 28%),
+        url("test1.png");
+    background-position: center, top left, center;
+}
+
+body.page-download {
+    background-image:
+        linear-gradient(180deg, rgba(251, 248, 243, 0.84), rgba(244, 239, 231, 0.94)),
+        radial-gradient(circle at top right, rgba(141, 107, 80, 0.16), transparent 24%),
+        url("test2.png");
+    background-position: center, top right, center;
 }
 
 body::before {
