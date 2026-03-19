@@ -60,13 +60,13 @@ body::after {
 
 body.page-home::after {
     background-image:
-        linear-gradient(180deg, rgba(251, 248, 243, 0.76), rgba(244, 239, 231, 0.92)),
+        linear-gradient(180deg, rgba(251, 248, 243, 0.18), rgba(244, 239, 231, 0.34)),
         url("test1.png");
 }
 
 body.page-download::after {
     background-image:
-        linear-gradient(180deg, rgba(251, 248, 243, 0.84), rgba(244, 239, 231, 0.94)),
+        linear-gradient(180deg, rgba(251, 248, 243, 0.22), rgba(244, 239, 231, 0.38)),
         url("test2.png");
 }
 
