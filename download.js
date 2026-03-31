@@ -6,6 +6,7 @@
     }
 
     const urls = {
+        r112: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vd2Fud3VrZWFpLXNldHVwLTEuMS4yLmV4ZQ==",
         r110: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vd2Fud3VrZWFpLXNldHVwLTEuMS4wLmV4ZQ==",
         r100: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vd2Fud3VrZWFpLXNldHVwLTEuMC4wLmV4ZQ==",
         v10: "aHR0cHM6Ly9zdHJpbmd0ZXN0Lm9zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20vJUU0JUI4JTg3JUU3JTg5JUE5JUU1JThGJUFGJUU3JTg4JUIxJTIwU2V0dXAlMjBWMTAuMC4wLmV4ZQ==",

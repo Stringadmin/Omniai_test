@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OmniAI | 下载页</title>
-    <meta name="description" content="OmniAI 下载页，提供正式版 1.1.0 入口、历史归档、安装说明与授权验证。">
-    <meta name="theme-color" content="#f6efef">
+    <meta name="description" content="OmniAI 漫剧制作软件官方下载页，提供正式版下载、历史归档与安装说明。">
+    <meta name="theme-color" content="#000000">
     <script>document.documentElement.classList.replace("no-js", "js");</script>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
@@ -15,25 +15,24 @@
 
     <header class="topbar" id="topbar">
         <div class="topbar-inner">
-            <a class="brand" href="index.html" aria-label="返回 OmniAI 首页">
+            <a class="brand" href="index.html" aria-label="返回首页">
                 <span class="brand-mark">
-                    <img src="logo.png" alt="" width="58" height="58">
+                    <img src="logo.png" alt="" width="38" height="38">
                 </span>
-                <span class="brand-copy">
+                <span>
                     <strong>OmniAI</strong>
-                    <small>下载入口 / 版本归档</small>
                 </span>
             </a>
 
             <nav class="nav-links" aria-label="主导航">
                 <a href="index.html">首页</a>
-                <a href="#latest">当前入口</a>
+                <a href="#latest">下载</a>
                 <a href="#archive">归档</a>
                 <a href="#support">帮助</a>
             </nav>
 
             <div class="topbar-actions">
-                <a class="button button-muted desktop-only" href="index.html#contact">联络</a>
+                <a class="button button-primary desktop-only" href="mailto:bysmj1213897@163.com">联络</a>
                 <button class="mobile-toggle" id="mobileToggle" type="button" aria-expanded="false" aria-controls="mobilePanel" aria-label="打开菜单">
                     <span></span>
                     <span></span>
@@ -45,311 +44,279 @@
         <div class="mobile-panel" id="mobilePanel">
             <nav class="mobile-links" aria-label="移动端导航">
                 <a href="index.html">首页</a>
-                <a href="#latest">当前入口</a>
+                <a href="#latest">下载</a>
                 <a href="#archive">归档</a>
                 <a href="#support">帮助</a>
-                <a href="index.html#contact">联络</a>
+                <a href="mailto:bysmj1213897@163.com">联络</a>
             </nav>
         </div>
     </header>
 
     <main id="content" class="site-shell">
-        <section class="section section-first">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero-section">
             <div class="container">
-                <div class="hero-grid">
-                    <article class="paper-card hero-card" data-reveal>
-                        <p class="eyebrow">Download Gate / 2026-03-19</p>
-                        <span class="hero-mark">Release 1.1.0</span>
-                        <h1>正式版 1.1.0 已就位，常用下载入口放在这里。</h1>
-                        <p class="lead">
-                            这个页面只做一件事：把当前版本、归档版本和安装说明整理清楚。验证通过后会直接跳到安装包，不额外绕步骤。
-                        </p>
-
-                        <div class="action-row">
-                            <button class="button button-primary" type="button" data-download-version="r110">下载正式版 1.1.0</button>
-                            <a class="button button-muted" href="#archive">查看归档版本</a>
-                        </div>
-
-                        <div class="fact-grid">
-                            <div class="fact-item">
-                                <span>当前默认</span>
-                                <strong>正式版 1.1.0</strong>
-                            </div>
-                            <div class="fact-item">
-                                <span>发布时间</span>
-                                <strong>2026-03-18</strong>
-                            </div>
-                            <div class="fact-item">
-                                <span>适用平台</span>
-                                <strong>Windows 10 / 11</strong>
-                            </div>
-                        </div>
-                    </article>
-
-                    <aside class="side-stack">
-                        <section class="paper-card side-card" data-reveal style="--delay:.08s">
-                            <p class="side-label">下载前</p>
-                            <h2 class="side-title">先看一眼说明，再点入口，会更省事。</h2>
-                            <ul class="plain-list">
-                                <li>点击版本按钮后会先弹出授权验证。</li>
-                                <li>验证通过后自动跳转到对应安装包地址。</li>
-                                <li>旧版本继续归档保留，方便兼容或回退。</li>
-                            </ul>
-                        </section>
-
-                        <section class="paper-card side-card" data-reveal style="--delay:.14s">
-                            <p class="side-label">安装备忘</p>
-                            <div class="mini-post">
-                                <span>系统</span>
-                                <strong>Windows 10 / 11，8 GB RAM 起步。</strong>
-                            </div>
-                            <div class="mini-post">
-                                <span>流程</span>
-                                <strong>验证成功后会直接跳转下载，不会额外显示明文地址。</strong>
-                            </div>
-                            <div class="mini-post">
-                                <span>回退</span>
-                                <strong>需要旧环境兼容时，可以直接从归档区取回旧版。</strong>
-                            </div>
-                        </section>
-                    </aside>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="latest">
-            <div class="container section-grid">
-                <div class="content-column">
-                    <div class="section-heading" data-reveal>
-                        <p class="section-kicker">当前入口</p>
-                        <h2>常规安装就从这里进，不需要额外找版本。</h2>
-                        <p class="section-copy">
-                            默认入口已经切到正式版 1.1.0。若你只是正常安装或更新，直接走这一条就够了；需要对照旧环境时，再往下看归档区。
-                        </p>
+                <div class="hero-content" data-reveal>
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        正式版现已开放下载
                     </div>
-
-                    <article class="paper-card release-card" data-reveal>
-                        <div class="release-head">
-                            <div>
-                                <p class="side-label">默认下载</p>
-                                <h3>Windows 正式版 1.1.0</h3>
-                            </div>
-                            <span class="release-badge">Stable</span>
-                        </div>
-
-                        <div class="release-metrics">
-                            <div>
-                                <span>版本号</span>
-                                <strong>1.1.0</strong>
-                            </div>
-                            <div>
-                                <span>最近更新</span>
-                                <strong>2026-03-18</strong>
-                            </div>
-                            <div>
-                                <span>验证方式</span>
-                                <strong>密码验证后跳转</strong>
-                            </div>
-                        </div>
-
-                        <ul class="detail-list">
-                            <li>主按钮已经更新到正式版 1.1.0 的安装包。</li>
-                            <li>正式版 1.0.0 继续保留在归档区，方便旧项目兼容。</li>
-                            <li>如果只是正常升级，验证通过后直接下载即可。</li>
-                        </ul>
-
-                        <div class="action-row compact">
-                            <button class="button button-primary" type="button" data-download-version="r110">下载正式版 1.1.0</button>
-                            <a class="button button-muted" href="#support">查看帮助</a>
-                        </div>
-
-                        <p class="panel-note">说明：验证成功后会自动跳转到对应安装包链接，页面不直接显示明文下载地址。</p>
-                    </article>
+                    <h1 class="hero-title">Download</h1>
+                    <p class="hero-subtitle">
+                        OmniAI 漫剧制作软件正式版下载。<br>
+                        输入剧本，一键生成漫剧分镜与成片。
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#latest">立即下载</a>
+                        <a class="button button-ghost" href="#archive">历史版本</a>
+                    </div>
                 </div>
-
-                <aside class="aside-column">
-                    <section class="paper-card aside-card" data-reveal style="--delay:.05s">
-                        <p class="side-label">系统要求</p>
-                        <ul class="plain-list">
-                            <li>Windows 10 或更高版本。</li>
-                            <li>Intel Core i5 或同等级处理器。</li>
-                            <li>8 GB RAM 及以上。</li>
-                            <li>至少 500 MB 可用存储空间。</li>
-                        </ul>
-                    </section>
-
-                    <section class="paper-card aside-card" data-reveal style="--delay:.11s">
-                        <p class="side-label">安装方式</p>
-                        <ol class="ordered-list">
-                            <li>点击对应版本的下载按钮。</li>
-                            <li>输入授权密码并完成验证。</li>
-                            <li>跳转后下载并运行安装包。</li>
-                            <li>首次启动时按需完成目录配置。</li>
-                        </ol>
-                    </section>
-                </aside>
+            </div>
+            <div class="hero-grid-lines" aria-hidden="true">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
             </div>
         </section>
 
+        <!-- ===== CURRENT VERSION ===== -->
+        <section class="section" id="latest">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <p class="section-eyebrow">立即下载</p>
+                    <h2 class="section-title">OmniAI 正式版 v1.1.2</h2>
+                    <p class="section-desc">通过授权验证后自动跳转到安装包，下载后运行安装程序即可开始使用。</p>
+                </div>
+
+                <div class="download-main" data-reveal>
+                    <div class="download-version-card">
+                        <div class="version-header">
+                            <div>
+                                <span class="version-tag">Stable</span>
+                                <h3>正式版 1.1.2</h3>
+                                <p class="version-sub">Windows 10 / 11 · 2026-03-31 发布</p>
+                            </div>
+                            <button class="button button-primary" type="button" data-download-version="r112">
+                                下载安装包
+                            </button>
+                        </div>
+
+                        <div class="version-details">
+                            <div class="version-detail-item">
+                                <span>版本号</span>
+                                <strong>1.1.2</strong>
+                            </div>
+                            <div class="version-detail-item">
+                                <span>发布日期</span>
+                                <strong>2026-03-31</strong>
+                            </div>
+                            <div class="version-detail-item">
+                                <span>验证方式</span>
+                                <strong>密码验证</strong>
+                            </div>
+                            <div class="version-detail-item">
+                                <span>系统</span>
+                                <strong>Win 10/11</strong>
+                            </div>
+                        </div>
+
+                        <p class="version-note">验证成功后自动跳转安装包下载地址，页面不展示明文链接。</p>
+                    </div>
+                </div>
+
+                <!-- Requirements -->
+                <div class="requirements-grid" data-reveal style="--delay:.08s">
+                    <div class="req-card">
+                        <h4>运行环境</h4>
+                        <ul>
+                            <li>Windows 10 或更高版本</li>
+                            <li>Intel Core i5 或同等级处理器</li>
+                            <li>8 GB RAM 及以上（建议 16GB）</li>
+                            <li>NVIDIA 独立显卡，4GB 显存及以上</li>
+                            <li>至少 5 GB 可用存储空间</li>
+                        </ul>
+                    </div>
+                    <div class="req-card">
+                        <h4>安装步骤</h4>
+                        <ol>
+                            <li>点击上方「下载安装包」按钮</li>
+                            <li>输入授权密码完成验证</li>
+                            <li>验证通过后自动跳转下载</li>
+                            <li>运行安装程序，按指引完成安装</li>
+                            <li>启动软件，输入剧本开始创作</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ARCHIVE ===== -->
         <section class="section" id="archive">
             <div class="container">
-                <div class="section-heading" data-reveal>
-                    <p class="section-kicker">归档仓</p>
-                    <h2>旧版本继续留着，方便兼容、对照或者回退。</h2>
-                    <p class="section-copy">
-                        归档不做复杂折叠，直接按顺序摊开。你只需要判断自己要哪个版本，然后点一下对应入口。
-                    </p>
+                <div class="section-header" data-reveal>
+                    <p class="section-eyebrow">历史归档</p>
+                    <h2 class="section-title">历史版本存档，方便回退或对照。</h2>
+                    <p class="section-desc">所有正式版与测试版均保留归档，便于兼容旧项目或版本对照。</p>
                 </div>
 
-                <div class="archive-list">
-                    <article class="paper-card archive-row archive-current" data-reveal>
-                        <div class="archive-meta">
-                            <span class="archive-version">1.0.0</span>
-                            <span class="archive-date">2026-03-18</span>
+                <div class="archive-table" data-reveal>
+                    <div class="archive-header">
+                        <span>版本</span>
+                        <span>日期</span>
+                        <span>说明</span>
+                        <span></span>
+                    </div>
+
+                    <article class="archive-row">
+                        <span class="archive-version">1.1.0</span>
+                        <span class="archive-date">2026-03-18</span>
+                        <div class="archive-desc">
+                            <strong>正式版 1.1.0</strong>
+                            <p>性能优化与bug修复</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>上一版正式版</h3>
-                            <p>上一版正式发布版本，适合需要维持旧项目环境或做兼容回退的场景。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="r100">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="r110">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.05s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V10.0.0</span>
-                            <span class="archive-date">2026-03-17</span>
+                    <article class="archive-row">
+                        <span class="archive-version">1.0.0</span>
+                        <span class="archive-date">2026-03-18</span>
+                        <div class="archive-desc">
+                            <strong>正式版 1.0.0</strong>
+                            <p>首个正式发布版本，包含基础分镜、合成、配音功能</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V 系列最后一个默认版本</h3>
-                            <p>V 系列的旧默认版本，适合需要继续维持旧环境节奏的情况。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v10">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="r100">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.1s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V9.0.0</span>
-                            <span class="archive-date">2026-03-16</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V10.0.0</span>
+                        <span class="archive-date">2026-03-17</span>
+                        <div class="archive-desc">
+                            <strong>Beta 10 预发布版</strong>
+                            <p>配音模块重写，新增 5 种音色；修复若干合成崩溃问题</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V9 发布版本</h3>
-                            <p>适合需要回到上一轮功能节奏，或者做对照测试的场景。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v9">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v10">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.15s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V8.0.0</span>
-                            <span class="archive-date">2026-03-13</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V9.0.0</span>
+                        <span class="archive-date">2026-03-16</span>
+                        <div class="archive-desc">
+                            <strong>Beta 9 预发布版</strong>
+                            <p>分镜生成速度提升 40%，新增草图预览模式</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V8 发布版本</h3>
-                            <p>下载页结构开始成型时使用的版本节点，适合保留做历史参照。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v8">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v9">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.2s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V7.0.0</span>
-                            <span class="archive-date">2026-03-11</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V8.0.0</span>
+                        <span class="archive-date">2026-03-13</span>
+                        <div class="archive-desc">
+                            <strong>Beta 8 预发布版</strong>
+                            <p>首次集成多风格模型切换，支持二次元/写实/水墨</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V7 发布版本</h3>
-                            <p>更早一轮的稳定版本，保留用于旧环境兼容或回溯测试。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v7">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v8">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.25s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V6.0.0</span>
-                            <span class="archive-date">2026-03-10</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V7.0.0</span>
+                        <span class="archive-date">2026-03-11</span>
+                        <div class="archive-desc">
+                            <strong>Beta 7 预发布版</strong>
+                            <p>时间轴编辑功能上线，支持关键帧动画与转场</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V6 发布版本</h3>
-                            <p>双页结构建立初期保留的节点版本，适合作为页面演进对照。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v6">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v7">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.3s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V5.0.0</span>
-                            <span class="archive-date">2026-03-10</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V6.0.0</span>
+                        <span class="archive-date">2026-03-10</span>
+                        <div class="archive-desc">
+                            <strong>Beta 6 预发布版</strong>
+                            <p>画面合成模块上线，支持局部重绘</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V5 发布版本</h3>
-                            <p>更早阶段的归档版本，保留用于对照和特殊兼容需求。</p>
-                        </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v5">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v6">下载</button>
                     </article>
 
-                    <article class="paper-card archive-row" data-reveal style="--delay:.35s">
-                        <div class="archive-meta">
-                            <span class="archive-version">V4.0.0</span>
-                            <span class="archive-date">2026-03-07</span>
+                    <article class="archive-row">
+                        <span class="archive-version">V5.0.0</span>
+                        <span class="archive-date">2026-03-10</span>
+                        <div class="archive-desc">
+                            <strong>Beta 5 预发布版</strong>
+                            <p>基础分镜生成功能上线</p>
                         </div>
-                        <div class="archive-copy">
-                            <h3>V4 发布版本</h3>
-                            <p>较早的归档版本，仅保留给特定兼容需求或历史留档使用。</p>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v5">下载</button>
+                    </article>
+
+                    <article class="archive-row">
+                        <span class="archive-version">V4.0.0</span>
+                        <span class="archive-date">2026-03-07</span>
+                        <div class="archive-desc">
+                            <strong>Beta 4 早期测试版</strong>
+                            <p>首个支持剧本解析的测试版本</p>
                         </div>
-                        <button class="button button-muted archive-action" type="button" data-download-version="v4">下载</button>
+                        <button class="button button-ghost-sm" type="button" data-download-version="v4">下载</button>
                     </article>
                 </div>
             </div>
         </section>
 
+        <!-- ===== SUPPORT ===== -->
         <section class="section" id="support">
             <div class="container">
-                <div class="paper-card contact-card" data-reveal>
-                    <div class="contact-copy">
-                        <p class="section-kicker">帮助与联络</p>
-                        <h2>如果下载、安装或验证环节遇到问题，可以直接联系我。</h2>
-                        <p>
-                            这个页面负责把下载这件事做完整；如果现场还有卡住的地方，直接发邮件会更快。
-                        </p>
-                    </div>
-
-                    <div class="contact-panel">
-                        <div>
-                            <span>联系邮箱</span>
+                <div class="contact-layout">
+                    <div class="contact-info" data-reveal>
+                        <p class="section-eyebrow">技术支持</p>
+                        <h2 class="section-title">遇到问题？</h2>
+                        <p class="section-desc">软件安装、运行报错、功能使用等问题，欢迎通过邮件联系。我们也接受创作交流与合作咨询。</p>
+                        <div class="contact-detail">
+                            <span class="contact-label">联系邮箱</span>
                             <strong>bysmj1213897@163.com</strong>
                         </div>
-                        <div>
-                            <span>当前平台</span>
+                        <div class="contact-detail">
+                            <span class="contact-label">支持平台</span>
                             <strong>Windows 10 / 11</strong>
                         </div>
-                        <div>
-                            <span>默认版本</span>
-                            <strong>正式版 1.1.0</strong>
-                        </div>
-                        <div class="contact-actions">
-                            <a class="button button-primary" href="mailto:bysmj1213897@163.com">发送邮件</a>
-                            <a class="button button-muted" href="index.html">返回首页</a>
-                        </div>
+                    </div>
+
+                    <div class="contact-links" data-reveal style="--delay:.1s">
+                        <a href="mailto:bysmj1213897@163.com" class="contact-link-card">
+                            <div>
+                                <strong>发送邮件</strong>
+                                <p>技术支持、创作交流、合作咨询</p>
+                            </div>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="index.html" class="contact-link-card">
+                            <div>
+                                <strong>返回首页</strong>
+                                <p>查看功能介绍与更新日志</p>
+                            </div>
+                            <span class="link-arrow">→</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
         <div class="container footer-inner">
             <div class="footer-brand">
                 <span class="brand-mark">
-                    <img src="logo.png" alt="" width="58" height="58">
+                    <img src="logo.png" alt="" width="36" height="36">
                 </span>
                 <div>
                     <strong>OmniAI</strong>
-                    <small>Download Gate / Archive</small>
+                    <small>漫剧制作软件</small>
                 </div>
             </div>
-            <p>&copy; 2026 OmniAI · Download and Release Notes</p>
+            <p>&copy; 2026 OmniAI · 漫剧制作软件</p>
         </div>
     </footer>
 
+    <!-- Download Modal -->
     <div class="modal" id="downloadModal" aria-hidden="true">
         <div class="modal-dialog" id="downloadDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
             <div class="modal-head">
@@ -357,7 +324,7 @@
                     <p class="side-label">授权验证</p>
                     <h2 id="dialogTitle">输入密码后继续下载</h2>
                 </div>
-                <button class="modal-close" type="button" id="closeModal" aria-label="关闭下载验证弹窗">&times;</button>
+                <button class="modal-close" type="button" id="closeModal" aria-label="关闭">&times;</button>
             </div>
 
             <div class="modal-body">
@@ -376,5 +343,285 @@
 
     <script src="site.js"></script>
     <script src="download.js"></script>
+
+    <style>
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .version-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .version-header h3 {
+            font-size: 1.8rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .version-sub {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .version-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 20px 0;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 16px;
+        }
+
+        .version-detail-item span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .version-detail-item strong {
+            color: var(--text-bright);
+            font-size: 0.95rem;
+        }
+
+        .version-note {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .download-version-card {
+            padding: 36px;
+            border-radius: var(--radius-xl);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            margin-bottom: 16px;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .req-card {
+            padding: 24px 28px;
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            border: 1px solid var(--line);
+        }
+
+        .req-card h4 {
+            color: var(--text-bright);
+            font-size: 0.95rem;
+            font-family: "PingFang SC", sans-serif;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .req-card ul, .req-card ol {
+            padding-left: 1.2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.9;
+        }
+
+        .archive-table {
+            border-radius: var(--radius-xl);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .archive-header {
+            display: grid;
+            grid-template-columns: 120px 120px 1fr 80px;
+            gap: 16px;
+            padding: 14px 24px;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid var(--line);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .archive-row {
+            display: grid;
+            grid-template-columns: 120px 120px 1fr 80px;
+            gap: 16px;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--line);
+            transition: background 0.2s;
+        }
+
+        .archive-row:last-child { border-bottom: none; }
+        .archive-row:hover { background: var(--surface-hover); }
+
+        .archive-version {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-family: "Georgia", serif;
+        }
+
+        .archive-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .archive-desc strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+
+        .archive-desc p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .archive-row .button-ghost-sm { justify-self: end; }
+
+        .download-main { margin-bottom: 16px; }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .modal-head h2 { font-size: 1.3rem; margin-top: 8px; }
+
+        .modal-body { padding: 20px 24px; }
+
+        .modal-copy {
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .side-label {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line);
+            background: var(--surface);
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--surface-hover);
+            color: var(--text-bright);
+        }
+
+        .field-label {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .field {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.03);
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
+
+        .field:focus { border-color: rgba(255,255,255,0.25); outline: none; }
+
+        .field-error {
+            display: none;
+            margin-top: 8px;
+            color: rgba(255, 100, 100, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .field-error.is-visible { display: block; }
+
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: none;
+            place-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .modal.is-open { display: grid; }
+
+        .modal-dialog {
+            width: min(100%, 420px);
+            border-radius: var(--radius-xl);
+            background: rgba(10, 10, 10, 0.98);
+            border: 1px solid var(--line-hover);
+            box-shadow: var(--shadow);
+            transform: translateY(16px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .modal.is-open .modal-dialog { transform: translateY(0); opacity: 1; }
+
+        @media (max-width: 860px) {
+            .archive-header { display: none; }
+            .archive-row { grid-template-columns: 1fr; gap: 8px; }
+            .archive-row .button-ghost-sm { justify-self: start; }
+            .requirements-grid { grid-template-columns: 1fr; }
+            .version-header { flex-direction: column; }
+            .version-details { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </body>
 </html>
